@@ -23,6 +23,6 @@
       "github": "adityasingh916"
     }
   ],
-  "postgres_version": "",
-  "laptop_used_for_benchmarks": ""
+  "postgres_version": "15",
+  "laptop_used_for_benchmarks": "Apple MacBook Pro"
 }
