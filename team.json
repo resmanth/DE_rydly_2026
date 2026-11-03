@@ -1,0 +1,28 @@
+
+{
+  "team_number": "T0030",
+  "group_lead": {
+    "name": "Suryanshu Tiwari",
+    "enrollment_no": "2501010466",
+    "github": "Suryanshu-Tiwari-gh"
+  },
+  "members": [
+    {
+      "name": "Resmanth Kumar Beesetti",
+      "enrollment_no": "2501010374",
+      "github": "resmanth"
+    },
+    {
+      "name": "Gagandeep",
+      "enrollment_no": "2501010163",
+      "github": "gagandeep3016-sudo"
+    },
+    {
+      "name": "Aditya Dhanraj Singh",
+      "enrollment_no": "2501010034",
+      "github": "adityasingh916"
+    }
+  ],
+  "postgres_version": "",
+  "laptop_used_for_benchmarks": ""
+}
