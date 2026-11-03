@@ -18,16 +18,17 @@
 
 ---
 
-## Team details (fill in before you start)
+
+## Team details
 
 | Role | Name | Enrollment No. | GitHub Username |
 |------|------|----------------|-----------------|
-| Group Lead | | | |
-| Member 2 | | | |
-| Member 3 | | | |
-| Member 4 | | | |
+| Group Lead | Suryanshu Tiwari | 2501010466 | Suryanshu-Tiwari-gh|
+| Member 2 | Resmanth Kumar Beesetti | 2501010374 | resmanth|
+| Member 3 | Gagandeep | 2501010163 | gagandeep3016-sudo |
+| Member 4 | Aditya Dhanraj Singh | 2501010034 | adityasingh916|
 
-**Team No.:** ____ · **Section:** ____ · **Repository URL:** ____
+**Team No.:** T0030 · **Section:** A · **Repository URL:** https://github.com/resmanth/DE_rydly_2026
 
 ---
 
