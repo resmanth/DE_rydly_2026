@@ -1,0 +1,69 @@
+=== R10 run 1 ===
+Sort  (cost=351.74..351.75 rows=6 width=58) (actual time=9.909..9.910 rows=2.00 loops=1)
+  Sort Key: i.reported_at DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=147
+  ->  Hash Join  (cost=57.50..351.66 rows=6 width=58) (actual time=9.898..9.901 rows=2.00 loops=1)
+        Hash Cond: (i.segment_id = s.segment_id)
+        Buffers: shared hit=144
+        ->  Seq Scan on incident_reports i  (cost=0.00..294.00 rows=60 width=37) (actual time=9.802..9.804 rows=21.00 loops=1)
+              Filter: (date(reported_at) = '2026-06-30'::date)
+              Rows Removed by Filter: 11979
+              Buffers: shared hit=114
+        ->  Hash  (cost=55.00..55.00 rows=200 width=29) (actual time=0.090..0.090 rows=200.00 loops=1)
+              Buckets: 1024  Batches: 1  Memory Usage: 21kB
+              Buffers: shared hit=30
+              ->  Seq Scan on road_segments s  (cost=0.00..55.00 rows=200 width=29) (actual time=0.005..0.078 rows=200.00 loops=1)
+                    Filter: (city_id = 1)
+                    Rows Removed by Filter: 1800
+                    Buffers: shared hit=30
+Planning:
+  Buffers: shared hit=228 dirtied=5
+Planning Time: 1.580 ms
+Execution Time: 9.934 ms
+=== R10 run 2 ===
+Sort  (cost=351.74..351.75 rows=6 width=58) (actual time=0.710..0.710 rows=2.00 loops=1)
+  Sort Key: i.reported_at DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=147
+  ->  Hash Join  (cost=57.50..351.66 rows=6 width=58) (actual time=0.700..0.702 rows=2.00 loops=1)
+        Hash Cond: (i.segment_id = s.segment_id)
+        Buffers: shared hit=144
+        ->  Seq Scan on incident_reports i  (cost=0.00..294.00 rows=60 width=37) (actual time=0.619..0.621 rows=21.00 loops=1)
+              Filter: (date(reported_at) = '2026-06-30'::date)
+              Rows Removed by Filter: 11979
+              Buffers: shared hit=114
+        ->  Hash  (cost=55.00..55.00 rows=200 width=29) (actual time=0.076..0.077 rows=200.00 loops=1)
+              Buckets: 1024  Batches: 1  Memory Usage: 21kB
+              Buffers: shared hit=30
+              ->  Seq Scan on road_segments s  (cost=0.00..55.00 rows=200 width=29) (actual time=0.003..0.066 rows=200.00 loops=1)
+                    Filter: (city_id = 1)
+                    Rows Removed by Filter: 1800
+                    Buffers: shared hit=30
+Planning:
+  Buffers: shared hit=228
+Planning Time: 0.289 ms
+Execution Time: 0.732 ms
+=== R10 run 3 ===
+Sort  (cost=351.74..351.75 rows=6 width=58) (actual time=0.776..0.777 rows=2.00 loops=1)
+  Sort Key: i.reported_at DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=147
+  ->  Hash Join  (cost=57.50..351.66 rows=6 width=58) (actual time=0.766..0.768 rows=2.00 loops=1)
+        Hash Cond: (i.segment_id = s.segment_id)
+        Buffers: shared hit=144
+        ->  Seq Scan on incident_reports i  (cost=0.00..294.00 rows=60 width=37) (actual time=0.682..0.683 rows=21.00 loops=1)
+              Filter: (date(reported_at) = '2026-06-30'::date)
+              Rows Removed by Filter: 11979
+              Buffers: shared hit=114
+        ->  Hash  (cost=55.00..55.00 rows=200 width=29) (actual time=0.079..0.080 rows=200.00 loops=1)
+              Buckets: 1024  Batches: 1  Memory Usage: 21kB
+              Buffers: shared hit=30
+              ->  Seq Scan on road_segments s  (cost=0.00..55.00 rows=200 width=29) (actual time=0.002..0.068 rows=200.00 loops=1)
+                    Filter: (city_id = 1)
+                    Rows Removed by Filter: 1800
+                    Buffers: shared hit=30
+Planning:
+  Buffers: shared hit=228
+Planning Time: 0.319 ms
+Execution Time: 0.799 ms

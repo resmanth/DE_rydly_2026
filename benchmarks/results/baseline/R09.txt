@@ -1,0 +1,63 @@
+=== R09 run 1 ===
+GroupAggregate  (cost=4696.69..4713.92 rows=124 width=72) (actual time=4.256..4.852 rows=24.00 loops=1)
+  Group Key: (EXTRACT(hour FROM recorded_at))
+  Buffers: shared hit=1893
+  ->  Gather Merge  (cost=4696.69..4710.82 rows=124 width=38) (actual time=4.243..4.822 rows=125.00 loops=1)
+        Workers Planned: 1
+        Workers Launched: 1
+        Buffers: shared hit=1893
+        ->  Sort  (cost=3696.68..3696.86 rows=73 width=38) (actual time=3.191..3.192 rows=62.50 loops=2)
+              Sort Key: (EXTRACT(hour FROM recorded_at))
+              Sort Method: quicksort  Memory: 27kB
+              Buffers: shared hit=1893
+              Worker 0:  Sort Method: quicksort  Memory: 26kB
+              ->  Parallel Seq Scan on traffic_readings  (cost=0.00..3694.42 rows=73 width=38) (actual time=0.142..3.165 rows=62.50 loops=2)
+                    Filter: (segment_id = 5)
+                    Rows Removed by Filter: 124938
+                    Buffers: shared hit=1856
+Planning:
+  Buffers: shared hit=114
+Planning Time: 0.193 ms
+Execution Time: 4.886 ms
+=== R09 run 2 ===
+GroupAggregate  (cost=4696.69..4713.92 rows=124 width=72) (actual time=3.820..4.344 rows=24.00 loops=1)
+  Group Key: (EXTRACT(hour FROM recorded_at))
+  Buffers: shared hit=1893
+  ->  Gather Merge  (cost=4696.69..4710.82 rows=124 width=38) (actual time=3.811..4.326 rows=125.00 loops=1)
+        Workers Planned: 1
+        Workers Launched: 1
+        Buffers: shared hit=1893
+        ->  Sort  (cost=3696.68..3696.86 rows=73 width=38) (actual time=2.874..2.875 rows=62.50 loops=2)
+              Sort Key: (EXTRACT(hour FROM recorded_at))
+              Sort Method: quicksort  Memory: 27kB
+              Buffers: shared hit=1893
+              Worker 0:  Sort Method: quicksort  Memory: 26kB
+              ->  Parallel Seq Scan on traffic_readings  (cost=0.00..3694.42 rows=73 width=38) (actual time=0.042..2.849 rows=62.50 loops=2)
+                    Filter: (segment_id = 5)
+                    Rows Removed by Filter: 124938
+                    Buffers: shared hit=1856
+Planning:
+  Buffers: shared hit=114
+Planning Time: 0.186 ms
+Execution Time: 4.376 ms
+=== R09 run 3 ===
+GroupAggregate  (cost=4696.69..4713.92 rows=124 width=72) (actual time=3.619..4.143 rows=24.00 loops=1)
+  Group Key: (EXTRACT(hour FROM recorded_at))
+  Buffers: shared hit=1893
+  ->  Gather Merge  (cost=4696.69..4710.82 rows=124 width=38) (actual time=3.608..4.117 rows=125.00 loops=1)
+        Workers Planned: 1
+        Workers Launched: 1
+        Buffers: shared hit=1893
+        ->  Sort  (cost=3696.68..3696.86 rows=73 width=38) (actual time=2.826..2.827 rows=62.50 loops=2)
+              Sort Key: (EXTRACT(hour FROM recorded_at))
+              Sort Method: quicksort  Memory: 27kB
+              Buffers: shared hit=1893
+              Worker 0:  Sort Method: quicksort  Memory: 26kB
+              ->  Parallel Seq Scan on traffic_readings  (cost=0.00..3694.42 rows=73 width=38) (actual time=0.027..2.805 rows=62.50 loops=2)
+                    Filter: (segment_id = 5)
+                    Rows Removed by Filter: 124938
+                    Buffers: shared hit=1856
+Planning:
+  Buffers: shared hit=114
+Planning Time: 0.172 ms
+Execution Time: 4.173 ms

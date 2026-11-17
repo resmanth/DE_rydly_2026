@@ -1,0 +1,84 @@
+=== R07 run 1 ===
+Unique  (cost=4816.75..4991.46 rows=1500 width=48) (actual time=57.525..58.590 rows=40.00 loops=1)
+  Buffers: shared hit=1931
+  ->  Gather Merge  (cost=4816.75..4987.71 rows=1500 width=48) (actual time=57.525..58.490 rows=5048.00 loops=1)
+        Workers Planned: 1
+        Workers Launched: 1
+        Buffers: shared hit=1931
+        ->  Sort  (cost=3816.74..3818.95 rows=882 width=48) (actual time=56.397..56.442 rows=2524.00 loops=2)
+              Sort Key: t.segment_id, t.recorded_at DESC
+              Sort Method: quicksort  Memory: 296kB
+              Buffers: shared hit=1931
+              Worker 0:  Sort Method: quicksort  Memory: 281kB
+              ->  Hash Join  (cost=60.15..3773.59 rows=882 width=48) (actual time=4.059..55.775 rows=2524.00 loops=2)
+                    Hash Cond: (t.segment_id = s.segment_id)
+                    Buffers: shared hit=1916
+                    ->  Parallel Seq Scan on traffic_readings t  (cost=0.00..3326.59 rows=147059 width=23) (actual time=0.006..48.311 rows=125000.00 loops=2)
+                          Buffers: shared hit=1856
+                    ->  Hash  (cost=60.00..60.00 rows=12 width=29) (actual time=4.046..4.047 rows=40.00 loops=2)
+                          Buckets: 1024  Batches: 1  Memory Usage: 11kB
+                          Buffers: shared hit=60
+                          ->  Seq Scan on road_segments s  (cost=0.00..60.00 rows=12 width=29) (actual time=0.193..4.040 rows=40.00 loops=2)
+                                Filter: (((road_name)::text ~~ 'Outer Ring Road%'::text) AND (city_id = 1))
+                                Rows Removed by Filter: 1960
+                                Buffers: shared hit=60
+Planning:
+  Buffers: shared hit=159
+Planning Time: 1.290 ms
+Execution Time: 58.625 ms
+=== R07 run 2 ===
+Unique  (cost=4816.75..4991.46 rows=1500 width=48) (actual time=7.531..8.401 rows=40.00 loops=1)
+  Buffers: shared hit=1931
+  ->  Gather Merge  (cost=4816.75..4987.71 rows=1500 width=48) (actual time=7.530..8.294 rows=5048.00 loops=1)
+        Workers Planned: 1
+        Workers Launched: 1
+        Buffers: shared hit=1931
+        ->  Sort  (cost=3816.74..3818.95 rows=882 width=48) (actual time=6.603..6.653 rows=2524.00 loops=2)
+              Sort Key: t.segment_id, t.recorded_at DESC
+              Sort Method: quicksort  Memory: 315kB
+              Buffers: shared hit=1931
+              Worker 0:  Sort Method: quicksort  Memory: 262kB
+              ->  Hash Join  (cost=60.15..3773.59 rows=882 width=48) (actual time=0.098..6.070 rows=2524.00 loops=2)
+                    Hash Cond: (t.segment_id = s.segment_id)
+                    Buffers: shared hit=1916
+                    ->  Parallel Seq Scan on traffic_readings t  (cost=0.00..3326.59 rows=147059 width=23) (actual time=0.003..2.862 rows=125000.00 loops=2)
+                          Buffers: shared hit=1856
+                    ->  Hash  (cost=60.00..60.00 rows=12 width=29) (actual time=0.089..0.090 rows=40.00 loops=2)
+                          Buckets: 1024  Batches: 1  Memory Usage: 11kB
+                          Buffers: shared hit=60
+                          ->  Seq Scan on road_segments s  (cost=0.00..60.00 rows=12 width=29) (actual time=0.012..0.085 rows=40.00 loops=2)
+                                Filter: (((road_name)::text ~~ 'Outer Ring Road%'::text) AND (city_id = 1))
+                                Rows Removed by Filter: 1960
+                                Buffers: shared hit=60
+Planning:
+  Buffers: shared hit=159
+Planning Time: 0.331 ms
+Execution Time: 8.437 ms
+=== R07 run 3 ===
+Unique  (cost=4816.75..4991.46 rows=1500 width=48) (actual time=8.230..9.106 rows=40.00 loops=1)
+  Buffers: shared hit=1931
+  ->  Gather Merge  (cost=4816.75..4987.71 rows=1500 width=48) (actual time=8.230..8.997 rows=5048.00 loops=1)
+        Workers Planned: 1
+        Workers Launched: 1
+        Buffers: shared hit=1931
+        ->  Sort  (cost=3816.74..3818.95 rows=882 width=48) (actual time=7.174..7.215 rows=2524.00 loops=2)
+              Sort Key: t.segment_id, t.recorded_at DESC
+              Sort Method: quicksort  Memory: 315kB
+              Buffers: shared hit=1931
+              Worker 0:  Sort Method: quicksort  Memory: 262kB
+              ->  Hash Join  (cost=60.15..3773.59 rows=882 width=48) (actual time=0.104..6.638 rows=2524.00 loops=2)
+                    Hash Cond: (t.segment_id = s.segment_id)
+                    Buffers: shared hit=1916
+                    ->  Parallel Seq Scan on traffic_readings t  (cost=0.00..3326.59 rows=147059 width=23) (actual time=0.003..3.119 rows=125000.00 loops=2)
+                          Buffers: shared hit=1856
+                    ->  Hash  (cost=60.00..60.00 rows=12 width=29) (actual time=0.096..0.096 rows=40.00 loops=2)
+                          Buckets: 1024  Batches: 1  Memory Usage: 11kB
+                          Buffers: shared hit=60
+                          ->  Seq Scan on road_segments s  (cost=0.00..60.00 rows=12 width=29) (actual time=0.013..0.091 rows=40.00 loops=2)
+                                Filter: (((road_name)::text ~~ 'Outer Ring Road%'::text) AND (city_id = 1))
+                                Rows Removed by Filter: 1960
+                                Buffers: shared hit=60
+Planning:
+  Buffers: shared hit=159
+Planning Time: 0.332 ms
+Execution Time: 9.140 ms

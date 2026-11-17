@@ -1,0 +1,75 @@
+=== R15 run 1 ===
+Sort  (cost=8361.66..8461.75 rows=40036 width=53) (actual time=27.276..27.287 rows=558.00 loops=1)
+  Sort Key: p.place_id
+  Sort Method: quicksort  Memory: 51kB
+  Buffers: shared hit=1691
+  ->  HashAggregate  (cost=4400.18..5301.11 rows=40036 width=53) (actual time=23.105..27.218 rows=558.00 loops=1)
+        Group Key: p.place_id
+        Filter: ((p.review_count <> count(*)) OR (p.avg_rating <> round(avg(r.rating), 1)))
+        Batches: 1  Memory Usage: 5905kB
+        Rows Removed by Filter: 33873
+        Buffers: shared hit=1688
+        ->  Hash Join  (cost=1812.95..3725.19 rows=89998 width=15) (actual time=5.026..14.896 rows=89998.00 loops=1)
+              Hash Cond: (r.place_id = p.place_id)
+              Buffers: shared hit=1688
+              ->  Seq Scan on place_reviews r  (cost=0.00..1675.98 rows=89998 width=6) (actual time=0.004..2.138 rows=89998.00 loops=1)
+                    Buffers: shared hit=776
+              ->  Hash  (cost=1312.42..1312.42 rows=40042 width=13) (actual time=4.984..4.984 rows=40042.00 loops=1)
+                    Buckets: 65536  Batches: 1  Memory Usage: 2346kB
+                    Buffers: shared hit=912
+                    ->  Seq Scan on places p  (cost=0.00..1312.42 rows=40042 width=13) (actual time=0.003..2.850 rows=40042.00 loops=1)
+                          Buffers: shared hit=912
+Planning:
+  Buffers: shared hit=224
+Planning Time: 1.006 ms
+Execution Time: 27.376 ms
+=== R15 run 2 ===
+Sort  (cost=8361.66..8461.75 rows=40036 width=53) (actual time=26.113..26.124 rows=558.00 loops=1)
+  Sort Key: p.place_id
+  Sort Method: quicksort  Memory: 51kB
+  Buffers: shared hit=1691
+  ->  HashAggregate  (cost=4400.18..5301.11 rows=40036 width=53) (actual time=21.698..26.054 rows=558.00 loops=1)
+        Group Key: p.place_id
+        Filter: ((p.review_count <> count(*)) OR (p.avg_rating <> round(avg(r.rating), 1)))
+        Batches: 1  Memory Usage: 5905kB
+        Rows Removed by Filter: 33873
+        Buffers: shared hit=1688
+        ->  Hash Join  (cost=1812.95..3725.19 rows=89998 width=15) (actual time=4.612..13.948 rows=89998.00 loops=1)
+              Hash Cond: (r.place_id = p.place_id)
+              Buffers: shared hit=1688
+              ->  Seq Scan on place_reviews r  (cost=0.00..1675.98 rows=89998 width=6) (actual time=0.003..2.102 rows=89998.00 loops=1)
+                    Buffers: shared hit=776
+              ->  Hash  (cost=1312.42..1312.42 rows=40042 width=13) (actual time=4.572..4.572 rows=40042.00 loops=1)
+                    Buckets: 65536  Batches: 1  Memory Usage: 2346kB
+                    Buffers: shared hit=912
+                    ->  Seq Scan on places p  (cost=0.00..1312.42 rows=40042 width=13) (actual time=0.003..2.631 rows=40042.00 loops=1)
+                          Buffers: shared hit=912
+Planning:
+  Buffers: shared hit=224
+Planning Time: 0.398 ms
+Execution Time: 26.201 ms
+=== R15 run 3 ===
+Sort  (cost=8361.66..8461.75 rows=40036 width=53) (actual time=26.881..26.892 rows=558.00 loops=1)
+  Sort Key: p.place_id
+  Sort Method: quicksort  Memory: 51kB
+  Buffers: shared hit=1691
+  ->  HashAggregate  (cost=4400.18..5301.11 rows=40036 width=53) (actual time=22.346..26.823 rows=558.00 loops=1)
+        Group Key: p.place_id
+        Filter: ((p.review_count <> count(*)) OR (p.avg_rating <> round(avg(r.rating), 1)))
+        Batches: 1  Memory Usage: 5905kB
+        Rows Removed by Filter: 33873
+        Buffers: shared hit=1688
+        ->  Hash Join  (cost=1812.95..3725.19 rows=89998 width=15) (actual time=4.454..14.212 rows=89998.00 loops=1)
+              Hash Cond: (r.place_id = p.place_id)
+              Buffers: shared hit=1688
+              ->  Seq Scan on place_reviews r  (cost=0.00..1675.98 rows=89998 width=6) (actual time=0.003..2.146 rows=89998.00 loops=1)
+                    Buffers: shared hit=776
+              ->  Hash  (cost=1312.42..1312.42 rows=40042 width=13) (actual time=4.419..4.420 rows=40042.00 loops=1)
+                    Buckets: 65536  Batches: 1  Memory Usage: 2346kB
+                    Buffers: shared hit=912
+                    ->  Seq Scan on places p  (cost=0.00..1312.42 rows=40042 width=13) (actual time=0.003..2.606 rows=40042.00 loops=1)
+                          Buffers: shared hit=912
+Planning:
+  Buffers: shared hit=224
+Planning Time: 0.406 ms
+Execution Time: 26.971 ms
