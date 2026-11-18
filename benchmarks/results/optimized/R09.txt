@@ -1,0 +1,48 @@
+=== R09 run 1 ===
+GroupAggregate  (cost=19.21..22.62 rows=124 width=72) (actual time=0.272..0.336 rows=24 loops=1)
+  Group Key: (EXTRACT(hour FROM recorded_at))
+  Buffers: shared hit=7
+  ->  Sort  (cost=19.21..19.52 rows=124 width=38) (actual time=0.257..0.266 rows=125 loops=1)
+        Sort Key: (EXTRACT(hour FROM recorded_at))
+        Sort Method: quicksort  Memory: 28kB
+        Buffers: shared hit=7
+        ->  Index Only Scan using idx_traffic_segment_time on traffic_readings  (cost=0.42..14.90 rows=124 width=38) (actual time=0.124..0.186 rows=125 loops=1)
+              Index Cond: (segment_id = 5)
+              Heap Fetches: 0
+              Buffers: shared hit=4
+Planning:
+  Buffers: shared hit=174
+Planning Time: 0.969 ms
+Execution Time: 0.402 ms
+=== R09 run 2 ===
+GroupAggregate  (cost=19.21..22.62 rows=124 width=72) (actual time=0.178..0.211 rows=24 loops=1)
+  Group Key: (EXTRACT(hour FROM recorded_at))
+  Buffers: shared hit=7
+  ->  Sort  (cost=19.21..19.52 rows=124 width=38) (actual time=0.167..0.171 rows=125 loops=1)
+        Sort Key: (EXTRACT(hour FROM recorded_at))
+        Sort Method: quicksort  Memory: 28kB
+        Buffers: shared hit=7
+        ->  Index Only Scan using idx_traffic_segment_time on traffic_readings  (cost=0.42..14.90 rows=124 width=38) (actual time=0.096..0.127 rows=125 loops=1)
+              Index Cond: (segment_id = 5)
+              Heap Fetches: 0
+              Buffers: shared hit=4
+Planning:
+  Buffers: shared hit=174
+Planning Time: 0.626 ms
+Execution Time: 0.257 ms
+=== R09 run 3 ===
+GroupAggregate  (cost=19.21..22.62 rows=124 width=72) (actual time=0.183..0.217 rows=24 loops=1)
+  Group Key: (EXTRACT(hour FROM recorded_at))
+  Buffers: shared hit=7
+  ->  Sort  (cost=19.21..19.52 rows=124 width=38) (actual time=0.172..0.177 rows=125 loops=1)
+        Sort Key: (EXTRACT(hour FROM recorded_at))
+        Sort Method: quicksort  Memory: 28kB
+        Buffers: shared hit=7
+        ->  Index Only Scan using idx_traffic_segment_time on traffic_readings  (cost=0.42..14.90 rows=124 width=38) (actual time=0.093..0.119 rows=125 loops=1)
+              Index Cond: (segment_id = 5)
+              Heap Fetches: 0
+              Buffers: shared hit=4
+Planning:
+  Buffers: shared hit=174
+Planning Time: 0.907 ms
+Execution Time: 0.279 ms

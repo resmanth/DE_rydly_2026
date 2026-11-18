@@ -1,0 +1,72 @@
+=== R24 run 1 ===
+Hash Join  (cost=1301.35..2834.38 rows=9 width=28) (actual time=5.153..5.196 rows=42 loops=1)
+  Hash Cond: ((b.name)::text = (a.name)::text)
+  Join Filter: ((b.place_id > a.place_id) AND (b.latitude > (a.latitude - 0.001)) AND (b.latitude < (a.latitude + 0.001)) AND (b.longitude > (a.longitude - 0.001)) AND (b.longitude < (a.longitude + 0.001)))
+  Rows Removed by Join Filter: 2219
+  Buffers: shared hit=1839
+  ->  Seq Scan on places b  (cost=0.00..1312.42 rows=40042 width=40) (actual time=0.003..1.010 rows=40042 loops=1)
+        Buffers: shared hit=912
+  ->  Hash  (cost=1274.28..1274.28 rows=2165 width=40) (actual time=1.808..1.808 rows=2177 loops=1)
+        Buckets: 4096  Batches: 1  Memory Usage: 188kB
+        Buffers: shared hit=927
+        ->  Bitmap Heap Scan on places a  (cost=265.40..1274.28 rows=2165 width=40) (actual time=0.365..1.574 rows=2177 loops=1)
+              Recheck Cond: (city_id = 1)
+              Filter: (category_id = 1)
+              Rows Removed by Filter: 4265
+              Heap Blocks: exact=872
+              Buffers: shared hit=927
+              ->  Bitmap Index Scan on idx_places_city_rating  (cost=0.00..264.86 rows=6459 width=0) (actual time=0.303..0.303 rows=6442 loops=1)
+                    Index Cond: (city_id = 1)
+                    Buffers: shared hit=55
+Planning:
+  Buffers: shared hit=519
+Planning Time: 0.618 ms
+Execution Time: 5.240 ms
+=== R24 run 2 ===
+Hash Join  (cost=1301.35..2834.38 rows=9 width=28) (actual time=4.516..4.547 rows=42 loops=1)
+  Hash Cond: ((b.name)::text = (a.name)::text)
+  Join Filter: ((b.place_id > a.place_id) AND (b.latitude > (a.latitude - 0.001)) AND (b.latitude < (a.latitude + 0.001)) AND (b.longitude > (a.longitude - 0.001)) AND (b.longitude < (a.longitude + 0.001)))
+  Rows Removed by Join Filter: 2219
+  Buffers: shared hit=1839
+  ->  Seq Scan on places b  (cost=0.00..1312.42 rows=40042 width=40) (actual time=0.003..0.856 rows=40042 loops=1)
+        Buffers: shared hit=912
+  ->  Hash  (cost=1274.28..1274.28 rows=2165 width=40) (actual time=1.594..1.594 rows=2177 loops=1)
+        Buckets: 4096  Batches: 1  Memory Usage: 188kB
+        Buffers: shared hit=927
+        ->  Bitmap Heap Scan on places a  (cost=265.40..1274.28 rows=2165 width=40) (actual time=0.369..1.394 rows=2177 loops=1)
+              Recheck Cond: (city_id = 1)
+              Filter: (category_id = 1)
+              Rows Removed by Filter: 4265
+              Heap Blocks: exact=872
+              Buffers: shared hit=927
+              ->  Bitmap Index Scan on idx_places_city_rating  (cost=0.00..264.86 rows=6459 width=0) (actual time=0.307..0.308 rows=6442 loops=1)
+                    Index Cond: (city_id = 1)
+                    Buffers: shared hit=55
+Planning:
+  Buffers: shared hit=519
+Planning Time: 0.612 ms
+Execution Time: 4.585 ms
+=== R24 run 3 ===
+Hash Join  (cost=1301.35..2834.38 rows=9 width=28) (actual time=5.401..5.444 rows=42 loops=1)
+  Hash Cond: ((b.name)::text = (a.name)::text)
+  Join Filter: ((b.place_id > a.place_id) AND (b.latitude > (a.latitude - 0.001)) AND (b.latitude < (a.latitude + 0.001)) AND (b.longitude > (a.longitude - 0.001)) AND (b.longitude < (a.longitude + 0.001)))
+  Rows Removed by Join Filter: 2219
+  Buffers: shared hit=1839
+  ->  Seq Scan on places b  (cost=0.00..1312.42 rows=40042 width=40) (actual time=0.003..1.047 rows=40042 loops=1)
+        Buffers: shared hit=912
+  ->  Hash  (cost=1274.28..1274.28 rows=2165 width=40) (actual time=1.638..1.638 rows=2177 loops=1)
+        Buckets: 4096  Batches: 1  Memory Usage: 188kB
+        Buffers: shared hit=927
+        ->  Bitmap Heap Scan on places a  (cost=265.40..1274.28 rows=2165 width=40) (actual time=0.366..1.427 rows=2177 loops=1)
+              Recheck Cond: (city_id = 1)
+              Filter: (category_id = 1)
+              Rows Removed by Filter: 4265
+              Heap Blocks: exact=872
+              Buffers: shared hit=927
+              ->  Bitmap Index Scan on idx_places_city_rating  (cost=0.00..264.86 rows=6459 width=0) (actual time=0.302..0.302 rows=6442 loops=1)
+                    Index Cond: (city_id = 1)
+                    Buffers: shared hit=55
+Planning:
+  Buffers: shared hit=519
+Planning Time: 0.622 ms
+Execution Time: 5.485 ms

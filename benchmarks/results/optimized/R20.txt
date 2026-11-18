@@ -1,0 +1,66 @@
+=== R20 run 1 ===
+WindowAgg  (cost=3950.11..4334.38 rows=11034 width=44) (actual time=1.459..1.888 rows=30 loops=1)
+  Buffers: shared hit=227
+  ->  GroupAggregate  (cost=3948.19..4168.87 rows=11034 width=12) (actual time=1.437..1.875 rows=30 loops=1)
+        Group Key: ((navigation_sessions.started_at)::date)
+        Buffers: shared hit=227
+        ->  Sort  (cost=3948.19..3975.77 rows=11034 width=4) (actual time=1.419..1.620 rows=10989 loops=1)
+              Sort Key: ((navigation_sessions.started_at)::date)
+              Sort Method: quicksort  Memory: 385kB
+              Buffers: shared hit=227
+              ->  Bitmap Heap Scan on navigation_sessions  (cost=14.82..3207.27 rows=11034 width=4) (actual time=0.123..1.190 rows=10989 loops=1)
+                    Recheck Cond: ((started_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (started_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+                    Rows Removed by Index Recheck: 1846
+                    Heap Blocks: lossy=216
+                    Buffers: shared hit=224
+                    ->  Bitmap Index Scan on idx_nav_started_brin  (cost=0.00..12.06 rows=17391 width=0) (actual time=0.010..0.010 rows=2160 loops=1)
+                          Index Cond: ((started_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (started_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+                          Buffers: shared hit=8
+Planning:
+  Buffers: shared hit=174
+Planning Time: 0.272 ms
+Execution Time: 1.930 ms
+=== R20 run 2 ===
+WindowAgg  (cost=3950.11..4334.38 rows=11034 width=44) (actual time=1.510..1.954 rows=30 loops=1)
+  Buffers: shared hit=227
+  ->  GroupAggregate  (cost=3948.19..4168.87 rows=11034 width=12) (actual time=1.489..1.941 rows=30 loops=1)
+        Group Key: ((navigation_sessions.started_at)::date)
+        Buffers: shared hit=227
+        ->  Sort  (cost=3948.19..3975.77 rows=11034 width=4) (actual time=1.470..1.674 rows=10989 loops=1)
+              Sort Key: ((navigation_sessions.started_at)::date)
+              Sort Method: quicksort  Memory: 385kB
+              Buffers: shared hit=227
+              ->  Bitmap Heap Scan on navigation_sessions  (cost=14.82..3207.27 rows=11034 width=4) (actual time=0.126..1.232 rows=10989 loops=1)
+                    Recheck Cond: ((started_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (started_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+                    Rows Removed by Index Recheck: 1846
+                    Heap Blocks: lossy=216
+                    Buffers: shared hit=224
+                    ->  Bitmap Index Scan on idx_nav_started_brin  (cost=0.00..12.06 rows=17391 width=0) (actual time=0.011..0.011 rows=2160 loops=1)
+                          Index Cond: ((started_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (started_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+                          Buffers: shared hit=8
+Planning:
+  Buffers: shared hit=174
+Planning Time: 0.274 ms
+Execution Time: 1.994 ms
+=== R20 run 3 ===
+WindowAgg  (cost=3950.11..4334.38 rows=11034 width=44) (actual time=1.572..2.004 rows=30 loops=1)
+  Buffers: shared hit=227
+  ->  GroupAggregate  (cost=3948.19..4168.87 rows=11034 width=12) (actual time=1.550..1.990 rows=30 loops=1)
+        Group Key: ((navigation_sessions.started_at)::date)
+        Buffers: shared hit=227
+        ->  Sort  (cost=3948.19..3975.77 rows=11034 width=4) (actual time=1.530..1.727 rows=10989 loops=1)
+              Sort Key: ((navigation_sessions.started_at)::date)
+              Sort Method: quicksort  Memory: 385kB
+              Buffers: shared hit=227
+              ->  Bitmap Heap Scan on navigation_sessions  (cost=14.82..3207.27 rows=11034 width=4) (actual time=0.151..1.287 rows=10989 loops=1)
+                    Recheck Cond: ((started_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (started_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+                    Rows Removed by Index Recheck: 1846
+                    Heap Blocks: lossy=216
+                    Buffers: shared hit=224
+                    ->  Bitmap Index Scan on idx_nav_started_brin  (cost=0.00..12.06 rows=17391 width=0) (actual time=0.016..0.016 rows=2160 loops=1)
+                          Index Cond: ((started_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (started_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+                          Buffers: shared hit=8
+Planning:
+  Buffers: shared hit=174
+Planning Time: 0.470 ms
+Execution Time: 2.140 ms

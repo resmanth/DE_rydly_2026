@@ -1,0 +1,42 @@
+=== R06 run 1 ===
+Nested Loop  (cost=0.70..21.07 rows=2 width=42) (actual time=0.090..0.124 rows=4 loops=1)
+  Buffers: shared hit=16
+  ->  Index Only Scan using idx_saved_user_list on saved_places s  (cost=0.41..4.45 rows=2 width=22) (actual time=0.076..0.077 rows=4 loops=1)
+        Index Cond: (user_id = 1005)
+        Heap Fetches: 0
+        Buffers: shared hit=4
+  ->  Index Scan using places_pkey on places p  (cost=0.29..8.31 rows=1 width=24) (actual time=0.011..0.011 rows=1 loops=4)
+        Index Cond: (place_id = s.place_id)
+        Buffers: shared hit=12
+Planning:
+  Buffers: shared hit=399
+Planning Time: 1.874 ms
+Execution Time: 0.169 ms
+=== R06 run 2 ===
+Nested Loop  (cost=0.70..21.07 rows=2 width=42) (actual time=0.083..0.111 rows=4 loops=1)
+  Buffers: shared hit=16
+  ->  Index Only Scan using idx_saved_user_list on saved_places s  (cost=0.41..4.45 rows=2 width=22) (actual time=0.068..0.069 rows=4 loops=1)
+        Index Cond: (user_id = 1005)
+        Heap Fetches: 0
+        Buffers: shared hit=4
+  ->  Index Scan using places_pkey on places p  (cost=0.29..8.31 rows=1 width=24) (actual time=0.009..0.009 rows=1 loops=4)
+        Index Cond: (place_id = s.place_id)
+        Buffers: shared hit=12
+Planning:
+  Buffers: shared hit=399
+Planning Time: 1.934 ms
+Execution Time: 0.165 ms
+=== R06 run 3 ===
+Nested Loop  (cost=0.70..21.07 rows=2 width=42) (actual time=0.054..0.073 rows=4 loops=1)
+  Buffers: shared hit=16
+  ->  Index Only Scan using idx_saved_user_list on saved_places s  (cost=0.41..4.45 rows=2 width=22) (actual time=0.044..0.045 rows=4 loops=1)
+        Index Cond: (user_id = 1005)
+        Heap Fetches: 0
+        Buffers: shared hit=4
+  ->  Index Scan using places_pkey on places p  (cost=0.29..8.31 rows=1 width=24) (actual time=0.006..0.006 rows=1 loops=4)
+        Index Cond: (place_id = s.place_id)
+        Buffers: shared hit=12
+Planning:
+  Buffers: shared hit=399
+Planning Time: 1.286 ms
+Execution Time: 0.109 ms

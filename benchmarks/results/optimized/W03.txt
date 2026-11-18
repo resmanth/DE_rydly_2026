@@ -1,0 +1,39 @@
+=== W03 run 1 ===
+Insert on saved_places  (cost=0.00..0.01 rows=0 width=0) (actual time=0.372..0.372 rows=0 loops=1)
+  Conflict Resolution: NOTHING
+  Tuples Inserted: 1
+  Conflicting Tuples: 0
+  Buffers: shared hit=102 dirtied=1
+  ->  Result  (cost=0.00..0.01 rows=1 width=94) (actual time=0.000..0.000 rows=1 loops=1)
+Planning:
+  Buffers: shared hit=3
+Planning Time: 0.032 ms
+Trigger for constraint saved_places_user_id_fkey: time=0.202 calls=1
+Trigger for constraint saved_places_place_id_fkey: time=0.229 calls=1
+Execution Time: 0.810 ms
+=== W03 run 2 ===
+Insert on saved_places  (cost=0.00..0.01 rows=0 width=0) (actual time=0.146..0.146 rows=0 loops=1)
+  Conflict Resolution: NOTHING
+  Tuples Inserted: 1
+  Conflicting Tuples: 0
+  Buffers: shared hit=102
+  ->  Result  (cost=0.00..0.01 rows=1 width=94) (actual time=0.000..0.001 rows=1 loops=1)
+Planning:
+  Buffers: shared hit=3
+Planning Time: 0.040 ms
+Trigger for constraint saved_places_user_id_fkey: time=0.212 calls=1
+Trigger for constraint saved_places_place_id_fkey: time=0.230 calls=1
+Execution Time: 0.597 ms
+=== W03 run 3 ===
+Insert on saved_places  (cost=0.00..0.01 rows=0 width=0) (actual time=0.127..0.127 rows=0 loops=1)
+  Conflict Resolution: NOTHING
+  Tuples Inserted: 1
+  Conflicting Tuples: 0
+  Buffers: shared hit=102
+  ->  Result  (cost=0.00..0.01 rows=1 width=94) (actual time=0.000..0.001 rows=1 loops=1)
+Planning:
+  Buffers: shared hit=3
+Planning Time: 0.031 ms
+Trigger for constraint saved_places_user_id_fkey: time=0.197 calls=1
+Trigger for constraint saved_places_place_id_fkey: time=0.284 calls=1
+Execution Time: 0.616 ms
