@@ -1,6 +1,6 @@
 -- Phase 4 indexes (CP3). Every index names the queries it serves.
 -- Run after 01_schema.sql and 02_load_data.sql, then ANALYZE.
-SET search_path TO gmaps;
+SET search_path TO gmaps, public;
 
 -- pg_trgm is needed for ILIKE '%text%' (R03)
 CREATE EXTENSION IF NOT EXISTS pg_trgm;
