@@ -1,0 +1,45 @@
+=== R13 run 1 ===
+Merge Anti Join  (cost=0.84..42482.15 rows=655750 width=25) (actual time=0.420..265.903 rows=666854.00 loops=1)
+  Merge Cond: (p.place_id = n.origin_place_id)
+  Buffers: shared hit=73689 read=19883 written=7
+  ->  Index Scan using places_pkey on places p  (cost=0.42..38520.20 rows=800853 width=25) (actual time=0.005..154.484 rows=800853.00 loops=1)
+        Index Searches: 1
+        Buffers: shared hit=1148 read=19484 written=7
+  ->  Index Only Scan using idx_nav_origin on navigation_sessions n  (cost=0.42..4016.75 rows=4001007 width=4) (actual time=0.411..20.682 rows=148323.00 loops=1)
+        Heap Fetches: 0
+        Index Searches: 1
+        Buffers: shared hit=72541 read=399
+Planning:
+  Buffers: shared hit=449
+Planning Time: 1.113 ms
+Execution Time: 290.232 ms
+=== R13 run 2 ===
+Merge Anti Join  (cost=0.84..42482.15 rows=655750 width=25) (actual time=0.122..256.859 rows=666854.00 loops=1)
+  Merge Cond: (p.place_id = n.origin_place_id)
+  Buffers: shared hit=74135 read=19437 written=4
+  ->  Index Scan using places_pkey on places p  (cost=0.42..38520.20 rows=800853 width=25) (actual time=0.044..158.347 rows=800853.00 loops=1)
+        Index Searches: 1
+        Buffers: shared hit=1594 read=19038 written=4
+  ->  Index Only Scan using idx_nav_origin on navigation_sessions n  (cost=0.42..4016.75 rows=4001007 width=4) (actual time=0.073..17.618 rows=148323.00 loops=1)
+        Heap Fetches: 0
+        Index Searches: 1
+        Buffers: shared hit=72541 read=399
+Planning:
+  Buffers: shared hit=449
+Planning Time: 1.443 ms
+Execution Time: 279.559 ms
+=== R13 run 3 ===
+Merge Anti Join  (cost=0.84..42482.15 rows=655750 width=25) (actual time=0.080..257.507 rows=666854.00 loops=1)
+  Merge Cond: (p.place_id = n.origin_place_id)
+  Buffers: shared hit=73815 read=19757
+  ->  Index Scan using places_pkey on places p  (cost=0.42..38520.20 rows=800853 width=25) (actual time=0.012..159.370 rows=800853.00 loops=1)
+        Index Searches: 1
+        Buffers: shared hit=1274 read=19358
+  ->  Index Only Scan using idx_nav_origin on navigation_sessions n  (cost=0.42..4016.75 rows=4001007 width=4) (actual time=0.063..17.508 rows=148323.00 loops=1)
+        Heap Fetches: 0
+        Index Searches: 1
+        Buffers: shared hit=72541 read=399
+Planning:
+  Buffers: shared hit=418 read=31
+Planning Time: 2.791 ms
+Execution Time: 280.289 ms

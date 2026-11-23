@@ -1,0 +1,42 @@
+=== W02 run 1 ===
+Insert on place_reviews  (cost=0.00..0.01 rows=0 width=0) (actual time=1.962..1.963 rows=0.00 loops=1)
+  Conflict Resolution: NOTHING
+  Conflict Arbiter Indexes: place_reviews_place_id_user_id_key
+  Tuples Inserted: 1
+  Conflicting Tuples: 0
+  Buffers: shared hit=26 read=13 dirtied=6
+  ->  Result  (cost=0.00..0.01 rows=1 width=540) (actual time=0.004..0.004 rows=1.00 loops=1)
+Planning:
+  Buffers: shared hit=105
+Planning Time: 0.149 ms
+Trigger for constraint place_reviews_place_id_fkey: time=0.781 calls=1
+Trigger for constraint place_reviews_user_id_fkey: time=0.224 calls=1
+Execution Time: 2.989 ms
+=== W02 run 2 ===
+Insert on place_reviews  (cost=0.00..0.01 rows=0 width=0) (actual time=0.239..0.239 rows=0.00 loops=1)
+  Conflict Resolution: NOTHING
+  Conflict Arbiter Indexes: place_reviews_place_id_user_id_key
+  Tuples Inserted: 1
+  Conflicting Tuples: 0
+  Buffers: shared hit=39 read=1 dirtied=1
+  ->  Result  (cost=0.00..0.01 rows=1 width=540) (actual time=0.004..0.005 rows=1.00 loops=1)
+Planning:
+  Buffers: shared hit=105
+Planning Time: 0.153 ms
+Trigger for constraint place_reviews_place_id_fkey: time=0.779 calls=1
+Trigger for constraint place_reviews_user_id_fkey: time=0.221 calls=1
+Execution Time: 1.259 ms
+=== W02 run 3 ===
+Insert on place_reviews  (cost=0.00..0.01 rows=0 width=0) (actual time=0.236..0.236 rows=0.00 loops=1)
+  Conflict Resolution: NOTHING
+  Conflict Arbiter Indexes: place_reviews_place_id_user_id_key
+  Tuples Inserted: 1
+  Conflicting Tuples: 0
+  Buffers: shared hit=39 read=1 dirtied=1
+  ->  Result  (cost=0.00..0.01 rows=1 width=540) (actual time=0.004..0.004 rows=1.00 loops=1)
+Planning:
+  Buffers: shared hit=105
+Planning Time: 0.149 ms
+Trigger for constraint place_reviews_place_id_fkey: time=0.759 calls=1
+Trigger for constraint place_reviews_user_id_fkey: time=0.234 calls=1
+Execution Time: 1.248 ms

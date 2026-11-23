@@ -1,0 +1,69 @@
+=== R07 run 1 ===
+Unique  (cost=4635.89..4787.73 rows=30369 width=48) (actual time=222.255..232.664 rows=800.00 loops=1)
+  Buffers: shared hit=3609 read=1481, temp read=841 written=843
+  ->  Sort  (cost=4635.89..4711.81 rows=30369 width=48) (actual time=222.254..228.278 rows=99873.00 loops=1)
+        Sort Key: t.segment_id, t.recorded_at DESC
+        Sort Method: external merge  Disk: 6728kB
+        Buffers: shared hit=3609 read=1481, temp read=841 written=843
+        ->  Nested Loop  (cost=0.72..2374.87 rows=30369 width=48) (actual time=0.452..168.900 rows=99873.00 loops=1)
+              Buffers: shared hit=3603 read=1481
+              ->  Index Scan using idx_segments_city_road on road_segments s  (cost=0.29..367.78 rows=243 width=29) (actual time=0.349..1.346 rows=800.00 loops=1)
+                    Index Cond: ((city_id = 1) AND ((road_name)::text ~>=~ 'Outer Ring Road'::text) AND ((road_name)::text ~<~ 'Outer Ring Roae'::text))
+                    Filter: ((road_name)::text ~~ 'Outer Ring Road%'::text)
+                    Index Searches: 1
+                    Buffers: shared hit=417 read=63
+              ->  Index Only Scan using idx_traffic_segment_time on traffic_readings t  (cost=0.43..7.00 rows=126 width=23) (actual time=0.146..0.200 rows=124.84 loops=800)
+                    Index Cond: (segment_id = s.segment_id)
+                    Heap Fetches: 0
+                    Index Searches: 800
+                    Buffers: shared hit=3186 read=1418
+Planning:
+  Buffers: shared hit=280 read=22
+Planning Time: 4.340 ms
+Execution Time: 234.450 ms
+=== R07 run 2 ===
+Unique  (cost=4635.89..4787.73 rows=30369 width=48) (actual time=72.501..82.945 rows=800.00 loops=1)
+  Buffers: shared hit=5090, temp read=841 written=843
+  ->  Sort  (cost=4635.89..4711.81 rows=30369 width=48) (actual time=72.499..78.545 rows=99873.00 loops=1)
+        Sort Key: t.segment_id, t.recorded_at DESC
+        Sort Method: external merge  Disk: 6728kB
+        Buffers: shared hit=5090, temp read=841 written=843
+        ->  Nested Loop  (cost=0.72..2374.87 rows=30369 width=48) (actual time=0.023..19.973 rows=99873.00 loops=1)
+              Buffers: shared hit=5084
+              ->  Index Scan using idx_segments_city_road on road_segments s  (cost=0.29..367.78 rows=243 width=29) (actual time=0.009..0.703 rows=800.00 loops=1)
+                    Index Cond: ((city_id = 1) AND ((road_name)::text ~>=~ 'Outer Ring Road'::text) AND ((road_name)::text ~<~ 'Outer Ring Roae'::text))
+                    Filter: ((road_name)::text ~~ 'Outer Ring Road%'::text)
+                    Index Searches: 1
+                    Buffers: shared hit=480
+              ->  Index Only Scan using idx_traffic_segment_time on traffic_readings t  (cost=0.43..7.00 rows=126 width=23) (actual time=0.006..0.015 rows=124.84 loops=800)
+                    Index Cond: (segment_id = s.segment_id)
+                    Heap Fetches: 0
+                    Index Searches: 800
+                    Buffers: shared hit=4604
+Planning:
+  Buffers: shared hit=302
+Planning Time: 1.020 ms
+Execution Time: 85.006 ms
+=== R07 run 3 ===
+Unique  (cost=4635.89..4787.73 rows=30369 width=48) (actual time=73.014..83.417 rows=800.00 loops=1)
+  Buffers: shared hit=5090, temp read=841 written=843
+  ->  Sort  (cost=4635.89..4711.81 rows=30369 width=48) (actual time=73.013..79.037 rows=99873.00 loops=1)
+        Sort Key: t.segment_id, t.recorded_at DESC
+        Sort Method: external merge  Disk: 6728kB
+        Buffers: shared hit=5090, temp read=841 written=843
+        ->  Nested Loop  (cost=0.72..2374.87 rows=30369 width=48) (actual time=0.055..20.350 rows=99873.00 loops=1)
+              Buffers: shared hit=5084
+              ->  Index Scan using idx_segments_city_road on road_segments s  (cost=0.29..367.78 rows=243 width=29) (actual time=0.024..0.768 rows=800.00 loops=1)
+                    Index Cond: ((city_id = 1) AND ((road_name)::text ~>=~ 'Outer Ring Road'::text) AND ((road_name)::text ~<~ 'Outer Ring Roae'::text))
+                    Filter: ((road_name)::text ~~ 'Outer Ring Road%'::text)
+                    Index Searches: 1
+                    Buffers: shared hit=480
+              ->  Index Only Scan using idx_traffic_segment_time on traffic_readings t  (cost=0.43..7.00 rows=126 width=23) (actual time=0.006..0.016 rows=124.84 loops=800)
+                    Index Cond: (segment_id = s.segment_id)
+                    Heap Fetches: 0
+                    Index Searches: 800
+                    Buffers: shared hit=4604
+Planning:
+  Buffers: shared hit=302
+Planning Time: 1.218 ms
+Execution Time: 85.405 ms

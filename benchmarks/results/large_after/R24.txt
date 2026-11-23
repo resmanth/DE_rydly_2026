@@ -1,0 +1,66 @@
+=== R24 run 1 ===
+Gather  (cost=1000.43..47324.37 rows=186 width=29) (actual time=13.036..242.377 rows=853.00 loops=1)
+  Workers Planned: 2
+  Workers Launched: 2
+  Buffers: shared hit=158859 read=20523 dirtied=497
+  ->  Nested Loop  (cost=0.43..46305.77 rows=78 width=29) (actual time=6.486..234.505 rows=284.33 loops=3)
+        Buffers: shared hit=158859 read=20523 dirtied=497
+        ->  Parallel Seq Scan on places a  (cost=0.00..23490.37 rows=18805 width=41) (actual time=0.047..25.170 rows=14507.00 loops=3)
+              Filter: ((city_id = 1) AND (category_id = 1))
+              Rows Removed by Filter: 252444
+              Buffers: shared hit=1111 read=17167
+        ->  Index Only Scan using idx_places_name_lat on places b  (cost=0.43..1.20 rows=1 width=41) (actual time=0.014..0.014 rows=0.02 loops=43521)
+              Index Cond: ((name = (a.name)::text) AND (latitude > (a.latitude - 0.001)) AND (latitude < (a.latitude + 0.001)))
+              Filter: ((place_id > a.place_id) AND (longitude > (a.longitude - 0.001)) AND (longitude < (a.longitude + 0.001)))
+              Rows Removed by Filter: 1
+              Heap Fetches: 30558
+              Index Searches: 43521
+              Buffers: shared hit=157748 read=3356 dirtied=497
+Planning:
+  Buffers: shared hit=531 read=8 dirtied=1
+Planning Time: 2.064 ms
+Execution Time: 242.465 ms
+=== R24 run 2 ===
+Gather  (cost=1000.43..47324.37 rows=186 width=29) (actual time=1.093..196.161 rows=853.00 loops=1)
+  Workers Planned: 2
+  Workers Launched: 2
+  Buffers: shared hit=161306 read=16310
+  ->  Nested Loop  (cost=0.43..46305.77 rows=78 width=29) (actual time=1.012..191.696 rows=284.33 loops=3)
+        Buffers: shared hit=161306 read=16310
+        ->  Parallel Seq Scan on places a  (cost=0.00..23490.37 rows=18805 width=41) (actual time=0.051..24.877 rows=14507.00 loops=3)
+              Filter: ((city_id = 1) AND (category_id = 1))
+              Rows Removed by Filter: 252444
+              Buffers: shared hit=1968 read=16310
+        ->  Index Only Scan using idx_places_name_lat on places b  (cost=0.43..1.20 rows=1 width=41) (actual time=0.011..0.011 rows=0.02 loops=43521)
+              Index Cond: ((name = (a.name)::text) AND (latitude > (a.latitude - 0.001)) AND (latitude < (a.latitude + 0.001)))
+              Filter: ((place_id > a.place_id) AND (longitude > (a.longitude - 0.001)) AND (longitude < (a.longitude + 0.001)))
+              Rows Removed by Filter: 1
+              Heap Fetches: 28758
+              Index Searches: 43521
+              Buffers: shared hit=159338
+Planning:
+  Buffers: shared hit=539
+Planning Time: 1.131 ms
+Execution Time: 196.233 ms
+=== R24 run 3 ===
+Gather  (cost=1000.43..47324.37 rows=186 width=29) (actual time=1.069..188.371 rows=853.00 loops=1)
+  Workers Planned: 2
+  Workers Launched: 2
+  Buffers: shared hit=161588 read=16028
+  ->  Nested Loop  (cost=0.43..46305.77 rows=78 width=29) (actual time=0.541..182.229 rows=284.33 loops=3)
+        Buffers: shared hit=161588 read=16028
+        ->  Parallel Seq Scan on places a  (cost=0.00..23490.37 rows=18805 width=41) (actual time=0.049..23.196 rows=14507.00 loops=3)
+              Filter: ((city_id = 1) AND (category_id = 1))
+              Rows Removed by Filter: 252444
+              Buffers: shared hit=2250 read=16028
+        ->  Index Only Scan using idx_places_name_lat on places b  (cost=0.43..1.20 rows=1 width=41) (actual time=0.011..0.011 rows=0.02 loops=43521)
+              Index Cond: ((name = (a.name)::text) AND (latitude > (a.latitude - 0.001)) AND (latitude < (a.latitude + 0.001)))
+              Filter: ((place_id > a.place_id) AND (longitude > (a.longitude - 0.001)) AND (longitude < (a.longitude + 0.001)))
+              Rows Removed by Filter: 1
+              Heap Fetches: 28758
+              Index Searches: 43521
+              Buffers: shared hit=159338
+Planning:
+  Buffers: shared hit=539
+Planning Time: 1.125 ms
+Execution Time: 188.445 ms

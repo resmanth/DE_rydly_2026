@@ -1,0 +1,54 @@
+=== R05 run 1 ===
+Limit  (cost=0.85..42.27 rows=4 width=48) (actual time=0.741..1.228 rows=10.00 loops=1)
+  Buffers: shared hit=16 read=28
+  ->  Nested Loop  (cost=0.85..42.27 rows=4 width=48) (actual time=0.740..1.226 rows=10.00 loops=1)
+        Buffers: shared hit=16 read=28
+        ->  Index Only Scan using idx_reviews_place_newest on place_reviews r  (cost=0.43..8.50 rows=4 width=42) (actual time=0.631..0.633 rows=10.00 loops=1)
+              Index Cond: (place_id = 18)
+              Heap Fetches: 0
+              Index Searches: 1
+              Buffers: shared read=4
+        ->  Index Scan using users_pkey on users u  (cost=0.42..8.44 rows=1 width=14) (actual time=0.059..0.059 rows=1.00 loops=10)
+              Index Cond: (user_id = r.user_id)
+              Index Searches: 10
+              Buffers: shared hit=16 read=24
+Planning:
+  Buffers: shared hit=315 read=13
+Planning Time: 2.619 ms
+Execution Time: 1.262 ms
+=== R05 run 2 ===
+Limit  (cost=0.85..42.27 rows=4 width=48) (actual time=0.051..0.099 rows=10.00 loops=1)
+  Buffers: shared hit=44
+  ->  Nested Loop  (cost=0.85..42.27 rows=4 width=48) (actual time=0.051..0.097 rows=10.00 loops=1)
+        Buffers: shared hit=44
+        ->  Index Only Scan using idx_reviews_place_newest on place_reviews r  (cost=0.43..8.50 rows=4 width=42) (actual time=0.042..0.043 rows=10.00 loops=1)
+              Index Cond: (place_id = 18)
+              Heap Fetches: 0
+              Index Searches: 1
+              Buffers: shared hit=4
+        ->  Index Scan using users_pkey on users u  (cost=0.42..8.44 rows=1 width=14) (actual time=0.005..0.005 rows=1.00 loops=10)
+              Index Cond: (user_id = r.user_id)
+              Index Searches: 10
+              Buffers: shared hit=40
+Planning:
+  Buffers: shared hit=328
+Planning Time: 0.837 ms
+Execution Time: 0.130 ms
+=== R05 run 3 ===
+Limit  (cost=0.85..42.27 rows=4 width=48) (actual time=0.051..0.097 rows=10.00 loops=1)
+  Buffers: shared hit=44
+  ->  Nested Loop  (cost=0.85..42.27 rows=4 width=48) (actual time=0.051..0.096 rows=10.00 loops=1)
+        Buffers: shared hit=44
+        ->  Index Only Scan using idx_reviews_place_newest on place_reviews r  (cost=0.43..8.50 rows=4 width=42) (actual time=0.042..0.043 rows=10.00 loops=1)
+              Index Cond: (place_id = 18)
+              Heap Fetches: 0
+              Index Searches: 1
+              Buffers: shared hit=4
+        ->  Index Scan using users_pkey on users u  (cost=0.42..8.44 rows=1 width=14) (actual time=0.005..0.005 rows=1.00 loops=10)
+              Index Cond: (user_id = r.user_id)
+              Index Searches: 10
+              Buffers: shared hit=40
+Planning:
+  Buffers: shared hit=328
+Planning Time: 0.851 ms
+Execution Time: 0.130 ms

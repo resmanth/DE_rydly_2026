@@ -1,0 +1,33 @@
+=== W01 run 1 ===
+Insert on navigation_sessions  (cost=0.00..0.01 rows=0 width=0) (actual time=1.279..1.279 rows=0.00 loops=1)
+  Buffers: shared hit=212 read=9 dirtied=6 written=3
+  ->  Result  (cost=0.00..0.01 rows=1 width=160) (actual time=0.004..0.004 rows=1.00 loops=1)
+Planning:
+  Buffers: shared hit=5 read=1
+Planning Time: 0.154 ms
+Trigger for constraint navigation_sessions_partitioned_dest_place_id_fkey on navigation_sessions_p_default: time=1.243 calls=1
+Trigger for constraint navigation_sessions_partitioned_origin_place_id_fkey on navigation_sessions_p_default: time=0.008 calls=1
+Trigger for constraint navigation_sessions_partitioned_user_id_fkey on navigation_sessions_p_default: time=1.096 calls=1
+Execution Time: 3.788 ms
+=== W01 run 2 ===
+Insert on navigation_sessions  (cost=0.00..0.01 rows=0 width=0) (actual time=0.554..0.555 rows=0.00 loops=1)
+  Buffers: shared hit=231 read=1
+  ->  Result  (cost=0.00..0.01 rows=1 width=160) (actual time=0.004..0.004 rows=1.00 loops=1)
+Planning:
+  Buffers: shared hit=6
+Planning Time: 0.076 ms
+Trigger for constraint navigation_sessions_partitioned_dest_place_id_fkey on navigation_sessions_p_default: time=0.714 calls=1
+Trigger for constraint navigation_sessions_partitioned_origin_place_id_fkey on navigation_sessions_p_default: time=0.006 calls=1
+Trigger for constraint navigation_sessions_partitioned_user_id_fkey on navigation_sessions_p_default: time=0.226 calls=1
+Execution Time: 1.655 ms
+=== W01 run 3 ===
+Insert on navigation_sessions  (cost=0.00..0.01 rows=0 width=0) (actual time=0.518..0.518 rows=0.00 loops=1)
+  Buffers: shared hit=232
+  ->  Result  (cost=0.00..0.01 rows=1 width=160) (actual time=0.005..0.005 rows=1.00 loops=1)
+Planning:
+  Buffers: shared hit=6
+Planning Time: 0.083 ms
+Trigger for constraint navigation_sessions_partitioned_dest_place_id_fkey on navigation_sessions_p_default: time=0.716 calls=1
+Trigger for constraint navigation_sessions_partitioned_origin_place_id_fkey on navigation_sessions_p_default: time=0.006 calls=1
+Trigger for constraint navigation_sessions_partitioned_user_id_fkey on navigation_sessions_p_default: time=0.224 calls=1
+Execution Time: 1.624 ms

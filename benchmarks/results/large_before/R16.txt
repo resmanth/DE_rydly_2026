@@ -1,0 +1,84 @@
+=== R16 run 1 ===
+Sort  (cost=60805.06..60866.46 rows=24559 width=33) (actual time=326.576..327.280 rows=18384.00 loops=1)
+  Sort Key: (count(*)) DESC
+  Sort Method: quicksort  Memory: 1733kB
+  Buffers: shared hit=58765 read=30834
+  ->  HashAggregate  (cost=58768.63..59014.22 rows=24559 width=33) (actual time=322.441..324.354 rows=18384.00 loops=1)
+        Group Key: p.place_id
+        Batches: 1  Memory Usage: 1817kB
+        Buffers: shared hit=58762 read=30834
+        ->  Gather  (cost=1000.43..58562.84 rows=41159 width=25) (actual time=0.317..311.108 rows=39710.00 loops=1)
+              Workers Planned: 2
+              Workers Launched: 2
+              Buffers: shared hit=58762 read=30834
+              ->  Nested Loop  (cost=0.43..53446.94 rows=17150 width=25) (actual time=0.435..313.429 rows=13236.67 loops=3)
+                    Buffers: shared hit=58762 read=30834
+                    ->  Parallel Seq Scan on places p  (cost=0.00..20888.89 rows=10233 width=25) (actual time=0.085..41.991 rows=7980.00 loops=3)
+                          Filter: is_permanently_closed
+                          Rows Removed by Filter: 258971
+                          Buffers: shared hit=1339 read=16213
+                    ->  Index Only Scan using idx_nav_dest_started on navigation_sessions n  (cost=0.43..3.15 rows=3 width=4) (actual time=0.033..0.034 rows=1.66 loops=23940)
+                          Index Cond: ((dest_place_id = p.place_id) AND (started_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone))
+                          Heap Fetches: 0
+                          Index Searches: 23940
+                          Buffers: shared hit=57423 read=14621
+Planning:
+  Buffers: shared hit=369 read=52
+Planning Time: 1.954 ms
+Execution Time: 328.021 ms
+=== R16 run 2 ===
+Sort  (cost=60805.06..60866.46 rows=24559 width=33) (actual time=67.554..68.285 rows=18384.00 loops=1)
+  Sort Key: (count(*)) DESC
+  Sort Method: quicksort  Memory: 1733kB
+  Buffers: shared hit=69182 read=20417
+  ->  HashAggregate  (cost=58768.63..59014.22 rows=24559 width=33) (actual time=63.074..65.161 rows=18384.00 loops=1)
+        Group Key: p.place_id
+        Batches: 1  Memory Usage: 1817kB
+        Buffers: shared hit=69179 read=20417
+        ->  Gather  (cost=1000.43..58562.84 rows=41159 width=25) (actual time=0.209..55.839 rows=39710.00 loops=1)
+              Workers Planned: 2
+              Workers Launched: 2
+              Buffers: shared hit=69179 read=20417
+              ->  Nested Loop  (cost=0.43..53446.94 rows=17150 width=25) (actual time=0.124..56.528 rows=13236.67 loops=3)
+                    Buffers: shared hit=69179 read=20417
+                    ->  Parallel Seq Scan on places p  (cost=0.00..20888.89 rows=10233 width=25) (actual time=0.077..29.753 rows=7980.00 loops=3)
+                          Filter: is_permanently_closed
+                          Rows Removed by Filter: 258971
+                          Buffers: shared hit=1287 read=16265
+                    ->  Index Only Scan using idx_nav_dest_started on navigation_sessions n  (cost=0.43..3.15 rows=3 width=4) (actual time=0.003..0.003 rows=1.66 loops=23940)
+                          Index Cond: ((dest_place_id = p.place_id) AND (started_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone))
+                          Heap Fetches: 0
+                          Index Searches: 23940
+                          Buffers: shared hit=67892 read=4152
+Planning:
+  Buffers: shared hit=391 read=30
+Planning Time: 1.470 ms
+Execution Time: 69.058 ms
+=== R16 run 3 ===
+Sort  (cost=60805.06..60866.46 rows=24559 width=33) (actual time=62.919..63.608 rows=18384.00 loops=1)
+  Sort Key: (count(*)) DESC
+  Sort Method: quicksort  Memory: 1733kB
+  Buffers: shared hit=72558 read=17041
+  ->  HashAggregate  (cost=58768.63..59014.22 rows=24559 width=33) (actual time=59.038..60.904 rows=18384.00 loops=1)
+        Group Key: p.place_id
+        Batches: 1  Memory Usage: 1817kB
+        Buffers: shared hit=72555 read=17041
+        ->  Gather  (cost=1000.43..58562.84 rows=41159 width=25) (actual time=0.353..52.138 rows=39710.00 loops=1)
+              Workers Planned: 2
+              Workers Launched: 2
+              Buffers: shared hit=72555 read=17041
+              ->  Nested Loop  (cost=0.43..53446.94 rows=17150 width=25) (actual time=0.151..52.968 rows=13236.67 loops=3)
+                    Buffers: shared hit=72555 read=17041
+                    ->  Parallel Seq Scan on places p  (cost=0.00..20888.89 rows=10233 width=25) (actual time=0.111..29.730 rows=7980.00 loops=3)
+                          Filter: is_permanently_closed
+                          Rows Removed by Filter: 258971
+                          Buffers: shared hit=1287 read=16265
+                    ->  Index Only Scan using idx_nav_dest_started on navigation_sessions n  (cost=0.43..3.15 rows=3 width=4) (actual time=0.003..0.003 rows=1.66 loops=23940)
+                          Index Cond: ((dest_place_id = p.place_id) AND (started_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone))
+                          Heap Fetches: 0
+                          Index Searches: 23940
+                          Buffers: shared hit=71268 read=776
+Planning:
+  Buffers: shared hit=421
+Planning Time: 1.158 ms
+Execution Time: 64.335 ms

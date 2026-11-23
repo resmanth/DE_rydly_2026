@@ -1,0 +1,336 @@
+=== R19 run 1 ===
+Sort  (cost=314537.04..314565.28 rows=11296 width=41) (actual time=1380.546..1381.709 rows=21333.00 loops=1)
+  Sort Key: (COALESCE((count(*)), '0'::bigint)) DESC
+  Sort Method: quicksort  Memory: 2098kB
+  Buffers: shared hit=56129 read=37442 dirtied=118 written=134
+  ->  Hash Right Join  (cost=10481.76..313776.62 rows=11296 width=41) (actual time=119.518..1376.916 rows=21333.00 loops=1)
+        Hash Cond: (navigation_sessions.dest_place_id = p.place_id)
+        Buffers: shared hit=56126 read=37442 dirtied=118 written=134
+        ->  GroupAggregate  (cost=8.09..296770.92 rows=470423 width=20) (actual time=1.499..1151.820 rows=785125.00 loops=1)
+              Group Key: navigation_sessions.dest_place_id
+              Buffers: shared hit=1490 read=24188 written=133
+              ->  Merge Append  (cost=8.09..262066.68 rows=4000001 width=12) (actual time=1.325..851.645 rows=4000000.00 loops=1)
+                    Sort Key: navigation_sessions.dest_place_id
+                    Buffers: shared hit=1490 read=24188 written=133
+                    ->  Index Only Scan using navigation_sessions_p202501_dest_place_id_started_at_rerout_idx on navigation_sessions_p202501 navigation_sessions_1  (cost=0.42..8915.02 rows=227107 width=12) (actual time=0.152..23.277 rows=227107.00 loops=1)
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared read=1372 written=9
+                    ->  Index Only Scan using navigation_sessions_p202502_dest_place_id_started_at_rerout_idx on navigation_sessions_p202502 navigation_sessions_2  (cost=0.42..8057.34 rows=205128 width=12) (actual time=0.066..20.689 rows=205128.00 loops=1)
+                          Heap Fetches: 69
+                          Index Searches: 1
+                          Buffers: shared hit=1 read=1239 written=9
+                    ->  Index Only Scan using navigation_sessions_p202503_dest_place_id_started_at_rerout_idx on navigation_sessions_p202503 navigation_sessions_3  (cost=0.42..8927.01 rows=227106 width=12) (actual time=0.064..22.681 rows=227106.00 loops=1)
+                          Heap Fetches: 210
+                          Index Searches: 1
+                          Buffers: shared hit=133 read=1375 written=6
+                    ->  Index Only Scan using navigation_sessions_p202504_dest_place_id_started_at_rerout_idx on navigation_sessions_p202504 navigation_sessions_4  (cost=0.42..8629.12 rows=219780 width=12) (actual time=0.065..21.718 rows=219780.00 loops=1)
+                          Heap Fetches: 139
+                          Index Searches: 1
+                          Buffers: shared hit=67 read=1329 written=5
+                    ->  Index Only Scan using navigation_sessions_p202505_dest_place_id_started_at_rerout_idx on navigation_sessions_p202505 navigation_sessions_5  (cost=0.42..8915.02 rows=227107 width=12) (actual time=0.064..25.316 rows=227107.00 loops=1)
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared read=1372 written=3
+                    ->  Index Only Scan using navigation_sessions_p202506_dest_place_id_started_at_rerout_idx on navigation_sessions_p202506 navigation_sessions_6  (cost=0.42..8621.12 rows=219780 width=12) (actual time=0.064..21.759 rows=219780.00 loops=1)
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared read=1327 written=8
+                    ->  Index Only Scan using navigation_sessions_p202507_dest_place_id_started_at_rerout_idx on navigation_sessions_p202507 navigation_sessions_7  (cost=0.42..8915.01 rows=227106 width=12) (actual time=0.063..22.778 rows=227106.00 loops=1)
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared read=1372 written=9
+                    ->  Index Only Scan using navigation_sessions_p202508_dest_place_id_started_at_rerout_idx on navigation_sessions_p202508 navigation_sessions_8  (cost=0.42..8915.01 rows=227106 width=12) (actual time=0.110..22.293 rows=227106.00 loops=1)
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared read=1372 written=4
+                    ->  Index Only Scan using navigation_sessions_p202509_dest_place_id_started_at_rerout_idx on navigation_sessions_p202509 navigation_sessions_9  (cost=0.42..8689.12 rows=219780 width=12) (actual time=0.065..23.259 rows=219780.00 loops=1)
+                          Heap Fetches: 1180
+                          Index Searches: 1
+                          Buffers: shared hit=1083 read=1344 written=7
+                    ->  Index Only Scan using navigation_sessions_p202510_dest_place_id_started_at_rerout_idx on navigation_sessions_p202510 navigation_sessions_10  (cost=0.42..8915.02 rows=227107 width=12) (actual time=0.080..22.473 rows=227107.00 loops=1)
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared read=1372 written=10
+                    ->  Index Only Scan using navigation_sessions_p202511_dest_place_id_started_at_rerout_idx on navigation_sessions_p202511 navigation_sessions_11  (cost=0.42..8621.12 rows=219780 width=12) (actual time=0.084..21.938 rows=219780.00 loops=1)
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared read=1327 written=8
+                    ->  Index Only Scan using navigation_sessions_p202512_dest_place_id_started_at_rerout_idx on navigation_sessions_p202512 navigation_sessions_12  (cost=0.42..8915.01 rows=227106 width=12) (actual time=0.059..22.360 rows=227106.00 loops=1)
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared read=1372 written=8
+                    ->  Index Only Scan using navigation_sessions_p202601_dest_place_id_started_at_rerout_idx on navigation_sessions_p202601 navigation_sessions_13  (cost=0.42..8915.01 rows=227106 width=12) (actual time=0.064..22.787 rows=227106.00 loops=1)
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared read=1372 written=3
+                    ->  Index Only Scan using navigation_sessions_p202602_dest_place_id_started_at_rerout_idx on navigation_sessions_p202602 navigation_sessions_14  (cost=0.42..8057.35 rows=205129 width=12) (actual time=0.058..21.531 rows=205129.00 loops=1)
+                          Heap Fetches: 69
+                          Index Searches: 1
+                          Buffers: shared read=1240 written=9
+                    ->  Index Only Scan using navigation_sessions_p202603_dest_place_id_started_at_rerout_idx on navigation_sessions_p202603 navigation_sessions_15  (cost=0.42..8915.01 rows=227106 width=12) (actual time=0.061..22.715 rows=227106.00 loops=1)
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared read=1372 written=3
+                    ->  Index Only Scan using navigation_sessions_p202604_dest_place_id_started_at_rerout_idx on navigation_sessions_p202604 navigation_sessions_16  (cost=0.42..8637.12 rows=219780 width=12) (actual time=0.063..22.151 rows=219780.00 loops=1)
+                          Heap Fetches: 280
+                          Index Searches: 1
+                          Buffers: shared hit=205 read=1331 written=10
+                    ->  Index Only Scan using navigation_sessions_p202605_dest_place_id_started_at_rerout_idx on navigation_sessions_p202605 navigation_sessions_17  (cost=0.42..8919.01 rows=227106 width=12) (actual time=0.062..22.711 rows=227106.00 loops=1)
+                          Heap Fetches: 69
+                          Index Searches: 1
+                          Buffers: shared read=1373 written=12
+                    ->  Index Only Scan using navigation_sessions_p202606_dest_place_id_started_at_rerout_idx on navigation_sessions_p202606 navigation_sessions_18  (cost=0.42..8621.12 rows=219780 width=12) (actual time=0.066..21.946 rows=219780.00 loops=1)
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared read=1327 written=10
+                    ->  Index Only Scan using navigation_sessions_p_default_dest_place_id_started_at_rero_idx on navigation_sessions_p_default navigation_sessions_19  (cost=0.12..8.14 rows=1 width=12) (actual time=0.005..0.005 rows=0.00 loops=1)
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared hit=1
+        ->  Hash  (cost=10332.47..10332.47 rows=11296 width=25) (actual time=116.052..116.053 rows=21333.00 loops=1)
+              Buckets: 32768 (originally 16384)  Batches: 1 (originally 1)  Memory Usage: 1509kB
+              Buffers: shared hit=54636 read=13254 dirtied=118 written=1
+              ->  Hash Join  (cost=1.59..10332.47 rows=11296 width=25) (actual time=0.084..113.194 rows=21333.00 loops=1)
+                    Hash Cond: (p.category_id = c.category_id)
+                    Buffers: shared hit=54636 read=13254 dirtied=118 written=1
+                    ->  Index Only Scan using idx_places_city_rating on places p  (cost=0.42..9849.82 rows=135549 width=29) (actual time=0.062..104.950 rows=128853.00 loops=1)
+                          Index Cond: (city_id = 1)
+                          Heap Fetches: 88141
+                          Index Searches: 1
+                          Buffers: shared hit=54635 read=13254 dirtied=118 written=1
+                    ->  Hash  (cost=1.15..1.15 rows=1 width=4) (actual time=0.008..0.009 rows=1.00 loops=1)
+                          Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                          Buffers: shared hit=1
+                          ->  Seq Scan on place_categories c  (cost=0.00..1.15 rows=1 width=4) (actual time=0.004..0.005 rows=1.00 loops=1)
+                                Filter: ((category_name)::text = 'Hospital'::text)
+                                Rows Removed by Filter: 11
+                                Buffers: shared hit=1
+Planning:
+  Buffers: shared hit=2680 read=225 dirtied=22
+Planning Time: 8.199 ms
+Execution Time: 1382.596 ms
+=== R19 run 2 ===
+Sort  (cost=314537.04..314565.28 rows=11296 width=41) (actual time=1376.570..1378.235 rows=21333.00 loops=1)
+  Sort Key: (COALESCE((count(*)), '0'::bigint)) DESC
+  Sort Method: quicksort  Memory: 2098kB
+  Buffers: shared hit=53348 read=36691
+  ->  Hash Right Join  (cost=10481.76..313776.62 rows=11296 width=41) (actual time=118.877..1372.947 rows=21333.00 loops=1)
+        Hash Cond: (navigation_sessions.dest_place_id = p.place_id)
+        Buffers: shared hit=53345 read=36691
+        ->  GroupAggregate  (cost=8.09..296770.92 rows=470423 width=20) (actual time=1.223..1152.842 rows=785125.00 loops=1)
+              Group Key: navigation_sessions.dest_place_id
+              Buffers: shared hit=1515 read=24163
+              ->  Merge Append  (cost=8.09..262066.68 rows=4000001 width=12) (actual time=1.063..852.567 rows=4000000.00 loops=1)
+                    Sort Key: navigation_sessions.dest_place_id
+                    Buffers: shared hit=1515 read=24163
+                    ->  Index Only Scan using navigation_sessions_p202501_dest_place_id_started_at_rerout_idx on navigation_sessions_p202501 navigation_sessions_1  (cost=0.42..8915.02 rows=227107 width=12) (actual time=0.102..23.018 rows=227107.00 loops=1)
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared read=1372
+                    ->  Index Only Scan using navigation_sessions_p202502_dest_place_id_started_at_rerout_idx on navigation_sessions_p202502 navigation_sessions_2  (cost=0.42..8057.34 rows=205128 width=12) (actual time=0.054..20.744 rows=205128.00 loops=1)
+                          Heap Fetches: 69
+                          Index Searches: 1
+                          Buffers: shared read=1240
+                    ->  Index Only Scan using navigation_sessions_p202503_dest_place_id_started_at_rerout_idx on navigation_sessions_p202503 navigation_sessions_3  (cost=0.42..8927.01 rows=227106 width=12) (actual time=0.058..23.136 rows=227106.00 loops=1)
+                          Heap Fetches: 210
+                          Index Searches: 1
+                          Buffers: shared hit=136 read=1372
+                    ->  Index Only Scan using navigation_sessions_p202504_dest_place_id_started_at_rerout_idx on navigation_sessions_p202504 navigation_sessions_4  (cost=0.42..8629.12 rows=219780 width=12) (actual time=0.058..21.914 rows=219780.00 loops=1)
+                          Heap Fetches: 139
+                          Index Searches: 1
+                          Buffers: shared hit=69 read=1327
+                    ->  Index Only Scan using navigation_sessions_p202505_dest_place_id_started_at_rerout_idx on navigation_sessions_p202505 navigation_sessions_5  (cost=0.42..8915.02 rows=227107 width=12) (actual time=0.058..25.532 rows=227107.00 loops=1)
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared read=1372
+                    ->  Index Only Scan using navigation_sessions_p202506_dest_place_id_started_at_rerout_idx on navigation_sessions_p202506 navigation_sessions_6  (cost=0.42..8621.12 rows=219780 width=12) (actual time=0.055..22.095 rows=219780.00 loops=1)
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared read=1327
+                    ->  Index Only Scan using navigation_sessions_p202507_dest_place_id_started_at_rerout_idx on navigation_sessions_p202507 navigation_sessions_7  (cost=0.42..8915.01 rows=227106 width=12) (actual time=0.054..23.170 rows=227106.00 loops=1)
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared read=1372
+                    ->  Index Only Scan using navigation_sessions_p202508_dest_place_id_started_at_rerout_idx on navigation_sessions_p202508 navigation_sessions_8  (cost=0.42..8915.01 rows=227106 width=12) (actual time=0.056..22.582 rows=227106.00 loops=1)
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared read=1372
+                    ->  Index Only Scan using navigation_sessions_p202509_dest_place_id_started_at_rerout_idx on navigation_sessions_p202509 navigation_sessions_9  (cost=0.42..8689.12 rows=219780 width=12) (actual time=0.056..23.923 rows=219780.00 loops=1)
+                          Heap Fetches: 1180
+                          Index Searches: 1
+                          Buffers: shared hit=1100 read=1327
+                    ->  Index Only Scan using navigation_sessions_p202510_dest_place_id_started_at_rerout_idx on navigation_sessions_p202510 navigation_sessions_10  (cost=0.42..8915.02 rows=227107 width=12) (actual time=0.056..22.705 rows=227107.00 loops=1)
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared read=1372
+                    ->  Index Only Scan using navigation_sessions_p202511_dest_place_id_started_at_rerout_idx on navigation_sessions_p202511 navigation_sessions_11  (cost=0.42..8621.12 rows=219780 width=12) (actual time=0.054..22.490 rows=219780.00 loops=1)
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared read=1327
+                    ->  Index Only Scan using navigation_sessions_p202512_dest_place_id_started_at_rerout_idx on navigation_sessions_p202512 navigation_sessions_12  (cost=0.42..8915.01 rows=227106 width=12) (actual time=0.057..22.546 rows=227106.00 loops=1)
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared read=1372
+                    ->  Index Only Scan using navigation_sessions_p202601_dest_place_id_started_at_rerout_idx on navigation_sessions_p202601 navigation_sessions_13  (cost=0.42..8915.01 rows=227106 width=12) (actual time=0.056..23.432 rows=227106.00 loops=1)
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared read=1372
+                    ->  Index Only Scan using navigation_sessions_p202602_dest_place_id_started_at_rerout_idx on navigation_sessions_p202602 navigation_sessions_14  (cost=0.42..8057.35 rows=205129 width=12) (actual time=0.055..20.613 rows=205129.00 loops=1)
+                          Heap Fetches: 69
+                          Index Searches: 1
+                          Buffers: shared read=1240
+                    ->  Index Only Scan using navigation_sessions_p202603_dest_place_id_started_at_rerout_idx on navigation_sessions_p202603 navigation_sessions_15  (cost=0.42..8915.01 rows=227106 width=12) (actual time=0.054..23.256 rows=227106.00 loops=1)
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared read=1372
+                    ->  Index Only Scan using navigation_sessions_p202604_dest_place_id_started_at_rerout_idx on navigation_sessions_p202604 navigation_sessions_16  (cost=0.42..8637.12 rows=219780 width=12) (actual time=0.057..22.364 rows=219780.00 loops=1)
+                          Heap Fetches: 280
+                          Index Searches: 1
+                          Buffers: shared hit=209 read=1327
+                    ->  Index Only Scan using navigation_sessions_p202605_dest_place_id_started_at_rerout_idx on navigation_sessions_p202605 navigation_sessions_17  (cost=0.42..8919.01 rows=227106 width=12) (actual time=0.055..23.050 rows=227106.00 loops=1)
+                          Heap Fetches: 69
+                          Index Searches: 1
+                          Buffers: shared read=1373
+                    ->  Index Only Scan using navigation_sessions_p202606_dest_place_id_started_at_rerout_idx on navigation_sessions_p202606 navigation_sessions_18  (cost=0.42..8621.12 rows=219780 width=12) (actual time=0.056..22.317 rows=219780.00 loops=1)
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared read=1327
+                    ->  Index Only Scan using navigation_sessions_p_default_dest_place_id_started_at_rero_idx on navigation_sessions_p_default navigation_sessions_19  (cost=0.12..8.14 rows=1 width=12) (actual time=0.005..0.006 rows=0.00 loops=1)
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared hit=1
+        ->  Hash  (cost=10332.47..10332.47 rows=11296 width=25) (actual time=115.658..115.659 rows=21333.00 loops=1)
+              Buckets: 32768 (originally 16384)  Batches: 1 (originally 1)  Memory Usage: 1509kB
+              Buffers: shared hit=51830 read=12528
+              ->  Hash Join  (cost=1.59..10332.47 rows=11296 width=25) (actual time=0.115..112.546 rows=21333.00 loops=1)
+                    Hash Cond: (p.category_id = c.category_id)
+                    Buffers: shared hit=51830 read=12528
+                    ->  Index Only Scan using idx_places_city_rating on places p  (cost=0.42..9849.82 rows=135549 width=29) (actual time=0.085..104.363 rows=128853.00 loops=1)
+                          Index Cond: (city_id = 1)
+                          Heap Fetches: 83485
+                          Index Searches: 1
+                          Buffers: shared hit=51829 read=12528
+                    ->  Hash  (cost=1.15..1.15 rows=1 width=4) (actual time=0.011..0.012 rows=1.00 loops=1)
+                          Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                          Buffers: shared hit=1
+                          ->  Seq Scan on place_categories c  (cost=0.00..1.15 rows=1 width=4) (actual time=0.007..0.007 rows=1.00 loops=1)
+                                Filter: ((category_name)::text = 'Hospital'::text)
+                                Rows Removed by Filter: 11
+                                Buffers: shared hit=1
+Planning:
+  Buffers: shared hit=2658 read=229
+Planning Time: 8.205 ms
+Execution Time: 1379.171 ms
+=== R19 run 3 ===
+Sort  (cost=314537.04..314565.28 rows=11296 width=41) (actual time=1397.399..1399.157 rows=21333.00 loops=1)
+  Sort Key: (COALESCE((count(*)), '0'::bigint)) DESC
+  Sort Method: quicksort  Memory: 2098kB
+  Buffers: shared hit=53348 read=36691
+  ->  Hash Right Join  (cost=10481.76..313776.62 rows=11296 width=41) (actual time=115.703..1393.819 rows=21333.00 loops=1)
+        Hash Cond: (navigation_sessions.dest_place_id = p.place_id)
+        Buffers: shared hit=53345 read=36691
+        ->  GroupAggregate  (cost=8.09..296770.92 rows=470423 width=20) (actual time=1.277..1165.117 rows=785125.00 loops=1)
+              Group Key: navigation_sessions.dest_place_id
+              Buffers: shared hit=1515 read=24163
+              ->  Merge Append  (cost=8.09..262066.68 rows=4000001 width=12) (actual time=1.113..864.781 rows=4000000.00 loops=1)
+                    Sort Key: navigation_sessions.dest_place_id
+                    Buffers: shared hit=1515 read=24163
+                    ->  Index Only Scan using navigation_sessions_p202501_dest_place_id_started_at_rerout_idx on navigation_sessions_p202501 navigation_sessions_1  (cost=0.42..8915.02 rows=227107 width=12) (actual time=0.122..23.673 rows=227107.00 loops=1)
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared read=1372
+                    ->  Index Only Scan using navigation_sessions_p202502_dest_place_id_started_at_rerout_idx on navigation_sessions_p202502 navigation_sessions_2  (cost=0.42..8057.34 rows=205128 width=12) (actual time=0.058..21.547 rows=205128.00 loops=1)
+                          Heap Fetches: 69
+                          Index Searches: 1
+                          Buffers: shared read=1240
+                    ->  Index Only Scan using navigation_sessions_p202503_dest_place_id_started_at_rerout_idx on navigation_sessions_p202503 navigation_sessions_3  (cost=0.42..8927.01 rows=227106 width=12) (actual time=0.064..23.702 rows=227106.00 loops=1)
+                          Heap Fetches: 210
+                          Index Searches: 1
+                          Buffers: shared hit=136 read=1372
+                    ->  Index Only Scan using navigation_sessions_p202504_dest_place_id_started_at_rerout_idx on navigation_sessions_p202504 navigation_sessions_4  (cost=0.42..8629.12 rows=219780 width=12) (actual time=0.060..22.763 rows=219780.00 loops=1)
+                          Heap Fetches: 139
+                          Index Searches: 1
+                          Buffers: shared hit=69 read=1327
+                    ->  Index Only Scan using navigation_sessions_p202505_dest_place_id_started_at_rerout_idx on navigation_sessions_p202505 navigation_sessions_5  (cost=0.42..8915.02 rows=227107 width=12) (actual time=0.060..26.243 rows=227107.00 loops=1)
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared read=1372
+                    ->  Index Only Scan using navigation_sessions_p202506_dest_place_id_started_at_rerout_idx on navigation_sessions_p202506 navigation_sessions_6  (cost=0.42..8621.12 rows=219780 width=12) (actual time=0.058..22.782 rows=219780.00 loops=1)
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared read=1327
+                    ->  Index Only Scan using navigation_sessions_p202507_dest_place_id_started_at_rerout_idx on navigation_sessions_p202507 navigation_sessions_7  (cost=0.42..8915.01 rows=227106 width=12) (actual time=0.052..23.757 rows=227106.00 loops=1)
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared read=1372
+                    ->  Index Only Scan using navigation_sessions_p202508_dest_place_id_started_at_rerout_idx on navigation_sessions_p202508 navigation_sessions_8  (cost=0.42..8915.01 rows=227106 width=12) (actual time=0.059..23.304 rows=227106.00 loops=1)
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared read=1372
+                    ->  Index Only Scan using navigation_sessions_p202509_dest_place_id_started_at_rerout_idx on navigation_sessions_p202509 navigation_sessions_9  (cost=0.42..8689.12 rows=219780 width=12) (actual time=0.057..24.693 rows=219780.00 loops=1)
+                          Heap Fetches: 1180
+                          Index Searches: 1
+                          Buffers: shared hit=1100 read=1327
+                    ->  Index Only Scan using navigation_sessions_p202510_dest_place_id_started_at_rerout_idx on navigation_sessions_p202510 navigation_sessions_10  (cost=0.42..8915.02 rows=227107 width=12) (actual time=0.056..23.426 rows=227107.00 loops=1)
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared read=1372
+                    ->  Index Only Scan using navigation_sessions_p202511_dest_place_id_started_at_rerout_idx on navigation_sessions_p202511 navigation_sessions_11  (cost=0.42..8621.12 rows=219780 width=12) (actual time=0.053..23.033 rows=219780.00 loops=1)
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared read=1327
+                    ->  Index Only Scan using navigation_sessions_p202512_dest_place_id_started_at_rerout_idx on navigation_sessions_p202512 navigation_sessions_12  (cost=0.42..8915.01 rows=227106 width=12) (actual time=0.056..23.224 rows=227106.00 loops=1)
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared read=1372
+                    ->  Index Only Scan using navigation_sessions_p202601_dest_place_id_started_at_rerout_idx on navigation_sessions_p202601 navigation_sessions_13  (cost=0.42..8915.01 rows=227106 width=12) (actual time=0.058..23.980 rows=227106.00 loops=1)
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared read=1372
+                    ->  Index Only Scan using navigation_sessions_p202602_dest_place_id_started_at_rerout_idx on navigation_sessions_p202602 navigation_sessions_14  (cost=0.42..8057.35 rows=205129 width=12) (actual time=0.056..21.324 rows=205129.00 loops=1)
+                          Heap Fetches: 69
+                          Index Searches: 1
+                          Buffers: shared read=1240
+                    ->  Index Only Scan using navigation_sessions_p202603_dest_place_id_started_at_rerout_idx on navigation_sessions_p202603 navigation_sessions_15  (cost=0.42..8915.01 rows=227106 width=12) (actual time=0.058..23.801 rows=227106.00 loops=1)
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared read=1372
+                    ->  Index Only Scan using navigation_sessions_p202604_dest_place_id_started_at_rerout_idx on navigation_sessions_p202604 navigation_sessions_16  (cost=0.42..8637.12 rows=219780 width=12) (actual time=0.056..23.213 rows=219780.00 loops=1)
+                          Heap Fetches: 280
+                          Index Searches: 1
+                          Buffers: shared hit=209 read=1327
+                    ->  Index Only Scan using navigation_sessions_p202605_dest_place_id_started_at_rerout_idx on navigation_sessions_p202605 navigation_sessions_17  (cost=0.42..8919.01 rows=227106 width=12) (actual time=0.054..23.798 rows=227106.00 loops=1)
+                          Heap Fetches: 69
+                          Index Searches: 1
+                          Buffers: shared read=1373
+                    ->  Index Only Scan using navigation_sessions_p202606_dest_place_id_started_at_rerout_idx on navigation_sessions_p202606 navigation_sessions_18  (cost=0.42..8621.12 rows=219780 width=12) (actual time=0.061..22.986 rows=219780.00 loops=1)
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared read=1327
+                    ->  Index Only Scan using navigation_sessions_p_default_dest_place_id_started_at_rero_idx on navigation_sessions_p_default navigation_sessions_19  (cost=0.12..8.14 rows=1 width=12) (actual time=0.006..0.006 rows=0.00 loops=1)
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared hit=1
+        ->  Hash  (cost=10332.47..10332.47 rows=11296 width=25) (actual time=112.458..112.459 rows=21333.00 loops=1)
+              Buckets: 32768 (originally 16384)  Batches: 1 (originally 1)  Memory Usage: 1509kB
+              Buffers: shared hit=51830 read=12528
+              ->  Hash Join  (cost=1.59..10332.47 rows=11296 width=25) (actual time=0.091..109.442 rows=21333.00 loops=1)
+                    Hash Cond: (p.category_id = c.category_id)
+                    Buffers: shared hit=51830 read=12528
+                    ->  Index Only Scan using idx_places_city_rating on places p  (cost=0.42..9849.82 rows=135549 width=29) (actual time=0.066..101.289 rows=128853.00 loops=1)
+                          Index Cond: (city_id = 1)
+                          Heap Fetches: 83485
+                          Index Searches: 1
+                          Buffers: shared hit=51829 read=12528
+                    ->  Hash  (cost=1.15..1.15 rows=1 width=4) (actual time=0.009..0.009 rows=1.00 loops=1)
+                          Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                          Buffers: shared hit=1
+                          ->  Seq Scan on place_categories c  (cost=0.00..1.15 rows=1 width=4) (actual time=0.004..0.005 rows=1.00 loops=1)
+                                Filter: ((category_name)::text = 'Hospital'::text)
+                                Rows Removed by Filter: 11
+                                Buffers: shared hit=1
+Planning:
+  Buffers: shared hit=2658 read=229
+Planning Time: 8.837 ms
+Execution Time: 1400.066 ms

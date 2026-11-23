@@ -1,0 +1,138 @@
+=== R12 run 1 ===
+Limit  (cost=67853.62..67853.65 rows=10 width=33) (actual time=26.840..26.966 rows=10.00 loops=1)
+  Buffers: shared hit=819 read=1217
+  ->  Sort  (cost=67853.62..67874.44 rows=8329 width=33) (actual time=26.839..26.964 rows=10.00 loops=1)
+        Sort Key: (count(*)) DESC
+        Sort Method: top-N heapsort  Memory: 26kB
+        Buffers: shared hit=819 read=1217
+        ->  GroupAggregate  (cost=66578.65..67673.64 rows=8329 width=33) (actual time=23.774..26.127 rows=7977.00 loops=1)
+              Group Key: p.place_id
+              Buffers: shared hit=816 read=1217
+              ->  Gather Merge  (cost=66578.65..67548.70 rows=8329 width=25) (actual time=23.767..24.811 rows=8377.00 loops=1)
+                    Workers Planned: 2
+                    Workers Launched: 2
+                    Buffers: shared hit=816 read=1217
+                    ->  Sort  (cost=65578.63..65587.30 rows=3470 width=25) (actual time=20.602..20.713 rows=2792.33 loops=3)
+                          Sort Key: p.place_id
+                          Sort Method: quicksort  Memory: 228kB
+                          Buffers: shared hit=816 read=1217
+                          Worker 0:  Sort Method: quicksort  Memory: 217kB
+                          Worker 1:  Sort Method: quicksort  Memory: 216kB
+                          ->  Parallel Hash Join  (cost=6308.09..65374.58 rows=3470 width=25) (actual time=15.097..20.056 rows=2792.33 loops=3)
+                                Hash Cond: (n.dest_place_id = p.place_id)
+                                Buffers: shared hit=802 read=1217
+                                ->  Parallel Bitmap Heap Scan on navigation_sessions n  (cost=29.45..59037.93 rows=22099 width=4) (actual time=0.734..2.637 rows=17094.00 loops=3)
+                                      Recheck Cond: (started_at >= '2026-06-24 00:00:00+05:30'::timestamp with time zone)
+                                      Rows Removed by Index Recheck: 2876
+                                      Heap Blocks: lossy=316
+                                      Buffers: shared hit=798 read=168
+                                      Worker 0:  Heap Blocks: lossy=289
+                                      Worker 1:  Heap Blocks: lossy=291
+                                      ->  Bitmap Index Scan on idx_nav_started_brin  (cost=0.00..16.19 rows=53347 width=0) (actual time=0.168..0.168 rows=8960.00 loops=1)
+                                            Index Cond: (started_at >= '2026-06-24 00:00:00+05:30'::timestamp with time zone)
+                                            Index Searches: 1
+                                            Buffers: shared hit=30
+                                ->  Parallel Hash  (cost=5623.64..5623.64 rows=52400 width=25) (actual time=14.282..14.283 rows=42666.67 loops=3)
+                                      Buckets: 131072  Batches: 1  Memory Usage: 8800kB
+                                      Buffers: shared hit=4 read=1049
+                                      ->  Parallel Index Only Scan using idx_places_city_rating on places p  (cost=0.42..5623.64 rows=52400 width=25) (actual time=0.169..9.328 rows=42666.67 loops=3)
+                                            Index Cond: (city_id = 2)
+                                            Heap Fetches: 0
+                                            Index Searches: 1
+                                            Buffers: shared hit=4 read=1049
+Planning:
+  Buffers: shared hit=424 read=5
+Planning Time: 2.118 ms
+Execution Time: 27.035 ms
+=== R12 run 2 ===
+Limit  (cost=67853.62..67853.65 rows=10 width=33) (actual time=21.092..21.289 rows=10.00 loops=1)
+  Buffers: shared hit=2036
+  ->  Sort  (cost=67853.62..67874.44 rows=8329 width=33) (actual time=21.091..21.288 rows=10.00 loops=1)
+        Sort Key: (count(*)) DESC
+        Sort Method: top-N heapsort  Memory: 26kB
+        Buffers: shared hit=2036
+        ->  GroupAggregate  (cost=66578.65..67673.64 rows=8329 width=33) (actual time=18.068..20.504 rows=7977.00 loops=1)
+              Group Key: p.place_id
+              Buffers: shared hit=2033
+              ->  Gather Merge  (cost=66578.65..67548.70 rows=8329 width=25) (actual time=18.061..19.194 rows=8377.00 loops=1)
+                    Workers Planned: 2
+                    Workers Launched: 2
+                    Buffers: shared hit=2033
+                    ->  Sort  (cost=65578.63..65587.30 rows=3470 width=25) (actual time=16.069..16.177 rows=2792.33 loops=3)
+                          Sort Key: p.place_id
+                          Sort Method: quicksort  Memory: 221kB
+                          Buffers: shared hit=2033
+                          Worker 0:  Sort Method: quicksort  Memory: 220kB
+                          Worker 1:  Sort Method: quicksort  Memory: 220kB
+                          ->  Parallel Hash Join  (cost=6308.09..65374.58 rows=3470 width=25) (actual time=10.879..15.568 rows=2792.33 loops=3)
+                                Hash Cond: (n.dest_place_id = p.place_id)
+                                Buffers: shared hit=2019
+                                ->  Parallel Bitmap Heap Scan on navigation_sessions n  (cost=29.45..59037.93 rows=22099 width=4) (actual time=0.505..2.350 rows=17094.00 loops=3)
+                                      Recheck Cond: (started_at >= '2026-06-24 00:00:00+05:30'::timestamp with time zone)
+                                      Rows Removed by Index Recheck: 2876
+                                      Heap Blocks: lossy=303
+                                      Buffers: shared hit=966
+                                      Worker 0:  Heap Blocks: lossy=307
+                                      Worker 1:  Heap Blocks: lossy=286
+                                      ->  Bitmap Index Scan on idx_nav_started_brin  (cost=0.00..16.19 rows=53347 width=0) (actual time=0.122..0.122 rows=8960.00 loops=1)
+                                            Index Cond: (started_at >= '2026-06-24 00:00:00+05:30'::timestamp with time zone)
+                                            Index Searches: 1
+                                            Buffers: shared hit=30
+                                ->  Parallel Hash  (cost=5623.64..5623.64 rows=52400 width=25) (actual time=10.298..10.298 rows=42666.67 loops=3)
+                                      Buckets: 131072  Batches: 1  Memory Usage: 8832kB
+                                      Buffers: shared hit=1053
+                                      ->  Parallel Index Only Scan using idx_places_city_rating on places p  (cost=0.42..5623.64 rows=52400 width=25) (actual time=0.034..5.139 rows=42666.67 loops=3)
+                                            Index Cond: (city_id = 2)
+                                            Heap Fetches: 0
+                                            Index Searches: 1
+                                            Buffers: shared hit=1053
+Planning:
+  Buffers: shared hit=429
+Planning Time: 1.214 ms
+Execution Time: 21.357 ms
+=== R12 run 3 ===
+Limit  (cost=67853.62..67853.65 rows=10 width=33) (actual time=21.788..21.925 rows=10.00 loops=1)
+  Buffers: shared hit=2012
+  ->  Sort  (cost=67853.62..67874.44 rows=8329 width=33) (actual time=21.787..21.924 rows=10.00 loops=1)
+        Sort Key: (count(*)) DESC
+        Sort Method: top-N heapsort  Memory: 26kB
+        Buffers: shared hit=2012
+        ->  GroupAggregate  (cost=66578.65..67673.64 rows=8329 width=33) (actual time=18.604..21.122 rows=7977.00 loops=1)
+              Group Key: p.place_id
+              Buffers: shared hit=2009
+              ->  Gather Merge  (cost=66578.65..67548.70 rows=8329 width=25) (actual time=18.596..19.696 rows=8377.00 loops=1)
+                    Workers Planned: 2
+                    Workers Launched: 2
+                    Buffers: shared hit=2009
+                    ->  Sort  (cost=65578.63..65587.30 rows=3470 width=25) (actual time=16.594..16.706 rows=2792.33 loops=3)
+                          Sort Key: p.place_id
+                          Sort Method: quicksort  Memory: 222kB
+                          Buffers: shared hit=2009
+                          Worker 0:  Sort Method: quicksort  Memory: 217kB
+                          Worker 1:  Sort Method: quicksort  Memory: 222kB
+                          ->  Parallel Hash Join  (cost=6308.09..65374.58 rows=3470 width=25) (actual time=10.938..16.084 rows=2792.33 loops=3)
+                                Hash Cond: (n.dest_place_id = p.place_id)
+                                Buffers: shared hit=1995
+                                ->  Parallel Bitmap Heap Scan on navigation_sessions n  (cost=29.45..59037.93 rows=22099 width=4) (actual time=0.449..2.385 rows=17094.00 loops=3)
+                                      Recheck Cond: (started_at >= '2026-06-24 00:00:00+05:30'::timestamp with time zone)
+                                      Rows Removed by Index Recheck: 2876
+                                      Heap Blocks: lossy=310
+                                      Buffers: shared hit=942
+                                      Worker 0:  Heap Blocks: lossy=291
+                                      Worker 1:  Heap Blocks: lossy=295
+                                      ->  Bitmap Index Scan on idx_nav_started_brin  (cost=0.00..16.19 rows=53347 width=0) (actual time=0.072..0.073 rows=8960.00 loops=1)
+                                            Index Cond: (started_at >= '2026-06-24 00:00:00+05:30'::timestamp with time zone)
+                                            Index Searches: 1
+                                            Buffers: shared hit=6
+                                ->  Parallel Hash  (cost=5623.64..5623.64 rows=52400 width=25) (actual time=10.414..10.415 rows=42666.67 loops=3)
+                                      Buckets: 131072  Batches: 1  Memory Usage: 8800kB
+                                      Buffers: shared hit=1053
+                                      ->  Parallel Index Only Scan using idx_places_city_rating on places p  (cost=0.42..5623.64 rows=52400 width=25) (actual time=0.035..5.375 rows=42666.67 loops=3)
+                                            Index Cond: (city_id = 2)
+                                            Heap Fetches: 0
+                                            Index Searches: 1
+                                            Buffers: shared hit=1053
+Planning:
+  Buffers: shared hit=429
+Planning Time: 1.207 ms
+Execution Time: 21.993 ms

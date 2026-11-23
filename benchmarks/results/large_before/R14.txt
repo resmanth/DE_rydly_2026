@@ -1,0 +1,111 @@
+=== R14 run 1 ===
+Limit  (cost=45708.71..45708.76 rows=20 width=31) (actual time=145.134..145.732 rows=20.00 loops=1)
+  Buffers: shared hit=19 read=9451
+  ->  Sort  (cost=45708.71..46037.71 rows=131602 width=31) (actual time=145.133..145.730 rows=20.00 loops=1)
+        Sort Key: (count(*)) DESC, (sum(r.photo_count)) DESC
+        Sort Method: top-N heapsort  Memory: 27kB
+        Buffers: shared hit=19 read=9451
+        ->  GroupAggregate  (cost=24576.57..42206.83 rows=131602 width=31) (actual time=92.567..131.513 rows=112157.00 loops=1)
+              Group Key: u.user_id
+              Buffers: shared hit=16 read=9451
+              ->  Gather Merge  (cost=24576.57..39903.79 rows=131602 width=17) (actual time=92.553..107.578 rows=134555.00 loops=1)
+                    Workers Planned: 2
+                    Workers Launched: 2
+                    Buffers: shared hit=16 read=9451
+                    ->  Sort  (cost=23576.55..23713.63 rows=54834 width=17) (actual time=88.763..90.520 rows=44851.67 loops=3)
+                          Sort Key: u.user_id
+                          Sort Method: quicksort  Memory: 2989kB
+                          Buffers: shared hit=16 read=9451
+                          Worker 0:  Sort Method: quicksort  Memory: 2985kB
+                          Worker 1:  Sort Method: quicksort  Memory: 3025kB
+                          ->  Parallel Hash Join  (cost=4831.21..19260.35 rows=54834 width=17) (actual time=11.733..82.023 rows=44851.67 loops=3)
+                                Hash Cond: (u.user_id = r.user_id)
+                                Buffers: shared hit=2 read=9451
+                                ->  Parallel Seq Scan on users u  (cost=0.00..12117.33 rows=333333 width=15) (actual time=0.079..19.327 rows=266666.67 loops=3)
+                                      Buffers: shared read=8784
+                                ->  Parallel Hash  (cost=4145.79..4145.79 rows=54834 width=6) (actual time=11.527..11.528 rows=44851.67 loops=3)
+                                      Buckets: 262144  Batches: 1  Memory Usage: 7360kB
+                                      Buffers: shared hit=2 read=667
+                                      ->  Parallel Index Only Scan using idx_reviews_created on place_reviews r  (cost=0.43..4145.79 rows=54834 width=6) (actual time=0.229..7.035 rows=44851.67 loops=3)
+                                            Index Cond: (created_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone)
+                                            Heap Fetches: 0
+                                            Index Searches: 1
+                                            Buffers: shared hit=2 read=667
+Planning:
+  Buffers: shared hit=244 read=34
+Planning Time: 1.654 ms
+Execution Time: 145.803 ms
+=== R14 run 2 ===
+Limit  (cost=45708.71..45708.76 rows=20 width=31) (actual time=114.646..114.795 rows=20.00 loops=1)
+  Buffers: shared hit=968 read=8502
+  ->  Sort  (cost=45708.71..46037.71 rows=131602 width=31) (actual time=114.645..114.793 rows=20.00 loops=1)
+        Sort Key: (count(*)) DESC, (sum(r.photo_count)) DESC
+        Sort Method: top-N heapsort  Memory: 27kB
+        Buffers: shared hit=968 read=8502
+        ->  GroupAggregate  (cost=24576.57..42206.83 rows=131602 width=31) (actual time=63.339..99.723 rows=112157.00 loops=1)
+              Group Key: u.user_id
+              Buffers: shared hit=965 read=8502
+              ->  Gather Merge  (cost=24576.57..39903.79 rows=131602 width=17) (actual time=63.322..76.882 rows=134555.00 loops=1)
+                    Workers Planned: 2
+                    Workers Launched: 2
+                    Buffers: shared hit=965 read=8502
+                    ->  Sort  (cost=23576.55..23713.63 rows=54834 width=17) (actual time=60.651..62.242 rows=44851.67 loops=3)
+                          Sort Key: u.user_id
+                          Sort Method: quicksort  Memory: 3005kB
+                          Buffers: shared hit=965 read=8502
+                          Worker 0:  Sort Method: quicksort  Memory: 3024kB
+                          Worker 1:  Sort Method: quicksort  Memory: 2969kB
+                          ->  Parallel Hash Join  (cost=4831.21..19260.35 rows=54834 width=17) (actual time=11.514..55.538 rows=44851.67 loops=3)
+                                Hash Cond: (u.user_id = r.user_id)
+                                Buffers: shared hit=951 read=8502
+                                ->  Parallel Seq Scan on users u  (cost=0.00..12117.33 rows=333333 width=15) (actual time=0.111..14.530 rows=266666.67 loops=3)
+                                      Buffers: shared hit=282 read=8502
+                                ->  Parallel Hash  (cost=4145.79..4145.79 rows=54834 width=6) (actual time=11.259..11.260 rows=44851.67 loops=3)
+                                      Buckets: 262144  Batches: 1  Memory Usage: 7360kB
+                                      Buffers: shared hit=669
+                                      ->  Parallel Index Only Scan using idx_reviews_created on place_reviews r  (cost=0.43..4145.79 rows=54834 width=6) (actual time=0.069..5.105 rows=44851.67 loops=3)
+                                            Index Cond: (created_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone)
+                                            Heap Fetches: 0
+                                            Index Searches: 1
+                                            Buffers: shared hit=669
+Planning:
+  Buffers: shared hit=278
+Planning Time: 0.835 ms
+Execution Time: 114.868 ms
+=== R14 run 3 ===
+Limit  (cost=45708.71..45708.76 rows=20 width=31) (actual time=114.801..114.964 rows=20.00 loops=1)
+  Buffers: shared hit=1249 read=8220
+  ->  Sort  (cost=45708.71..46037.71 rows=131602 width=31) (actual time=114.800..114.961 rows=20.00 loops=1)
+        Sort Key: (count(*)) DESC, (sum(r.photo_count)) DESC
+        Sort Method: top-N heapsort  Memory: 27kB
+        Buffers: shared hit=1249 read=8220
+        ->  GroupAggregate  (cost=24576.57..42206.83 rows=131602 width=31) (actual time=68.640..103.132 rows=112157.00 loops=1)
+              Group Key: u.user_id
+              Buffers: shared hit=1246 read=8220
+              ->  Gather Merge  (cost=24576.57..39903.79 rows=131602 width=17) (actual time=68.623..81.869 rows=134555.00 loops=1)
+                    Workers Planned: 2
+                    Workers Launched: 2
+                    Buffers: shared hit=1246 read=8220
+                    ->  Sort  (cost=23576.55..23713.63 rows=54834 width=17) (actual time=66.461..68.015 rows=44851.67 loops=3)
+                          Sort Key: u.user_id
+                          Sort Method: quicksort  Memory: 3025kB
+                          Buffers: shared hit=1246 read=8220
+                          Worker 0:  Sort Method: quicksort  Memory: 2987kB
+                          Worker 1:  Sort Method: quicksort  Memory: 2987kB
+                          ->  Parallel Hash Join  (cost=4831.21..19260.35 rows=54834 width=17) (actual time=8.167..61.417 rows=44851.67 loops=3)
+                                Hash Cond: (u.user_id = r.user_id)
+                                Buffers: shared hit=1232 read=8220
+                                ->  Parallel Seq Scan on users u  (cost=0.00..12117.33 rows=333333 width=15) (actual time=0.081..16.415 rows=266666.67 loops=3)
+                                      Buffers: shared hit=564 read=8220
+                                ->  Parallel Hash  (cost=4145.79..4145.79 rows=54834 width=6) (actual time=7.949..7.950 rows=44851.67 loops=3)
+                                      Buckets: 262144  Batches: 1  Memory Usage: 7360kB
+                                      Buffers: shared hit=668
+                                      ->  Parallel Index Only Scan using idx_reviews_created on place_reviews r  (cost=0.43..4145.79 rows=54834 width=6) (actual time=0.051..3.895 rows=44851.67 loops=3)
+                                            Index Cond: (created_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone)
+                                            Heap Fetches: 0
+                                            Index Searches: 1
+                                            Buffers: shared hit=668
+Planning:
+  Buffers: shared hit=278
+Planning Time: 0.835 ms
+Execution Time: 115.032 ms

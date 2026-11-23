@@ -1,0 +1,111 @@
+=== R19 run 1 ===
+Sort  (cost=206614.34..206641.46 rows=10847 width=41) (actual time=916.777..918.439 rows=21333.00 loops=1)
+  Sort Key: (COALESCE((count(*)), '0'::bigint)) DESC
+  Sort Method: quicksort  Memory: 2098kB
+  Buffers: shared hit=1247932 read=25156
+  ->  Hash Right Join  (cost=7181.85..205887.32 rows=10847 width=41) (actual time=27.124..913.191 rows=21333.00 loops=1)
+        Hash Cond: (navigation_sessions.dest_place_id = p.place_id)
+        Buffers: shared hit=1247929 read=25156
+        ->  GroupAggregate  (cost=0.43..191963.11 rows=485602 width=20) (actual time=0.215..787.721 rows=785125.00 loops=1)
+              Group Key: navigation_sessions.dest_place_id
+              Buffers: shared hit=1247928 read=24099
+              ->  Index Only Scan using idx_nav_dest_started on navigation_sessions  (cost=0.43..157099.53 rows=4001007 width=12) (actual time=0.097..467.288 rows=4000000.00 loops=1)
+                    Heap Fetches: 0
+                    Index Searches: 1
+                    Buffers: shared hit=1247928 read=24099
+        ->  Hash  (cost=7045.83..7045.83 rows=10847 width=25) (actual time=25.704..25.709 rows=21333.00 loops=1)
+              Buckets: 32768 (originally 16384)  Batches: 1 (originally 1)  Memory Usage: 1509kB
+              Buffers: shared hit=1 read=1057
+              ->  Hash Join  (cost=1.59..7045.83 rows=10847 width=25) (actual time=0.205..23.338 rows=21333.00 loops=1)
+                    Hash Cond: (p.category_id = c.category_id)
+                    Buffers: shared hit=1 read=1057
+                    ->  Index Only Scan using idx_places_city_rating on places p  (cost=0.42..6582.31 rows=130165 width=29) (actual time=0.188..15.709 rows=128853.00 loops=1)
+                          Index Cond: (city_id = 1)
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared read=1057
+                    ->  Hash  (cost=1.15..1.15 rows=1 width=4) (actual time=0.010..0.011 rows=1.00 loops=1)
+                          Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                          Buffers: shared hit=1
+                          ->  Seq Scan on place_categories c  (cost=0.00..1.15 rows=1 width=4) (actual time=0.004..0.005 rows=1.00 loops=1)
+                                Filter: ((category_name)::text = 'Hospital'::text)
+                                Rows Removed by Filter: 11
+                                Buffers: shared hit=1
+Planning:
+  Buffers: shared hit=433 read=19
+Planning Time: 2.500 ms
+Execution Time: 919.259 ms
+=== R19 run 2 ===
+Sort  (cost=206614.34..206641.46 rows=10847 width=41) (actual time=913.226..914.606 rows=21333.00 loops=1)
+  Sort Key: (COALESCE((count(*)), '0'::bigint)) DESC
+  Sort Method: quicksort  Memory: 2098kB
+  Buffers: shared hit=1247933 read=25155
+  ->  Hash Right Join  (cost=7181.85..205887.32 rows=10847 width=41) (actual time=26.372..909.789 rows=21333.00 loops=1)
+        Hash Cond: (navigation_sessions.dest_place_id = p.place_id)
+        Buffers: shared hit=1247930 read=25155
+        ->  GroupAggregate  (cost=0.43..191963.11 rows=485602 width=20) (actual time=0.191..789.677 rows=785125.00 loops=1)
+              Group Key: navigation_sessions.dest_place_id
+              Buffers: shared hit=1247928 read=24099
+              ->  Index Only Scan using idx_nav_dest_started on navigation_sessions  (cost=0.43..157099.53 rows=4001007 width=12) (actual time=0.077..471.041 rows=4000000.00 loops=1)
+                    Heap Fetches: 0
+                    Index Searches: 1
+                    Buffers: shared hit=1247928 read=24099
+        ->  Hash  (cost=7045.83..7045.83 rows=10847 width=25) (actual time=24.971..24.976 rows=21333.00 loops=1)
+              Buckets: 32768 (originally 16384)  Batches: 1 (originally 1)  Memory Usage: 1509kB
+              Buffers: shared hit=2 read=1056
+              ->  Hash Join  (cost=1.59..7045.83 rows=10847 width=25) (actual time=0.086..22.487 rows=21333.00 loops=1)
+                    Hash Cond: (p.category_id = c.category_id)
+                    Buffers: shared hit=2 read=1056
+                    ->  Index Only Scan using idx_places_city_rating on places p  (cost=0.42..6582.31 rows=130165 width=29) (actual time=0.067..14.926 rows=128853.00 loops=1)
+                          Index Cond: (city_id = 1)
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared hit=1 read=1056
+                    ->  Hash  (cost=1.15..1.15 rows=1 width=4) (actual time=0.011..0.012 rows=1.00 loops=1)
+                          Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                          Buffers: shared hit=1
+                          ->  Seq Scan on place_categories c  (cost=0.00..1.15 rows=1 width=4) (actual time=0.005..0.006 rows=1.00 loops=1)
+                                Filter: ((category_name)::text = 'Hospital'::text)
+                                Rows Removed by Filter: 11
+                                Buffers: shared hit=1
+Planning:
+  Buffers: shared hit=436 read=16
+Planning Time: 1.832 ms
+Execution Time: 915.465 ms
+=== R19 run 3 ===
+Sort  (cost=206614.34..206641.46 rows=10847 width=41) (actual time=950.898..951.994 rows=21333.00 loops=1)
+  Sort Key: (COALESCE((count(*)), '0'::bigint)) DESC
+  Sort Method: quicksort  Memory: 2098kB
+  Buffers: shared hit=1247933 read=25155
+  ->  Hash Right Join  (cost=7181.85..205887.32 rows=10847 width=41) (actual time=26.890..946.923 rows=21333.00 loops=1)
+        Hash Cond: (navigation_sessions.dest_place_id = p.place_id)
+        Buffers: shared hit=1247930 read=25155
+        ->  GroupAggregate  (cost=0.43..191963.11 rows=485602 width=20) (actual time=0.266..816.227 rows=785125.00 loops=1)
+              Group Key: navigation_sessions.dest_place_id
+              Buffers: shared hit=1247928 read=24099
+              ->  Index Only Scan using idx_nav_dest_started on navigation_sessions  (cost=0.43..157099.53 rows=4001007 width=12) (actual time=0.123..486.394 rows=4000000.00 loops=1)
+                    Heap Fetches: 0
+                    Index Searches: 1
+                    Buffers: shared hit=1247928 read=24099
+        ->  Hash  (cost=7045.83..7045.83 rows=10847 width=25) (actual time=25.252..25.253 rows=21333.00 loops=1)
+              Buckets: 32768 (originally 16384)  Batches: 1 (originally 1)  Memory Usage: 1509kB
+              Buffers: shared hit=2 read=1056
+              ->  Hash Join  (cost=1.59..7045.83 rows=10847 width=25) (actual time=0.082..22.753 rows=21333.00 loops=1)
+                    Hash Cond: (p.category_id = c.category_id)
+                    Buffers: shared hit=2 read=1056
+                    ->  Index Only Scan using idx_places_city_rating on places p  (cost=0.42..6582.31 rows=130165 width=29) (actual time=0.065..15.205 rows=128853.00 loops=1)
+                          Index Cond: (city_id = 1)
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared hit=1 read=1056
+                    ->  Hash  (cost=1.15..1.15 rows=1 width=4) (actual time=0.010..0.011 rows=1.00 loops=1)
+                          Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                          Buffers: shared hit=1
+                          ->  Seq Scan on place_categories c  (cost=0.00..1.15 rows=1 width=4) (actual time=0.005..0.006 rows=1.00 loops=1)
+                                Filter: ((category_name)::text = 'Hospital'::text)
+                                Rows Removed by Filter: 11
+                                Buffers: shared hit=1
+Planning:
+  Buffers: shared hit=425 read=27
+Planning Time: 1.793 ms
+Execution Time: 952.802 ms

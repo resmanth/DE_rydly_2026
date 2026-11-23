@@ -1,0 +1,120 @@
+=== R11 run 1 ===
+GroupAggregate  (cost=186755.62..223299.95 rows=1124441 width=55) (actual time=2578.212..2736.371 rows=24.00 loops=1)
+  Group Key: (date_trunc('month'::text, navigation_sessions.started_at)), navigation_sessions.travel_mode
+  Buffers: shared hit=6 read=19045 dirtied=19045 written=6417, temp read=9688 written=9706
+  ->  Sort  (cost=186755.62..189566.72 rows=1124441 width=23) (actual time=2565.994..2639.358 rows=1125819.00 loops=1)
+        Sort Key: (date_trunc('month'::text, navigation_sessions.started_at)), navigation_sessions.travel_mode
+        Sort Method: external merge  Disk: 38784kB
+        Buffers: shared hit=6 read=19045 dirtied=19045 written=6417, temp read=9688 written=9706
+        ->  Append  (cost=0.00..50683.43 rows=1124441 width=23) (actual time=0.071..2177.450 rows=1125819.00 loops=1)
+              Buffers: shared read=19045 dirtied=19045 written=6417
+              ->  Seq Scan on navigation_sessions_p202601 navigation_sessions_1  (cost=0.00..7719.41 rows=193221 width=23) (actual time=0.071..314.233 rows=193065.00 loops=1)
+                    Filter: ((started_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone) AND (started_at < '2027-01-01 00:00:00+05:30'::timestamp with time zone) AND ((status)::text = 'COMPLETED'::text))
+                    Rows Removed by Filter: 34041
+                    Buffers: shared read=3262 dirtied=3262
+              ->  Seq Scan on navigation_sessions_p202602 navigation_sessions_2  (cost=0.00..6970.87 rows=174044 width=23) (actual time=0.089..330.633 rows=174446.00 loops=1)
+                    Filter: ((started_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone) AND (started_at < '2027-01-01 00:00:00+05:30'::timestamp with time zone) AND ((status)::text = 'COMPLETED'::text))
+                    Rows Removed by Filter: 30683
+                    Buffers: shared read=2946 dirtied=2946
+              ->  Seq Scan on navigation_sessions_p202603 navigation_sessions_3  (cost=0.00..7717.27 rows=192767 width=23) (actual time=0.057..376.798 rows=193016.00 loops=1)
+                    Filter: ((started_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone) AND (started_at < '2027-01-01 00:00:00+05:30'::timestamp with time zone) AND ((status)::text = 'COMPLETED'::text))
+                    Rows Removed by Filter: 34090
+                    Buffers: shared read=3261 dirtied=3261 written=1756
+              ->  Seq Scan on navigation_sessions_p202604 navigation_sessions_4  (cost=0.00..7470.16 rows=186805 width=23) (actual time=0.115..363.057 rows=186945.00 loops=1)
+                    Filter: ((started_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone) AND (started_at < '2027-01-01 00:00:00+05:30'::timestamp with time zone) AND ((status)::text = 'COMPLETED'::text))
+                    Rows Removed by Filter: 32835
+                    Buffers: shared read=3157 dirtied=3157 written=2944
+              ->  Seq Scan on navigation_sessions_p202605 navigation_sessions_5  (cost=0.00..7717.86 rows=192600 width=23) (actual time=0.097..372.101 rows=193120.00 loops=1)
+                    Filter: ((started_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone) AND (started_at < '2027-01-01 00:00:00+05:30'::timestamp with time zone) AND ((status)::text = 'COMPLETED'::text))
+                    Rows Removed by Filter: 33986
+                    Buffers: shared read=3262 dirtied=3262 written=1717
+              ->  Seq Scan on navigation_sessions_p202606 navigation_sessions_6  (cost=0.00..7465.66 rows=185003 width=23) (actual time=0.187..349.533 rows=185227.00 loops=1)
+                    Filter: ((started_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone) AND (started_at < '2027-01-01 00:00:00+05:30'::timestamp with time zone) AND ((status)::text = 'COMPLETED'::text))
+                    Rows Removed by Filter: 34553
+                    Buffers: shared read=3157 dirtied=3157
+              ->  Seq Scan on navigation_sessions_p_default navigation_sessions_7  (cost=0.00..0.00 rows=1 width=23) (actual time=0.012..0.012 rows=0.00 loops=1)
+                    Filter: ((started_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone) AND (started_at < '2027-01-01 00:00:00+05:30'::timestamp with time zone) AND ((status)::text = 'COMPLETED'::text))
+Planning:
+  Buffers: shared hit=1264 read=45 dirtied=22
+Planning Time: 9.347 ms
+Execution Time: 2745.350 ms
+=== R11 run 2 ===
+GroupAggregate  (cost=186755.62..223299.95 rows=1124441 width=55) (actual time=856.705..1015.298 rows=24.00 loops=1)
+  Group Key: (date_trunc('month'::text, navigation_sessions.started_at)), navigation_sessions.travel_mode
+  Buffers: shared hit=23 read=19028 written=11358, temp read=9688 written=9706
+  ->  Sort  (cost=186755.62..189566.72 rows=1124441 width=23) (actual time=844.550..918.145 rows=1125819.00 loops=1)
+        Sort Key: (date_trunc('month'::text, navigation_sessions.started_at)), navigation_sessions.travel_mode
+        Sort Method: external merge  Disk: 38784kB
+        Buffers: shared hit=23 read=19028 written=11358, temp read=9688 written=9706
+        ->  Append  (cost=0.00..50683.43 rows=1124441 width=23) (actual time=0.061..437.888 rows=1125819.00 loops=1)
+              Buffers: shared hit=17 read=19028 written=11358
+              ->  Seq Scan on navigation_sessions_p202601 navigation_sessions_1  (cost=0.00..7719.41 rows=193221 width=23) (actual time=0.060..53.153 rows=193065.00 loops=1)
+                    Filter: ((started_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone) AND (started_at < '2027-01-01 00:00:00+05:30'::timestamp with time zone) AND ((status)::text = 'COMPLETED'::text))
+                    Rows Removed by Filter: 34041
+                    Buffers: shared read=3262
+              ->  Seq Scan on navigation_sessions_p202602 navigation_sessions_2  (cost=0.00..6970.87 rows=174044 width=23) (actual time=0.047..60.717 rows=174446.00 loops=1)
+                    Filter: ((started_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone) AND (started_at < '2027-01-01 00:00:00+05:30'::timestamp with time zone) AND ((status)::text = 'COMPLETED'::text))
+                    Rows Removed by Filter: 30683
+                    Buffers: shared read=2946 written=2283
+              ->  Seq Scan on navigation_sessions_p202603 navigation_sessions_3  (cost=0.00..7717.27 rows=192767 width=23) (actual time=0.074..68.773 rows=193016.00 loops=1)
+                    Filter: ((started_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone) AND (started_at < '2027-01-01 00:00:00+05:30'::timestamp with time zone) AND ((status)::text = 'COMPLETED'::text))
+                    Rows Removed by Filter: 34090
+                    Buffers: shared read=3261 written=3170
+              ->  Seq Scan on navigation_sessions_p202604 navigation_sessions_4  (cost=0.00..7470.16 rows=186805 width=23) (actual time=0.062..65.342 rows=186945.00 loops=1)
+                    Filter: ((started_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone) AND (started_at < '2027-01-01 00:00:00+05:30'::timestamp with time zone) AND ((status)::text = 'COMPLETED'::text))
+                    Rows Removed by Filter: 32835
+                    Buffers: shared hit=11 read=3146 written=2604
+              ->  Seq Scan on navigation_sessions_p202605 navigation_sessions_5  (cost=0.00..7717.86 rows=192600 width=23) (actual time=0.043..71.275 rows=193120.00 loops=1)
+                    Filter: ((started_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone) AND (started_at < '2027-01-01 00:00:00+05:30'::timestamp with time zone) AND ((status)::text = 'COMPLETED'::text))
+                    Rows Removed by Filter: 33986
+                    Buffers: shared hit=6 read=3256 written=3217
+              ->  Seq Scan on navigation_sessions_p202606 navigation_sessions_6  (cost=0.00..7465.66 rows=185003 width=23) (actual time=0.066..47.590 rows=185227.00 loops=1)
+                    Filter: ((started_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone) AND (started_at < '2027-01-01 00:00:00+05:30'::timestamp with time zone) AND ((status)::text = 'COMPLETED'::text))
+                    Rows Removed by Filter: 34553
+                    Buffers: shared read=3157 written=84
+              ->  Seq Scan on navigation_sessions_p_default navigation_sessions_7  (cost=0.00..0.00 rows=1 width=23) (actual time=0.018..0.018 rows=0.00 loops=1)
+                    Filter: ((started_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone) AND (started_at < '2027-01-01 00:00:00+05:30'::timestamp with time zone) AND ((status)::text = 'COMPLETED'::text))
+Planning:
+  Buffers: shared hit=1251 read=44
+Planning Time: 4.390 ms
+Execution Time: 1024.003 ms
+=== R11 run 3 ===
+GroupAggregate  (cost=186755.62..223299.95 rows=1124441 width=55) (actual time=774.471..932.186 rows=24.00 loops=1)
+  Group Key: (date_trunc('month'::text, navigation_sessions.started_at)), navigation_sessions.travel_mode
+  Buffers: shared hit=6 read=19045, temp read=9688 written=9706
+  ->  Sort  (cost=186755.62..189566.72 rows=1124441 width=23) (actual time=762.296..835.237 rows=1125819.00 loops=1)
+        Sort Key: (date_trunc('month'::text, navigation_sessions.started_at)), navigation_sessions.travel_mode
+        Sort Method: external merge  Disk: 38784kB
+        Buffers: shared hit=6 read=19045, temp read=9688 written=9706
+        ->  Append  (cost=0.00..50683.43 rows=1124441 width=23) (actual time=0.069..374.816 rows=1125819.00 loops=1)
+              Buffers: shared read=19045
+              ->  Seq Scan on navigation_sessions_p202601 navigation_sessions_1  (cost=0.00..7719.41 rows=193221 width=23) (actual time=0.069..55.982 rows=193065.00 loops=1)
+                    Filter: ((started_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone) AND (started_at < '2027-01-01 00:00:00+05:30'::timestamp with time zone) AND ((status)::text = 'COMPLETED'::text))
+                    Rows Removed by Filter: 34041
+                    Buffers: shared read=3262
+              ->  Seq Scan on navigation_sessions_p202602 navigation_sessions_2  (cost=0.00..6970.87 rows=174044 width=23) (actual time=0.044..48.243 rows=174446.00 loops=1)
+                    Filter: ((started_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone) AND (started_at < '2027-01-01 00:00:00+05:30'::timestamp with time zone) AND ((status)::text = 'COMPLETED'::text))
+                    Rows Removed by Filter: 30683
+                    Buffers: shared read=2946
+              ->  Seq Scan on navigation_sessions_p202603 navigation_sessions_3  (cost=0.00..7717.27 rows=192767 width=23) (actual time=0.047..51.905 rows=193016.00 loops=1)
+                    Filter: ((started_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone) AND (started_at < '2027-01-01 00:00:00+05:30'::timestamp with time zone) AND ((status)::text = 'COMPLETED'::text))
+                    Rows Removed by Filter: 34090
+                    Buffers: shared read=3261
+              ->  Seq Scan on navigation_sessions_p202604 navigation_sessions_4  (cost=0.00..7470.16 rows=186805 width=23) (actual time=0.053..49.987 rows=186945.00 loops=1)
+                    Filter: ((started_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone) AND (started_at < '2027-01-01 00:00:00+05:30'::timestamp with time zone) AND ((status)::text = 'COMPLETED'::text))
+                    Rows Removed by Filter: 32835
+                    Buffers: shared read=3157
+              ->  Seq Scan on navigation_sessions_p202605 navigation_sessions_5  (cost=0.00..7717.86 rows=192600 width=23) (actual time=0.047..51.080 rows=193120.00 loops=1)
+                    Filter: ((started_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone) AND (started_at < '2027-01-01 00:00:00+05:30'::timestamp with time zone) AND ((status)::text = 'COMPLETED'::text))
+                    Rows Removed by Filter: 33986
+                    Buffers: shared read=3262
+              ->  Seq Scan on navigation_sessions_p202606 navigation_sessions_6  (cost=0.00..7465.66 rows=185003 width=23) (actual time=0.042..46.681 rows=185227.00 loops=1)
+                    Filter: ((started_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone) AND (started_at < '2027-01-01 00:00:00+05:30'::timestamp with time zone) AND ((status)::text = 'COMPLETED'::text))
+                    Rows Removed by Filter: 34553
+                    Buffers: shared read=3157
+              ->  Seq Scan on navigation_sessions_p_default navigation_sessions_7  (cost=0.00..0.00 rows=1 width=23) (actual time=0.010..0.010 rows=0.00 loops=1)
+                    Filter: ((started_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone) AND (started_at < '2027-01-01 00:00:00+05:30'::timestamp with time zone) AND ((status)::text = 'COMPLETED'::text))
+Planning:
+  Buffers: shared hit=1250 read=45
+Planning Time: 3.890 ms
+Execution Time: 941.139 ms

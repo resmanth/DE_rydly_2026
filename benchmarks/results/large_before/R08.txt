@@ -1,0 +1,84 @@
+=== R08 run 1 ===
+Sort  (cost=773.45..773.51 rows=26 width=48) (actual time=1.989..1.991 rows=45.00 loops=1)
+  Sort Key: t.recorded_at DESC
+  Sort Method: quicksort  Memory: 28kB
+  Buffers: shared hit=67 read=7
+  ->  Hash Join  (cost=755.68..772.83 rows=26 width=48) (actual time=1.646..1.966 rows=45.00 loops=1)
+        Hash Cond: (t.segment_id = s.segment_id)
+        Buffers: shared hit=64 read=7
+        ->  Index Only Scan using idx_traffic_heavy_recent on traffic_readings t  (cost=0.42..16.91 rows=256 width=23) (actual time=0.566..0.848 rows=471.00 loops=1)
+              Index Cond: (recorded_at >= '2026-06-30 18:00:00+05:30'::timestamp with time zone)
+              Heap Fetches: 0
+              Index Searches: 1
+              Buffers: shared hit=1 read=5
+        ->  Hash  (cost=705.27..705.27 rows=3999 width=29) (actual time=1.062..1.063 rows=4000.00 loops=1)
+              Buckets: 4096  Batches: 1  Memory Usage: 278kB
+              Buffers: shared hit=63 read=2
+              ->  Bitmap Heap Scan on road_segments s  (cost=47.28..705.27 rows=3999 width=29) (actual time=0.095..0.651 rows=4000.00 loops=1)
+                    Recheck Cond: (city_id = 1)
+                    Heap Blocks: exact=60
+                    Buffers: shared hit=63 read=2
+                    ->  Bitmap Index Scan on idx_segments_city_road  (cost=0.00..46.28 rows=3999 width=0) (actual time=0.079..0.079 rows=4000.00 loops=1)
+                          Index Cond: (city_id = 1)
+                          Index Searches: 1
+                          Buffers: shared hit=3 read=2
+Planning:
+  Buffers: shared hit=364
+Planning Time: 0.962 ms
+Execution Time: 2.030 ms
+=== R08 run 2 ===
+Sort  (cost=773.45..773.51 rows=26 width=48) (actual time=1.137..1.140 rows=45.00 loops=1)
+  Sort Key: t.recorded_at DESC
+  Sort Method: quicksort  Memory: 28kB
+  Buffers: shared hit=74
+  ->  Hash Join  (cost=755.68..772.83 rows=26 width=48) (actual time=1.039..1.110 rows=45.00 loops=1)
+        Hash Cond: (t.segment_id = s.segment_id)
+        Buffers: shared hit=71
+        ->  Index Only Scan using idx_traffic_heavy_recent on traffic_readings t  (cost=0.42..16.91 rows=256 width=23) (actual time=0.019..0.056 rows=471.00 loops=1)
+              Index Cond: (recorded_at >= '2026-06-30 18:00:00+05:30'::timestamp with time zone)
+              Heap Fetches: 0
+              Index Searches: 1
+              Buffers: shared hit=6
+        ->  Hash  (cost=705.27..705.27 rows=3999 width=29) (actual time=1.002..1.002 rows=4000.00 loops=1)
+              Buckets: 4096  Batches: 1  Memory Usage: 278kB
+              Buffers: shared hit=65
+              ->  Bitmap Heap Scan on road_segments s  (cost=47.28..705.27 rows=3999 width=29) (actual time=0.093..0.598 rows=4000.00 loops=1)
+                    Recheck Cond: (city_id = 1)
+                    Heap Blocks: exact=60
+                    Buffers: shared hit=65
+                    ->  Bitmap Index Scan on idx_segments_city_road  (cost=0.00..46.28 rows=3999 width=0) (actual time=0.077..0.077 rows=4000.00 loops=1)
+                          Index Cond: (city_id = 1)
+                          Index Searches: 1
+                          Buffers: shared hit=5
+Planning:
+  Buffers: shared hit=364
+Planning Time: 1.061 ms
+Execution Time: 1.182 ms
+=== R08 run 3 ===
+Sort  (cost=773.45..773.51 rows=26 width=48) (actual time=1.132..1.135 rows=45.00 loops=1)
+  Sort Key: t.recorded_at DESC
+  Sort Method: quicksort  Memory: 28kB
+  Buffers: shared hit=74
+  ->  Hash Join  (cost=755.68..772.83 rows=26 width=48) (actual time=1.037..1.107 rows=45.00 loops=1)
+        Hash Cond: (t.segment_id = s.segment_id)
+        Buffers: shared hit=71
+        ->  Index Only Scan using idx_traffic_heavy_recent on traffic_readings t  (cost=0.42..16.91 rows=256 width=23) (actual time=0.012..0.047 rows=471.00 loops=1)
+              Index Cond: (recorded_at >= '2026-06-30 18:00:00+05:30'::timestamp with time zone)
+              Heap Fetches: 0
+              Index Searches: 1
+              Buffers: shared hit=6
+        ->  Hash  (cost=705.27..705.27 rows=3999 width=29) (actual time=1.008..1.008 rows=4000.00 loops=1)
+              Buckets: 4096  Batches: 1  Memory Usage: 278kB
+              Buffers: shared hit=65
+              ->  Bitmap Heap Scan on road_segments s  (cost=47.28..705.27 rows=3999 width=29) (actual time=0.097..0.606 rows=4000.00 loops=1)
+                    Recheck Cond: (city_id = 1)
+                    Heap Blocks: exact=60
+                    Buffers: shared hit=65
+                    ->  Bitmap Index Scan on idx_segments_city_road  (cost=0.00..46.28 rows=3999 width=0) (actual time=0.079..0.080 rows=4000.00 loops=1)
+                          Index Cond: (city_id = 1)
+                          Index Searches: 1
+                          Buffers: shared hit=5
+Planning:
+  Buffers: shared hit=364
+Planning Time: 1.022 ms
+Execution Time: 1.175 ms

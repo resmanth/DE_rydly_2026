@@ -1,0 +1,270 @@
+=== R13 run 1 ===
+Merge Anti Join  (cost=6.06..55750.49 rows=690770 width=25) (actual time=2.840..4896.691 rows=666854.00 loops=1)
+  Merge Cond: (p.place_id = n.origin_place_id)
+  Buffers: shared hit=59042 read=134420 dirtied=74560 written=63455
+  ->  Index Scan using places_pkey on places p  (cost=0.42..39749.54 rows=833979 width=25) (actual time=0.005..355.437 rows=800853.00 loops=1)
+        Index Searches: 1
+        Buffers: shared hit=25813 read=18933 dirtied=2436 written=9430
+  ->  Merge Append  (cost=5.64..338572.97 rows=4000001 width=4) (actual time=2.830..4451.937 rows=148323.00 loops=1)
+        Sort Key: n.origin_place_id
+        Buffers: shared hit=33229 read=115487 dirtied=72124 written=54025
+        ->  Index Only Scan using navigation_sessions_p202501_origin_place_id_idx on navigation_sessions_p202501 n_1  (cost=0.29..13276.59 rows=227107 width=4) (actual time=0.303..266.014 rows=8378.00 loops=1)
+              Heap Fetches: 8378
+              Index Searches: 1
+              Buffers: shared hit=2136 read=6265 dirtied=2935 written=2916
+        ->  Index Only Scan using navigation_sessions_p202502_origin_place_id_idx on navigation_sessions_p202502 n_2  (cost=0.28..11990.62 rows=205128 width=4) (actual time=0.144..293.809 rows=7505.00 loops=1)
+              Heap Fetches: 7505
+              Index Searches: 1
+              Buffers: shared hit=1951 read=5574 dirtied=4386 written=2599
+        ->  Index Only Scan using navigation_sessions_p202503_origin_place_id_idx on navigation_sessions_p202503 n_3  (cost=0.29..13264.65 rows=227106 width=4) (actual time=0.156..365.314 rows=8418.00 loops=1)
+              Heap Fetches: 8418
+              Index Searches: 1
+              Buffers: shared hit=1872 read=6568 dirtied=6550 written=3079
+        ->  Index Only Scan using navigation_sessions_p202504_origin_place_id_idx on navigation_sessions_p202504 n_4  (cost=0.28..12831.40 rows=219780 width=4) (actual time=0.193..357.989 rows=8262.00 loops=1)
+              Heap Fetches: 8262
+              Index Searches: 1
+              Buffers: shared hit=1835 read=6450 dirtied=6426 written=2983
+        ->  Index Only Scan using navigation_sessions_p202505_origin_place_id_idx on navigation_sessions_p202505 n_5  (cost=0.28..13265.67 rows=227107 width=4) (actual time=0.142..351.677 rows=8368.00 loops=1)
+              Heap Fetches: 8368
+              Index Searches: 1
+              Buffers: shared hit=1821 read=6570 dirtied=6546 written=3070
+        ->  Index Only Scan using navigation_sessions_p202506_origin_place_id_idx on navigation_sessions_p202506 n_6  (cost=0.28..12834.11 rows=219780 width=4) (actual time=0.183..337.286 rows=7962.00 loops=1)
+              Heap Fetches: 7962
+              Index Searches: 1
+              Buffers: shared hit=1736 read=6246 dirtied=6223 written=2938
+        ->  Index Only Scan using navigation_sessions_p202507_origin_place_id_idx on navigation_sessions_p202507 n_7  (cost=0.29..13247.85 rows=227106 width=4) (actual time=0.119..364.612 rows=8412.00 loops=1)
+              Heap Fetches: 8412
+              Index Searches: 1
+              Buffers: shared hit=1926 read=6508 dirtied=6485 written=3011
+        ->  Index Only Scan using navigation_sessions_p202508_origin_place_id_idx on navigation_sessions_p202508 n_8  (cost=0.29..13247.12 rows=227106 width=4) (actual time=0.128..353.560 rows=8451.00 loops=1)
+              Heap Fetches: 8451
+              Index Searches: 1
+              Buffers: shared hit=1839 read=6637 dirtied=6614 written=3058
+        ->  Index Only Scan using navigation_sessions_p202509_origin_place_id_idx on navigation_sessions_p202509 n_9  (cost=0.28..12842.17 rows=219780 width=4) (actual time=0.149..348.222 rows=8083.00 loops=1)
+              Heap Fetches: 8083
+              Index Searches: 1
+              Buffers: shared hit=1752 read=6354 dirtied=6332 written=2956
+        ->  Index Only Scan using navigation_sessions_p202510_origin_place_id_idx on navigation_sessions_p202510 n_10  (cost=0.29..13259.07 rows=227107 width=4) (actual time=0.196..359.597 rows=8656.00 loops=1)
+              Heap Fetches: 8656
+              Index Searches: 1
+              Buffers: shared hit=1970 read=6710 dirtied=6685 written=3158
+        ->  Index Only Scan using navigation_sessions_p202511_origin_place_id_idx on navigation_sessions_p202511 n_11  (cost=0.29..12848.12 rows=219780 width=4) (actual time=0.128..341.305 rows=8161.00 loops=1)
+              Heap Fetches: 8161
+              Index Searches: 1
+              Buffers: shared hit=1737 read=6444 dirtied=6420 written=3070
+        ->  Index Only Scan using navigation_sessions_p202512_origin_place_id_idx on navigation_sessions_p202512 n_12  (cost=0.28..13243.13 rows=227106 width=4) (actual time=0.135..362.039 rows=8297.00 loops=1)
+              Heap Fetches: 8297
+              Index Searches: 1
+              Buffers: shared hit=1770 read=6546 dirtied=6522 written=3092
+        ->  Index Only Scan using navigation_sessions_p202601_origin_place_id_idx on navigation_sessions_p202601 n_13  (cost=0.29..13268.36 rows=227106 width=4) (actual time=0.128..56.001 rows=8439.00 loops=1)
+              Heap Fetches: 8439
+              Index Searches: 1
+              Buffers: shared hit=1808 read=6654 written=3038
+        ->  Index Only Scan using navigation_sessions_p202602_origin_place_id_idx on navigation_sessions_p202602 n_14  (cost=0.28..11995.19 rows=205129 width=4) (actual time=0.131..50.198 rows=7702.00 loops=1)
+              Heap Fetches: 7702
+              Index Searches: 1
+              Buffers: shared hit=1712 read=6008 written=2875
+        ->  Index Only Scan using navigation_sessions_p202603_origin_place_id_idx on navigation_sessions_p202603 n_15  (cost=0.29..13258.38 rows=227106 width=4) (actual time=0.183..56.318 rows=8355.00 loops=1)
+              Heap Fetches: 8355
+              Index Searches: 1
+              Buffers: shared hit=1800 read=6573 written=3050
+        ->  Index Only Scan using navigation_sessions_p202604_origin_place_id_idx on navigation_sessions_p202604 n_16  (cost=0.28..12825.22 rows=219780 width=4) (actual time=0.150..55.187 rows=8221.00 loops=1)
+              Heap Fetches: 8221
+              Index Searches: 1
+              Buffers: shared hit=1826 read=6418 written=2967
+        ->  Index Only Scan using navigation_sessions_p202605_origin_place_id_idx on navigation_sessions_p202605 n_17  (cost=0.29..13268.36 rows=227106 width=4) (actual time=0.132..55.673 rows=8336.00 loops=1)
+              Heap Fetches: 8336
+              Index Searches: 1
+              Buffers: shared hit=1796 read=6562 written=3123
+        ->  Index Only Scan using navigation_sessions_p202606_origin_place_id_idx on navigation_sessions_p202606 n_18  (cost=0.29..12839.83 rows=219780 width=4) (actual time=0.121..53.497 rows=8317.00 loops=1)
+              Heap Fetches: 8317
+              Index Searches: 1
+              Buffers: shared hit=1941 read=6400 written=3042
+        ->  Index Only Scan using navigation_sessions_p_default_origin_place_id_idx on navigation_sessions_p_default n_19  (cost=0.12..8.14 rows=1 width=4) (actual time=0.005..0.006 rows=0.00 loops=1)
+              Heap Fetches: 0
+              Index Searches: 1
+              Buffers: shared hit=1
+Planning:
+  Buffers: shared hit=2694 read=110 dirtied=43
+Planning Time: 17.283 ms
+Execution Time: 4919.962 ms
+=== R13 run 2 ===
+Merge Anti Join  (cost=6.06..54861.66 rows=690770 width=25) (actual time=0.852..762.366 rows=666854.00 loops=1)
+  Merge Cond: (p.place_id = n.origin_place_id)
+  Buffers: shared hit=34900 read=113229 written=9191
+  ->  Index Scan using places_pkey on places p  (cost=0.42..39749.54 rows=833979 width=25) (actual time=0.005..147.614 rows=800853.00 loops=1)
+        Index Searches: 1
+        Buffers: shared hit=633 read=19999 written=1513
+  ->  Merge Append  (cost=5.64..313744.47 rows=4000001 width=4) (actual time=0.841..529.444 rows=148323.00 loops=1)
+        Sort Key: n.origin_place_id
+        Buffers: shared hit=34267 read=93230 written=7678
+        ->  Index Only Scan using navigation_sessions_p202501_origin_place_id_idx on navigation_sessions_p202501 n_1  (cost=0.29..224.17 rows=227107 width=4) (actual time=0.069..1.075 rows=8378.00 loops=1)
+              Heap Fetches: 0
+              Index Searches: 1
+              Buffers: shared read=25 written=5
+        ->  Index Only Scan using navigation_sessions_p202502_origin_place_id_idx on navigation_sessions_p202502 n_2  (cost=0.28..214.54 rows=205128 width=4) (actual time=0.060..1.016 rows=7505.00 loops=1)
+              Heap Fetches: 2
+              Index Searches: 1
+              Buffers: shared hit=1 read=23 written=3
+        ->  Index Only Scan using navigation_sessions_p202503_origin_place_id_idx on navigation_sessions_p202503 n_3  (cost=0.29..13264.65 rows=227106 width=4) (actual time=0.061..13.863 rows=8418.00 loops=1)
+              Heap Fetches: 3079
+              Index Searches: 1
+              Buffers: shared hit=939 read=2159 written=303
+        ->  Index Only Scan using navigation_sessions_p202504_origin_place_id_idx on navigation_sessions_p202504 n_4  (cost=0.28..12831.40 rows=219780 width=4) (actual time=0.042..33.037 rows=8262.00 loops=1)
+              Heap Fetches: 8262
+              Index Searches: 1
+              Buffers: shared hit=2247 read=6038 written=459
+        ->  Index Only Scan using navigation_sessions_p202505_origin_place_id_idx on navigation_sessions_p202505 n_5  (cost=0.28..13265.67 rows=227107 width=4) (actual time=0.040..33.781 rows=8368.00 loops=1)
+              Heap Fetches: 8368
+              Index Searches: 1
+              Buffers: shared hit=2203 read=6188 written=485
+        ->  Index Only Scan using navigation_sessions_p202506_origin_place_id_idx on navigation_sessions_p202506 n_6  (cost=0.28..12834.11 rows=219780 width=4) (actual time=0.049..31.279 rows=7962.00 loops=1)
+              Heap Fetches: 7962
+              Index Searches: 1
+              Buffers: shared hit=2146 read=5836 written=487
+        ->  Index Only Scan using navigation_sessions_p202507_origin_place_id_idx on navigation_sessions_p202507 n_7  (cost=0.29..13247.85 rows=227106 width=4) (actual time=0.040..32.879 rows=8412.00 loops=1)
+              Heap Fetches: 8412
+              Index Searches: 1
+              Buffers: shared hit=2345 read=6089 written=494
+        ->  Index Only Scan using navigation_sessions_p202508_origin_place_id_idx on navigation_sessions_p202508 n_8  (cost=0.29..13247.12 rows=227106 width=4) (actual time=0.042..33.390 rows=8451.00 loops=1)
+              Heap Fetches: 8451
+              Index Searches: 1
+              Buffers: shared hit=2259 read=6217 written=533
+        ->  Index Only Scan using navigation_sessions_p202509_origin_place_id_idx on navigation_sessions_p202509 n_9  (cost=0.28..12842.17 rows=219780 width=4) (actual time=0.037..32.615 rows=8083.00 loops=1)
+              Heap Fetches: 8083
+              Index Searches: 1
+              Buffers: shared hit=2187 read=5919 written=478
+        ->  Index Only Scan using navigation_sessions_p202510_origin_place_id_idx on navigation_sessions_p202510 n_10  (cost=0.29..13259.07 rows=227107 width=4) (actual time=0.041..33.436 rows=8656.00 loops=1)
+              Heap Fetches: 8656
+              Index Searches: 1
+              Buffers: shared hit=2406 read=6274 written=494
+        ->  Index Only Scan using navigation_sessions_p202511_origin_place_id_idx on navigation_sessions_p202511 n_11  (cost=0.29..12848.12 rows=219780 width=4) (actual time=0.051..33.066 rows=8161.00 loops=1)
+              Heap Fetches: 8161
+              Index Searches: 1
+              Buffers: shared hit=2139 read=6042 written=517
+        ->  Index Only Scan using navigation_sessions_p202512_origin_place_id_idx on navigation_sessions_p202512 n_12  (cost=0.28..13243.13 rows=227106 width=4) (actual time=0.051..32.985 rows=8297.00 loops=1)
+              Heap Fetches: 8297
+              Index Searches: 1
+              Buffers: shared hit=2189 read=6127 written=475
+        ->  Index Only Scan using navigation_sessions_p202601_origin_place_id_idx on navigation_sessions_p202601 n_13  (cost=0.29..13268.36 rows=227106 width=4) (actual time=0.041..34.495 rows=8439.00 loops=1)
+              Heap Fetches: 8439
+              Index Searches: 1
+              Buffers: shared hit=2229 read=6233 written=530
+        ->  Index Only Scan using navigation_sessions_p202602_origin_place_id_idx on navigation_sessions_p202602 n_14  (cost=0.28..11995.19 rows=205129 width=4) (actual time=0.051..30.538 rows=7702.00 loops=1)
+              Heap Fetches: 7702
+              Index Searches: 1
+              Buffers: shared hit=2106 read=5614 written=445
+        ->  Index Only Scan using navigation_sessions_p202603_origin_place_id_idx on navigation_sessions_p202603 n_15  (cost=0.29..13258.38 rows=227106 width=4) (actual time=0.041..32.878 rows=8355.00 loops=1)
+              Heap Fetches: 8355
+              Index Searches: 1
+              Buffers: shared hit=2207 read=6166 written=516
+        ->  Index Only Scan using navigation_sessions_p202604_origin_place_id_idx on navigation_sessions_p202604 n_16  (cost=0.28..12825.22 rows=219780 width=4) (actual time=0.031..33.124 rows=8221.00 loops=1)
+              Heap Fetches: 8221
+              Index Searches: 1
+              Buffers: shared hit=2224 read=6020 written=498
+        ->  Index Only Scan using navigation_sessions_p202605_origin_place_id_idx on navigation_sessions_p202605 n_17  (cost=0.29..13268.36 rows=227106 width=4) (actual time=0.045..33.063 rows=8336.00 loops=1)
+              Heap Fetches: 8336
+              Index Searches: 1
+              Buffers: shared hit=2199 read=6159 written=461
+        ->  Index Only Scan using navigation_sessions_p202606_origin_place_id_idx on navigation_sessions_p202606 n_18  (cost=0.29..12839.83 rows=219780 width=4) (actual time=0.041..33.234 rows=8317.00 loops=1)
+              Heap Fetches: 8317
+              Index Searches: 1
+              Buffers: shared hit=2240 read=6101 written=495
+        ->  Index Only Scan using navigation_sessions_p_default_origin_place_id_idx on navigation_sessions_p_default n_19  (cost=0.12..8.14 rows=1 width=4) (actual time=0.006..0.006 rows=0.00 loops=1)
+              Heap Fetches: 0
+              Index Searches: 1
+              Buffers: shared hit=1
+Planning:
+  Buffers: shared hit=2614 read=183 dirtied=8 written=78
+Planning Time: 8.866 ms
+Execution Time: 785.202 ms
+=== R13 run 3 ===
+Merge Anti Join  (cost=6.06..54395.40 rows=690770 width=25) (actual time=0.690..665.288 rows=666854.00 loops=1)
+  Merge Cond: (p.place_id = n.origin_place_id)
+  Buffers: shared hit=35583 read=109481 written=1088
+  ->  Index Scan using places_pkey on places p  (cost=0.42..39749.54 rows=833979 width=25) (actual time=0.010..136.982 rows=800853.00 loops=1)
+        Index Searches: 1
+        Buffers: shared hit=636 read=19996 written=207
+  ->  Merge Append  (cost=5.64..300719.96 rows=4000001 width=4) (actual time=0.675..442.976 rows=148323.00 loops=1)
+        Sort Key: n.origin_place_id
+        Buffers: shared hit=34947 read=89485 written=881
+        ->  Index Only Scan using navigation_sessions_p202501_origin_place_id_idx on navigation_sessions_p202501 n_1  (cost=0.29..224.17 rows=227107 width=4) (actual time=0.070..1.123 rows=8378.00 loops=1)
+              Heap Fetches: 0
+              Index Searches: 1
+              Buffers: shared hit=1 read=24
+        ->  Index Only Scan using navigation_sessions_p202502_origin_place_id_idx on navigation_sessions_p202502 n_2  (cost=0.28..214.54 rows=205128 width=4) (actual time=0.064..0.971 rows=7505.00 loops=1)
+              Heap Fetches: 2
+              Index Searches: 1
+              Buffers: shared hit=1 read=23 written=1
+        ->  Index Only Scan using navigation_sessions_p202503_origin_place_id_idx on navigation_sessions_p202503 n_3  (cost=0.29..240.14 rows=227106 width=4) (actual time=0.055..1.150 rows=8418.00 loops=1)
+              Heap Fetches: 13
+              Index Searches: 1
+              Buffers: shared hit=4 read=29 written=1
+        ->  Index Only Scan using navigation_sessions_p202504_origin_place_id_idx on navigation_sessions_p202504 n_4  (cost=0.28..12831.40 rows=219780 width=4) (actual time=0.036..26.542 rows=8262.00 loops=1)
+              Heap Fetches: 8262
+              Index Searches: 1
+              Buffers: shared hit=2731 read=5554 written=57
+        ->  Index Only Scan using navigation_sessions_p202505_origin_place_id_idx on navigation_sessions_p202505 n_5  (cost=0.28..13265.67 rows=227107 width=4) (actual time=0.035..29.444 rows=8368.00 loops=1)
+              Heap Fetches: 8368
+              Index Searches: 1
+              Buffers: shared hit=2293 read=6098 written=57
+        ->  Index Only Scan using navigation_sessions_p202506_origin_place_id_idx on navigation_sessions_p202506 n_6  (cost=0.28..12834.11 rows=219780 width=4) (actual time=0.035..27.141 rows=7962.00 loops=1)
+              Heap Fetches: 7962
+              Index Searches: 1
+              Buffers: shared hit=2206 read=5776 written=53
+        ->  Index Only Scan using navigation_sessions_p202507_origin_place_id_idx on navigation_sessions_p202507 n_7  (cost=0.29..13247.85 rows=227106 width=4) (actual time=0.036..28.361 rows=8412.00 loops=1)
+              Heap Fetches: 8412
+              Index Searches: 1
+              Buffers: shared hit=2414 read=6020 written=64
+        ->  Index Only Scan using navigation_sessions_p202508_origin_place_id_idx on navigation_sessions_p202508 n_8  (cost=0.29..13247.12 rows=227106 width=4) (actual time=0.033..28.491 rows=8451.00 loops=1)
+              Heap Fetches: 8451
+              Index Searches: 1
+              Buffers: shared hit=2348 read=6128 written=61
+        ->  Index Only Scan using navigation_sessions_p202509_origin_place_id_idx on navigation_sessions_p202509 n_9  (cost=0.28..12842.17 rows=219780 width=4) (actual time=0.029..27.954 rows=8083.00 loops=1)
+              Heap Fetches: 8083
+              Index Searches: 1
+              Buffers: shared hit=2263 read=5843 written=67
+        ->  Index Only Scan using navigation_sessions_p202510_origin_place_id_idx on navigation_sessions_p202510 n_10  (cost=0.29..13259.07 rows=227107 width=4) (actual time=0.035..28.929 rows=8656.00 loops=1)
+              Heap Fetches: 8656
+              Index Searches: 1
+              Buffers: shared hit=2497 read=6183 written=52
+        ->  Index Only Scan using navigation_sessions_p202511_origin_place_id_idx on navigation_sessions_p202511 n_11  (cost=0.29..12848.12 rows=219780 width=4) (actual time=0.058..28.062 rows=8161.00 loops=1)
+              Heap Fetches: 8161
+              Index Searches: 1
+              Buffers: shared hit=2207 read=5974 written=65
+        ->  Index Only Scan using navigation_sessions_p202512_origin_place_id_idx on navigation_sessions_p202512 n_12  (cost=0.28..13243.13 rows=227106 width=4) (actual time=0.033..28.221 rows=8297.00 loops=1)
+              Heap Fetches: 8297
+              Index Searches: 1
+              Buffers: shared hit=2263 read=6053 written=54
+        ->  Index Only Scan using navigation_sessions_p202601_origin_place_id_idx on navigation_sessions_p202601 n_13  (cost=0.29..13268.36 rows=227106 width=4) (actual time=0.033..28.743 rows=8439.00 loops=1)
+              Heap Fetches: 8439
+              Index Searches: 1
+              Buffers: shared hit=2315 read=6147 written=53
+        ->  Index Only Scan using navigation_sessions_p202602_origin_place_id_idx on navigation_sessions_p202602 n_14  (cost=0.28..11995.19 rows=205129 width=4) (actual time=0.024..26.490 rows=7702.00 loops=1)
+              Heap Fetches: 7702
+              Index Searches: 1
+              Buffers: shared hit=2181 read=5539 written=60
+        ->  Index Only Scan using navigation_sessions_p202603_origin_place_id_idx on navigation_sessions_p202603 n_15  (cost=0.29..13258.38 rows=227106 width=4) (actual time=0.024..28.036 rows=8355.00 loops=1)
+              Heap Fetches: 8355
+              Index Searches: 1
+              Buffers: shared hit=2313 read=6060 written=59
+        ->  Index Only Scan using navigation_sessions_p202604_origin_place_id_idx on navigation_sessions_p202604 n_16  (cost=0.28..12825.22 rows=219780 width=4) (actual time=0.020..27.213 rows=8221.00 loops=1)
+              Heap Fetches: 8221
+              Index Searches: 1
+              Buffers: shared hit=2312 read=5932 written=55
+        ->  Index Only Scan using navigation_sessions_p202605_origin_place_id_idx on navigation_sessions_p202605 n_17  (cost=0.29..13268.36 rows=227106 width=4) (actual time=0.024..28.270 rows=8336.00 loops=1)
+              Heap Fetches: 8336
+              Index Searches: 1
+              Buffers: shared hit=2276 read=6082 written=60
+        ->  Index Only Scan using navigation_sessions_p202606_origin_place_id_idx on navigation_sessions_p202606 n_18  (cost=0.29..12839.83 rows=219780 width=4) (actual time=0.025..27.999 rows=8317.00 loops=1)
+              Heap Fetches: 8317
+              Index Searches: 1
+              Buffers: shared hit=2321 read=6020 written=62
+        ->  Index Only Scan using navigation_sessions_p_default_origin_place_id_idx on navigation_sessions_p_default n_19  (cost=0.12..8.14 rows=1 width=4) (actual time=0.005..0.005 rows=0.00 loops=1)
+              Heap Fetches: 0
+              Index Searches: 1
+              Buffers: shared hit=1
+Planning:
+  Buffers: shared hit=2605 read=198
+Planning Time: 8.736 ms
+Execution Time: 688.302 ms

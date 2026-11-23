@@ -1,0 +1,147 @@
+=== R16 run 1 ===
+Sort  (cost=59887.21..59951.15 rows=25575 width=33) (actual time=196.040..196.776 rows=18384.00 loops=1)
+  Sort Key: (count(*)) DESC
+  Sort Method: quicksort  Memory: 1733kB
+  Buffers: shared hit=8921 read=28405 written=33
+  ->  HashAggregate  (cost=57759.05..58014.80 rows=25575 width=33) (actual time=192.045..193.998 rows=18384.00 loops=1)
+        Group Key: p.place_id
+        Batches: 1  Memory Usage: 1817kB
+        Buffers: shared hit=8918 read=28405 written=33
+        ->  Gather  (cost=22886.11..57555.75 rows=40660 width=25) (actual time=41.535..181.631 rows=39710.00 loops=1)
+              Workers Planned: 2
+              Workers Launched: 2
+              Buffers: shared hit=8918 read=28405 written=33
+              ->  Parallel Hash Join  (cost=21886.11..52489.75 rows=16942 width=25) (actual time=38.739..182.768 rows=13236.67 loops=3)
+                    Hash Cond: (n.dest_place_id = p.place_id)
+                    Buffers: shared hit=8918 read=28405 written=33
+                    ->  Parallel Append  (cost=0.00..29153.45 rows=552449 width=4) (actual time=0.099..99.166 rows=442002.33 loops=3)
+                          Buffers: shared read=19045 written=33
+                          ->  Parallel Seq Scan on navigation_sessions_p202602 n_2  (cost=0.00..4454.30 rows=120652 width=4) (actual time=0.148..25.514 rows=205129.00 loops=1)
+                                Filter: (started_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone)
+                                Buffers: shared read=2946 written=8
+                          ->  Parallel Seq Scan on navigation_sessions_p202601 n_1  (cost=0.00..4444.84 rows=94618 width=4) (actual time=0.118..28.112 rows=227106.00 loops=1)
+                                Filter: (started_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone)
+                                Buffers: shared read=3262 written=3
+                          ->  Parallel Seq Scan on navigation_sessions_p202605 n_5  (cost=0.00..4444.84 rows=94618 width=4) (actual time=0.090..46.890 rows=227106.00 loops=1)
+                                Filter: (started_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone)
+                                Buffers: shared read=3262 written=9
+                          ->  Parallel Seq Scan on navigation_sessions_p202603 n_3  (cost=0.00..4443.84 rows=94618 width=4) (actual time=0.050..21.287 rows=113553.00 loops=2)
+                                Filter: (started_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone)
+                                Buffers: shared read=3261 written=7
+                          ->  Parallel Seq Scan on navigation_sessions_p202604 n_4  (cost=0.00..4301.69 rows=91566 width=4) (actual time=0.067..18.919 rows=109890.00 loops=2)
+                                Filter: (started_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone)
+                                Buffers: shared read=3157 written=2
+                          ->  Parallel Seq Scan on navigation_sessions_p202606 n_6  (cost=0.00..4301.69 rows=91566 width=4) (actual time=0.028..26.547 rows=219780.00 loops=1)
+                                Filter: (started_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone)
+                                Buffers: shared read=3157 written=4
+                          ->  Parallel Seq Scan on navigation_sessions_p_default n_7  (cost=0.00..0.00 rows=1 width=4) (actual time=0.001..0.001 rows=0.00 loops=1)
+                                Filter: (started_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone)
+                    ->  Parallel Hash  (cost=21752.91..21752.91 rows=10656 width=25) (actual time=38.575..38.575 rows=7980.00 loops=3)
+                          Buckets: 32768  Batches: 1  Memory Usage: 1760kB
+                          Buffers: shared hit=8918 read=9360
+                          ->  Parallel Seq Scan on places p  (cost=0.00..21752.91 rows=10656 width=25) (actual time=0.091..37.162 rows=7980.00 loops=3)
+                                Filter: is_permanently_closed
+                                Rows Removed by Filter: 258971
+                                Buffers: shared hit=8918 read=9360
+Planning:
+  Buffers: shared hit=1276 read=130 dirtied=4
+Planning Time: 5.045 ms
+Execution Time: 197.609 ms
+=== R16 run 2 ===
+Sort  (cost=59887.21..59951.15 rows=25575 width=33) (actual time=158.584..159.299 rows=18384.00 loops=1)
+  Sort Key: (count(*)) DESC
+  Sort Method: quicksort  Memory: 1733kB
+  Buffers: shared hit=5 read=37321 written=45
+  ->  HashAggregate  (cost=57759.05..58014.80 rows=25575 width=33) (actual time=154.829..156.563 rows=18384.00 loops=1)
+        Group Key: p.place_id
+        Batches: 1  Memory Usage: 1817kB
+        Buffers: shared hit=2 read=37321 written=45
+        ->  Gather  (cost=22886.11..57555.75 rows=40660 width=25) (actual time=35.101..146.802 rows=39710.00 loops=1)
+              Workers Planned: 2
+              Workers Launched: 2
+              Buffers: shared hit=2 read=37321 written=45
+              ->  Parallel Hash Join  (cost=21886.11..52489.75 rows=16942 width=25) (actual time=32.649..147.080 rows=13236.67 loops=3)
+                    Hash Cond: (n.dest_place_id = p.place_id)
+                    Buffers: shared hit=2 read=37321 written=45
+                    ->  Parallel Append  (cost=0.00..29153.45 rows=552449 width=4) (actual time=0.074..79.517 rows=442002.33 loops=3)
+                          Buffers: shared read=19045 written=45
+                          ->  Parallel Seq Scan on navigation_sessions_p202602 n_2  (cost=0.00..4454.30 rows=120652 width=4) (actual time=0.102..26.977 rows=205129.00 loops=1)
+                                Filter: (started_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone)
+                                Buffers: shared read=2946
+                          ->  Parallel Seq Scan on navigation_sessions_p202601 n_1  (cost=0.00..4444.84 rows=94618 width=4) (actual time=0.095..26.674 rows=227106.00 loops=1)
+                                Filter: (started_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone)
+                                Buffers: shared read=3262
+                          ->  Parallel Seq Scan on navigation_sessions_p202605 n_5  (cost=0.00..4444.84 rows=94618 width=4) (actual time=0.100..24.015 rows=227106.00 loops=1)
+                                Filter: (started_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone)
+                                Buffers: shared read=3262 written=19
+                          ->  Parallel Seq Scan on navigation_sessions_p202603 n_3  (cost=0.00..4443.84 rows=94618 width=4) (actual time=0.036..9.219 rows=75702.00 loops=3)
+                                Filter: (started_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone)
+                                Buffers: shared read=3261 written=8
+                          ->  Parallel Seq Scan on navigation_sessions_p202604 n_4  (cost=0.00..4301.69 rows=91566 width=4) (actual time=0.050..12.315 rows=109890.00 loops=2)
+                                Filter: (started_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone)
+                                Buffers: shared read=3157 written=18
+                          ->  Parallel Seq Scan on navigation_sessions_p202606 n_6  (cost=0.00..4301.69 rows=91566 width=4) (actual time=0.024..26.806 rows=219780.00 loops=1)
+                                Filter: (started_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone)
+                                Buffers: shared read=3157
+                          ->  Parallel Seq Scan on navigation_sessions_p_default n_7  (cost=0.00..0.00 rows=1 width=4) (actual time=0.001..0.001 rows=0.00 loops=1)
+                                Filter: (started_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone)
+                    ->  Parallel Hash  (cost=21752.91..21752.91 rows=10656 width=25) (actual time=32.521..32.521 rows=7980.00 loops=3)
+                          Buckets: 32768  Batches: 1  Memory Usage: 1760kB
+                          Buffers: shared hit=2 read=18276
+                          ->  Parallel Seq Scan on places p  (cost=0.00..21752.91 rows=10656 width=25) (actual time=0.094..31.239 rows=7980.00 loops=3)
+                                Filter: is_permanently_closed
+                                Rows Removed by Filter: 258971
+                                Buffers: shared hit=2 read=18276
+Planning:
+  Buffers: shared hit=1329 read=77
+Planning Time: 4.037 ms
+Execution Time: 160.033 ms
+=== R16 run 3 ===
+Sort  (cost=59887.21..59951.15 rows=25575 width=33) (actual time=156.621..157.343 rows=18384.00 loops=1)
+  Sort Key: (count(*)) DESC
+  Sort Method: quicksort  Memory: 1733kB
+  Buffers: shared hit=5 read=37321 written=35
+  ->  HashAggregate  (cost=57759.05..58014.80 rows=25575 width=33) (actual time=152.739..154.482 rows=18384.00 loops=1)
+        Group Key: p.place_id
+        Batches: 1  Memory Usage: 1817kB
+        Buffers: shared hit=2 read=37321 written=35
+        ->  Gather  (cost=22886.11..57555.75 rows=40660 width=25) (actual time=35.466..144.243 rows=39710.00 loops=1)
+              Workers Planned: 2
+              Workers Launched: 2
+              Buffers: shared hit=2 read=37321 written=35
+              ->  Parallel Hash Join  (cost=21886.11..52489.75 rows=16942 width=25) (actual time=33.165..145.273 rows=13236.67 loops=3)
+                    Hash Cond: (n.dest_place_id = p.place_id)
+                    Buffers: shared hit=2 read=37321 written=35
+                    ->  Parallel Append  (cost=0.00..29153.45 rows=552449 width=4) (actual time=0.073..77.917 rows=442002.33 loops=3)
+                          Buffers: shared read=19045 written=35
+                          ->  Parallel Seq Scan on navigation_sessions_p202602 n_2  (cost=0.00..4454.30 rows=120652 width=4) (actual time=0.093..24.375 rows=205129.00 loops=1)
+                                Filter: (started_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone)
+                                Buffers: shared read=2946
+                          ->  Parallel Seq Scan on navigation_sessions_p202601 n_1  (cost=0.00..4444.84 rows=94618 width=4) (actual time=0.089..26.175 rows=227106.00 loops=1)
+                                Filter: (started_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone)
+                                Buffers: shared read=3262
+                          ->  Parallel Seq Scan on navigation_sessions_p202605 n_5  (cost=0.00..4444.84 rows=94618 width=4) (actual time=0.091..26.079 rows=227106.00 loops=1)
+                                Filter: (started_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone)
+                                Buffers: shared read=3262 written=13
+                          ->  Parallel Seq Scan on navigation_sessions_p202603 n_3  (cost=0.00..4443.84 rows=94618 width=4) (actual time=0.069..9.422 rows=75702.00 loops=3)
+                                Filter: (started_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone)
+                                Buffers: shared read=3261 written=12
+                          ->  Parallel Seq Scan on navigation_sessions_p202604 n_4  (cost=0.00..4301.69 rows=91566 width=4) (actual time=0.065..11.586 rows=109890.00 loops=2)
+                                Filter: (started_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone)
+                                Buffers: shared read=3157 written=10
+                          ->  Parallel Seq Scan on navigation_sessions_p202606 n_6  (cost=0.00..4301.69 rows=91566 width=4) (actual time=0.025..23.544 rows=219780.00 loops=1)
+                                Filter: (started_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone)
+                                Buffers: shared read=3157
+                          ->  Parallel Seq Scan on navigation_sessions_p_default n_7  (cost=0.00..0.00 rows=1 width=4) (actual time=0.003..0.003 rows=0.00 loops=1)
+                                Filter: (started_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone)
+                    ->  Parallel Hash  (cost=21752.91..21752.91 rows=10656 width=25) (actual time=33.043..33.043 rows=7980.00 loops=3)
+                          Buckets: 32768  Batches: 1  Memory Usage: 1760kB
+                          Buffers: shared hit=2 read=18276
+                          ->  Parallel Seq Scan on places p  (cost=0.00..21752.91 rows=10656 width=25) (actual time=0.076..31.848 rows=7980.00 loops=3)
+                                Filter: is_permanently_closed
+                                Rows Removed by Filter: 258971
+                                Buffers: shared hit=2 read=18276
+Planning:
+  Buffers: shared hit=1318 read=88
+Planning Time: 4.009 ms
+Execution Time: 158.095 ms

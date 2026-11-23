@@ -1,0 +1,33 @@
+=== W05 run 1 ===
+Delete on incident_reports  (cost=0.00..5304.00 rows=0 width=0) (actual time=336.728..336.729 rows=0.00 loops=1)
+  Buffers: shared hit=226751 read=2304 dirtied=2152 written=1459
+  ->  Seq Scan on incident_reports  (cost=0.00..5304.00 rows=226026 width=6) (actual time=0.053..190.831 rows=226751.00 loops=1)
+        Filter: (expires_at < '2026-06-01 00:00:00+05:30'::timestamp with time zone)
+        Rows Removed by Filter: 13249
+        Buffers: shared read=2304 dirtied=2152 written=1459
+Planning:
+  Buffers: shared hit=84 read=22
+Planning Time: 1.124 ms
+Execution Time: 336.868 ms
+=== W05 run 2 ===
+Delete on incident_reports  (cost=0.00..5304.00 rows=0 width=0) (actual time=172.716..172.717 rows=0.00 loops=1)
+  Buffers: shared hit=229055
+  ->  Seq Scan on incident_reports  (cost=0.00..5304.00 rows=226026 width=6) (actual time=0.016..32.728 rows=226751.00 loops=1)
+        Filter: (expires_at < '2026-06-01 00:00:00+05:30'::timestamp with time zone)
+        Rows Removed by Filter: 13249
+        Buffers: shared hit=2304
+Planning:
+  Buffers: shared hit=106
+Planning Time: 0.411 ms
+Execution Time: 172.814 ms
+=== W05 run 3 ===
+Delete on incident_reports  (cost=0.00..5304.00 rows=0 width=0) (actual time=165.116..165.116 rows=0.00 loops=1)
+  Buffers: shared hit=229055
+  ->  Seq Scan on incident_reports  (cost=0.00..5304.00 rows=226026 width=6) (actual time=0.014..32.518 rows=226751.00 loops=1)
+        Filter: (expires_at < '2026-06-01 00:00:00+05:30'::timestamp with time zone)
+        Rows Removed by Filter: 13249
+        Buffers: shared hit=2304
+Planning:
+  Buffers: shared hit=106
+Planning Time: 0.415 ms
+Execution Time: 165.209 ms

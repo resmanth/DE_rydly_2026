@@ -1,0 +1,84 @@
+=== R10 run 1 ===
+Sort  (cost=788.16..788.28 rows=49 width=58) (actual time=1.362..1.364 rows=35.00 loops=1)
+  Sort Key: i.reported_at DESC
+  Sort Method: quicksort  Memory: 27kB
+  Buffers: shared hit=72 read=3
+  ->  Hash Join  (cost=755.68..786.79 rows=49 width=58) (actual time=1.044..1.340 rows=35.00 loops=1)
+        Hash Cond: (i.segment_id = s.segment_id)
+        Buffers: shared hit=69 read=3
+        ->  Index Only Scan Backward using idx_incidents_reported on incident_reports i  (cost=0.42..30.24 rows=491 width=37) (actual time=0.005..0.264 rows=439.00 loops=1)
+              Index Cond: ((reported_at >= '2026-06-30 00:00:00+05:30'::timestamp with time zone) AND (reported_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+              Heap Fetches: 0
+              Index Searches: 1
+              Buffers: shared hit=4 read=3
+        ->  Hash  (cost=705.27..705.27 rows=3999 width=29) (actual time=1.023..1.024 rows=4000.00 loops=1)
+              Buckets: 4096  Batches: 1  Memory Usage: 284kB
+              Buffers: shared hit=65
+              ->  Bitmap Heap Scan on road_segments s  (cost=47.28..705.27 rows=3999 width=29) (actual time=0.089..0.597 rows=4000.00 loops=1)
+                    Recheck Cond: (city_id = 1)
+                    Heap Blocks: exact=60
+                    Buffers: shared hit=65
+                    ->  Bitmap Index Scan on idx_segments_city_road  (cost=0.00..46.28 rows=3999 width=0) (actual time=0.074..0.074 rows=4000.00 loops=1)
+                          Index Cond: (city_id = 1)
+                          Index Searches: 1
+                          Buffers: shared hit=5
+Planning:
+  Buffers: shared hit=311 read=6
+Planning Time: 1.953 ms
+Execution Time: 1.418 ms
+=== R10 run 2 ===
+Sort  (cost=788.16..788.28 rows=49 width=58) (actual time=1.321..1.323 rows=35.00 loops=1)
+  Sort Key: i.reported_at DESC
+  Sort Method: quicksort  Memory: 27kB
+  Buffers: shared hit=75
+  ->  Hash Join  (cost=755.68..786.79 rows=49 width=58) (actual time=1.218..1.296 rows=35.00 loops=1)
+        Hash Cond: (i.segment_id = s.segment_id)
+        Buffers: shared hit=72
+        ->  Index Only Scan Backward using idx_incidents_reported on incident_reports i  (cost=0.42..30.24 rows=491 width=37) (actual time=0.005..0.048 rows=439.00 loops=1)
+              Index Cond: ((reported_at >= '2026-06-30 00:00:00+05:30'::timestamp with time zone) AND (reported_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+              Heap Fetches: 0
+              Index Searches: 1
+              Buffers: shared hit=7
+        ->  Hash  (cost=705.27..705.27 rows=3999 width=29) (actual time=1.198..1.199 rows=4000.00 loops=1)
+              Buckets: 4096  Batches: 1  Memory Usage: 284kB
+              Buffers: shared hit=65
+              ->  Bitmap Heap Scan on road_segments s  (cost=47.28..705.27 rows=3999 width=29) (actual time=0.110..0.708 rows=4000.00 loops=1)
+                    Recheck Cond: (city_id = 1)
+                    Heap Blocks: exact=60
+                    Buffers: shared hit=65
+                    ->  Bitmap Index Scan on idx_segments_city_road  (cost=0.00..46.28 rows=3999 width=0) (actual time=0.091..0.091 rows=4000.00 loops=1)
+                          Index Cond: (city_id = 1)
+                          Index Searches: 1
+                          Buffers: shared hit=5
+Planning:
+  Buffers: shared hit=317
+Planning Time: 0.921 ms
+Execution Time: 1.386 ms
+=== R10 run 3 ===
+Sort  (cost=788.16..788.28 rows=49 width=58) (actual time=1.176..1.178 rows=35.00 loops=1)
+  Sort Key: i.reported_at DESC
+  Sort Method: quicksort  Memory: 27kB
+  Buffers: shared hit=75
+  ->  Hash Join  (cost=755.68..786.79 rows=49 width=58) (actual time=1.080..1.154 rows=35.00 loops=1)
+        Hash Cond: (i.segment_id = s.segment_id)
+        Buffers: shared hit=72
+        ->  Index Only Scan Backward using idx_incidents_reported on incident_reports i  (cost=0.42..30.24 rows=491 width=37) (actual time=0.005..0.045 rows=439.00 loops=1)
+              Index Cond: ((reported_at >= '2026-06-30 00:00:00+05:30'::timestamp with time zone) AND (reported_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+              Heap Fetches: 0
+              Index Searches: 1
+              Buffers: shared hit=7
+        ->  Hash  (cost=705.27..705.27 rows=3999 width=29) (actual time=1.061..1.062 rows=4000.00 loops=1)
+              Buckets: 4096  Batches: 1  Memory Usage: 284kB
+              Buffers: shared hit=65
+              ->  Bitmap Heap Scan on road_segments s  (cost=47.28..705.27 rows=3999 width=29) (actual time=0.097..0.603 rows=4000.00 loops=1)
+                    Recheck Cond: (city_id = 1)
+                    Heap Blocks: exact=60
+                    Buffers: shared hit=65
+                    ->  Bitmap Index Scan on idx_segments_city_road  (cost=0.00..46.28 rows=3999 width=0) (actual time=0.081..0.081 rows=4000.00 loops=1)
+                          Index Cond: (city_id = 1)
+                          Index Searches: 1
+                          Buffers: shared hit=5
+Planning:
+  Buffers: shared hit=317
+Planning Time: 0.910 ms
+Execution Time: 1.238 ms

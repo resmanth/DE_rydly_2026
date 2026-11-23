@@ -1,0 +1,201 @@
+=== R18 run 1 ===
+Sort  (cost=100819.08..100819.09 rows=4 width=47) (actual time=447.108..448.793 rows=4.00 loops=1)
+  Sort Key: (round(((100.0 * (count(*) FILTER (WHERE ((navigation_sessions.status)::text = 'CANCELLED'::text)))::numeric) / (count(*))::numeric), 1)) DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=6438 read=51028 written=5307
+  ->  Finalize GroupAggregate  (cost=100817.71..100819.04 rows=4 width=47) (actual time=447.093..448.782 rows=4.00 loops=1)
+        Group Key: navigation_sessions.travel_mode
+        Buffers: shared hit=6435 read=51028 written=5307
+        ->  Gather Merge  (cost=100817.71..100818.87 rows=10 width=23) (actual time=447.077..448.765 rows=12.00 loops=1)
+              Workers Planned: 2
+              Workers Launched: 2
+              Buffers: shared hit=6435 read=51028 written=5307
+              ->  Sort  (cost=99817.68..99817.69 rows=4 width=23) (actual time=443.514..443.516 rows=4.00 loops=3)
+                    Sort Key: navigation_sessions.travel_mode
+                    Sort Method: quicksort  Memory: 25kB
+                    Buffers: shared hit=6435 read=51028 written=5307
+                    Worker 0:  Sort Method: quicksort  Memory: 25kB
+                    Worker 1:  Sort Method: quicksort  Memory: 25kB
+                    ->  Partial HashAggregate  (cost=99817.60..99817.64 rows=4 width=23) (actual time=443.490..443.493 rows=4.00 loops=3)
+                          Group Key: navigation_sessions.travel_mode
+                          Batches: 1  Memory Usage: 32kB
+                          Buffers: shared hit=6419 read=51028 written=5307
+                          Worker 0:  Batches: 1  Memory Usage: 32kB
+                          Worker 1:  Batches: 1  Memory Usage: 32kB
+                          ->  Parallel Append  (cost=0.00..83150.89 rows=1666671 width=17) (actual time=0.059..255.863 rows=1333333.33 loops=3)
+                                Buffers: shared hit=6419 read=51028 written=5307
+                                ->  Parallel Seq Scan on navigation_sessions_p202501 navigation_sessions_1  (cost=0.00..4208.28 rows=94628 width=17) (actual time=0.065..36.934 rows=227107.00 loops=1)
+                                      Buffers: shared read=3262 written=345
+                                ->  Parallel Seq Scan on navigation_sessions_p202507 navigation_sessions_7  (cost=0.00..4208.27 rows=94628 width=17) (actual time=0.081..32.776 rows=227106.00 loops=1)
+                                      Buffers: shared read=3262 written=418
+                                ->  Parallel Seq Scan on navigation_sessions_p202512 navigation_sessions_12  (cost=0.00..4208.27 rows=94628 width=17) (actual time=0.068..28.312 rows=227106.00 loops=1)
+                                      Buffers: shared read=3262 written=4
+                                ->  Parallel Seq Scan on navigation_sessions_p202601 navigation_sessions_13  (cost=0.00..4208.27 rows=94628 width=17) (actual time=0.057..29.680 rows=227106.00 loops=1)
+                                      Buffers: shared read=3262
+                                ->  Parallel Seq Scan on navigation_sessions_p202605 navigation_sessions_17  (cost=0.00..4208.27 rows=94628 width=17) (actual time=0.003..31.411 rows=227106.00 loops=1)
+                                      Buffers: shared hit=3261 read=1
+                                ->  Parallel Seq Scan on navigation_sessions_p202505 navigation_sessions_5  (cost=0.00..4207.28 rows=94628 width=17) (actual time=0.093..29.746 rows=227107.00 loops=1)
+                                      Buffers: shared read=3261 written=2
+                                ->  Parallel Seq Scan on navigation_sessions_p202510 navigation_sessions_10  (cost=0.00..4207.28 rows=94628 width=17) (actual time=0.061..32.916 rows=227107.00 loops=1)
+                                      Buffers: shared read=3261 written=424
+                                ->  Parallel Seq Scan on navigation_sessions_p202503 navigation_sessions_3  (cost=0.00..4207.27 rows=94628 width=17) (actual time=0.077..33.598 rows=227106.00 loops=1)
+                                      Buffers: shared read=3261 written=841
+                                ->  Parallel Seq Scan on navigation_sessions_p202508 navigation_sessions_8  (cost=0.00..4207.27 rows=94628 width=17) (actual time=0.089..27.892 rows=227106.00 loops=1)
+                                      Buffers: shared read=3261 written=847
+                                ->  Parallel Seq Scan on navigation_sessions_p202603 navigation_sessions_15  (cost=0.00..4207.27 rows=94628 width=17) (actual time=0.087..29.240 rows=227106.00 loops=1)
+                                      Buffers: shared read=3261 written=392
+                                ->  Parallel Seq Scan on navigation_sessions_p202602 navigation_sessions_14  (cost=0.00..4152.64 rows=120664 width=17) (actual time=0.041..11.411 rows=102564.50 loops=2)
+                                      Buffers: shared read=2946 written=70
+                                ->  Parallel Seq Scan on navigation_sessions_p202502 navigation_sessions_2  (cost=0.00..4152.64 rows=120664 width=17) (actual time=0.047..11.484 rows=102564.00 loops=2)
+                                      Buffers: shared read=2946 written=10
+                                ->  Parallel Seq Scan on navigation_sessions_p202504 navigation_sessions_4  (cost=0.00..4072.75 rows=91575 width=17) (actual time=0.031..25.867 rows=219780.00 loops=1)
+                                      Buffers: shared read=3157 written=593
+                                ->  Parallel Seq Scan on navigation_sessions_p202509 navigation_sessions_9  (cost=0.00..4072.75 rows=91575 width=17) (actual time=0.019..27.501 rows=219780.00 loops=1)
+                                      Buffers: shared read=3157 written=890
+                                ->  Parallel Seq Scan on navigation_sessions_p202604 navigation_sessions_16  (cost=0.00..4072.75 rows=91575 width=17) (actual time=0.026..24.357 rows=219780.00 loops=1)
+                                      Buffers: shared hit=1 read=3156 written=3
+                                ->  Parallel Seq Scan on navigation_sessions_p202606 navigation_sessions_18  (cost=0.00..4072.75 rows=91575 width=17) (actual time=0.003..24.015 rows=219780.00 loops=1)
+                                      Buffers: shared hit=3157
+                                ->  Parallel Seq Scan on navigation_sessions_p202506 navigation_sessions_6  (cost=0.00..4071.75 rows=91575 width=17) (actual time=0.026..28.164 rows=219780.00 loops=1)
+                                      Buffers: shared read=3156 written=19
+                                ->  Parallel Seq Scan on navigation_sessions_p202511 navigation_sessions_11  (cost=0.00..4071.75 rows=91575 width=17) (actual time=0.029..31.049 rows=219780.00 loops=1)
+                                      Buffers: shared read=3156 written=449
+                                ->  Parallel Seq Scan on navigation_sessions_p_default navigation_sessions_19  (cost=0.00..0.00 rows=1 width=84) (actual time=0.001..0.001 rows=0.00 loops=1)
+Planning:
+  Buffers: shared hit=2434 read=189 dirtied=15 written=30
+Planning Time: 6.897 ms
+Execution Time: 448.909 ms
+=== R18 run 2 ===
+Sort  (cost=100819.08..100819.09 rows=4 width=47) (actual time=442.320..444.178 rows=4.00 loops=1)
+  Sort Key: (round(((100.0 * (count(*) FILTER (WHERE ((navigation_sessions.status)::text = 'CANCELLED'::text)))::numeric) / (count(*))::numeric), 1)) DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=305 read=57161 written=487
+  ->  Finalize GroupAggregate  (cost=100817.71..100819.04 rows=4 width=47) (actual time=442.306..444.168 rows=4.00 loops=1)
+        Group Key: navigation_sessions.travel_mode
+        Buffers: shared hit=302 read=57161 written=487
+        ->  Gather Merge  (cost=100817.71..100818.87 rows=10 width=23) (actual time=442.293..444.154 rows=12.00 loops=1)
+              Workers Planned: 2
+              Workers Launched: 2
+              Buffers: shared hit=302 read=57161 written=487
+              ->  Sort  (cost=99817.68..99817.69 rows=4 width=23) (actual time=439.323..439.326 rows=4.00 loops=3)
+                    Sort Key: navigation_sessions.travel_mode
+                    Sort Method: quicksort  Memory: 25kB
+                    Buffers: shared hit=302 read=57161 written=487
+                    Worker 0:  Sort Method: quicksort  Memory: 25kB
+                    Worker 1:  Sort Method: quicksort  Memory: 25kB
+                    ->  Partial HashAggregate  (cost=99817.60..99817.64 rows=4 width=23) (actual time=439.302..439.305 rows=4.00 loops=3)
+                          Group Key: navigation_sessions.travel_mode
+                          Batches: 1  Memory Usage: 32kB
+                          Buffers: shared hit=286 read=57161 written=487
+                          Worker 0:  Batches: 1  Memory Usage: 32kB
+                          Worker 1:  Batches: 1  Memory Usage: 32kB
+                          ->  Parallel Append  (cost=0.00..83150.89 rows=1666671 width=17) (actual time=0.051..251.546 rows=1333333.33 loops=3)
+                                Buffers: shared hit=286 read=57161 written=487
+                                ->  Parallel Seq Scan on navigation_sessions_p202501 navigation_sessions_1  (cost=0.00..4208.28 rows=94628 width=17) (actual time=0.063..27.026 rows=227107.00 loops=1)
+                                      Buffers: shared read=3262 written=1
+                                ->  Parallel Seq Scan on navigation_sessions_p202507 navigation_sessions_7  (cost=0.00..4208.27 rows=94628 width=17) (actual time=0.064..26.677 rows=227106.00 loops=1)
+                                      Buffers: shared read=3262 written=5
+                                ->  Parallel Seq Scan on navigation_sessions_p202512 navigation_sessions_12  (cost=0.00..4208.27 rows=94628 width=17) (actual time=0.065..29.142 rows=227106.00 loops=1)
+                                      Buffers: shared read=3262 written=1
+                                ->  Parallel Seq Scan on navigation_sessions_p202601 navigation_sessions_13  (cost=0.00..4208.27 rows=94628 width=17) (actual time=0.063..36.295 rows=227106.00 loops=1)
+                                      Buffers: shared read=3262 written=1
+                                ->  Parallel Seq Scan on navigation_sessions_p202605 navigation_sessions_17  (cost=0.00..4208.27 rows=94628 width=17) (actual time=0.078..30.117 rows=227106.00 loops=1)
+                                      Buffers: shared read=3262
+                                ->  Parallel Seq Scan on navigation_sessions_p202505 navigation_sessions_5  (cost=0.00..4207.28 rows=94628 width=17) (actual time=0.082..32.413 rows=227107.00 loops=1)
+                                      Buffers: shared read=3261 written=1
+                                ->  Parallel Seq Scan on navigation_sessions_p202510 navigation_sessions_10  (cost=0.00..4207.28 rows=94628 width=17) (actual time=0.081..25.899 rows=227107.00 loops=1)
+                                      Buffers: shared read=3261 written=18
+                                ->  Parallel Seq Scan on navigation_sessions_p202503 navigation_sessions_3  (cost=0.00..4207.27 rows=94628 width=17) (actual time=0.067..25.578 rows=227106.00 loops=1)
+                                      Buffers: shared read=3261 written=32
+                                ->  Parallel Seq Scan on navigation_sessions_p202508 navigation_sessions_8  (cost=0.00..4207.27 rows=94628 width=17) (actual time=0.155..30.854 rows=227106.00 loops=1)
+                                      Buffers: shared read=3261 written=93
+                                ->  Parallel Seq Scan on navigation_sessions_p202603 navigation_sessions_15  (cost=0.00..4207.27 rows=94628 width=17) (actual time=0.061..34.885 rows=227106.00 loops=1)
+                                      Buffers: shared read=3261 written=126
+                                ->  Parallel Seq Scan on navigation_sessions_p202602 navigation_sessions_14  (cost=0.00..4152.64 rows=120664 width=17) (actual time=0.063..7.385 rows=68376.33 loops=3)
+                                      Buffers: shared read=2946 written=35
+                                ->  Parallel Seq Scan on navigation_sessions_p202502 navigation_sessions_2  (cost=0.00..4152.64 rows=120664 width=17) (actual time=0.048..13.548 rows=102564.00 loops=2)
+                                      Buffers: shared read=2946 written=15
+                                ->  Parallel Seq Scan on navigation_sessions_p202504 navigation_sessions_4  (cost=0.00..4072.75 rows=91575 width=17) (actual time=0.019..26.434 rows=219780.00 loops=1)
+                                      Buffers: shared read=3157 written=28
+                                ->  Parallel Seq Scan on navigation_sessions_p202509 navigation_sessions_9  (cost=0.00..4072.75 rows=91575 width=17) (actual time=0.022..25.146 rows=219780.00 loops=1)
+                                      Buffers: shared read=3157 written=125
+                                ->  Parallel Seq Scan on navigation_sessions_p202604 navigation_sessions_16  (cost=0.00..4072.75 rows=91575 width=17) (actual time=0.025..24.186 rows=219780.00 loops=1)
+                                      Buffers: shared read=3157
+                                ->  Parallel Seq Scan on navigation_sessions_p202606 navigation_sessions_18  (cost=0.00..4072.75 rows=91575 width=17) (actual time=0.021..30.865 rows=219780.00 loops=1)
+                                      Buffers: shared hit=286 read=2871
+                                ->  Parallel Seq Scan on navigation_sessions_p202506 navigation_sessions_6  (cost=0.00..4071.75 rows=91575 width=17) (actual time=0.024..25.069 rows=219780.00 loops=1)
+                                      Buffers: shared read=3156 written=2
+                                ->  Parallel Seq Scan on navigation_sessions_p202511 navigation_sessions_11  (cost=0.00..4071.75 rows=91575 width=17) (actual time=0.025..26.239 rows=219780.00 loops=1)
+                                      Buffers: shared read=3156 written=4
+                                ->  Parallel Seq Scan on navigation_sessions_p_default navigation_sessions_19  (cost=0.00..0.00 rows=1 width=84) (actual time=0.001..0.001 rows=0.00 loops=1)
+Planning:
+  Buffers: shared hit=2391 read=218 dirtied=4 written=1
+Planning Time: 6.795 ms
+Execution Time: 444.292 ms
+=== R18 run 3 ===
+Sort  (cost=100819.08..100819.09 rows=4 width=47) (actual time=438.164..439.752 rows=4.00 loops=1)
+  Sort Key: (round(((100.0 * (count(*) FILTER (WHERE ((navigation_sessions.status)::text = 'CANCELLED'::text)))::numeric) / (count(*))::numeric), 1)) DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=19 read=57447 written=2
+  ->  Finalize GroupAggregate  (cost=100817.71..100819.04 rows=4 width=47) (actual time=438.148..439.740 rows=4.00 loops=1)
+        Group Key: navigation_sessions.travel_mode
+        Buffers: shared hit=16 read=57447 written=2
+        ->  Gather Merge  (cost=100817.71..100818.87 rows=10 width=23) (actual time=438.132..439.723 rows=12.00 loops=1)
+              Workers Planned: 2
+              Workers Launched: 2
+              Buffers: shared hit=16 read=57447 written=2
+              ->  Sort  (cost=99817.68..99817.69 rows=4 width=23) (actual time=434.934..434.937 rows=4.00 loops=3)
+                    Sort Key: navigation_sessions.travel_mode
+                    Sort Method: quicksort  Memory: 25kB
+                    Buffers: shared hit=16 read=57447 written=2
+                    Worker 0:  Sort Method: quicksort  Memory: 25kB
+                    Worker 1:  Sort Method: quicksort  Memory: 25kB
+                    ->  Partial HashAggregate  (cost=99817.60..99817.64 rows=4 width=23) (actual time=434.907..434.910 rows=4.00 loops=3)
+                          Group Key: navigation_sessions.travel_mode
+                          Batches: 1  Memory Usage: 32kB
+                          Buffers: shared read=57447 written=2
+                          Worker 0:  Batches: 1  Memory Usage: 32kB
+                          Worker 1:  Batches: 1  Memory Usage: 32kB
+                          ->  Parallel Append  (cost=0.00..83150.89 rows=1666671 width=17) (actual time=0.064..256.055 rows=1333333.33 loops=3)
+                                Buffers: shared read=57447 written=2
+                                ->  Parallel Seq Scan on navigation_sessions_p202501 navigation_sessions_1  (cost=0.00..4208.28 rows=94628 width=17) (actual time=0.068..29.963 rows=227107.00 loops=1)
+                                      Buffers: shared read=3262
+                                ->  Parallel Seq Scan on navigation_sessions_p202507 navigation_sessions_7  (cost=0.00..4208.27 rows=94628 width=17) (actual time=0.090..27.527 rows=227106.00 loops=1)
+                                      Buffers: shared read=3262
+                                ->  Parallel Seq Scan on navigation_sessions_p202512 navigation_sessions_12  (cost=0.00..4208.27 rows=94628 width=17) (actual time=0.093..40.823 rows=227106.00 loops=1)
+                                      Buffers: shared read=3262
+                                ->  Parallel Seq Scan on navigation_sessions_p202601 navigation_sessions_13  (cost=0.00..4208.27 rows=94628 width=17) (actual time=0.062..38.612 rows=227106.00 loops=1)
+                                      Buffers: shared read=3262
+                                ->  Parallel Seq Scan on navigation_sessions_p202605 navigation_sessions_17  (cost=0.00..4208.27 rows=94628 width=17) (actual time=0.113..27.234 rows=227106.00 loops=1)
+                                      Buffers: shared read=3262
+                                ->  Parallel Seq Scan on navigation_sessions_p202505 navigation_sessions_5  (cost=0.00..4207.28 rows=94628 width=17) (actual time=0.090..32.796 rows=227107.00 loops=1)
+                                      Buffers: shared read=3261
+                                ->  Parallel Seq Scan on navigation_sessions_p202510 navigation_sessions_10  (cost=0.00..4207.28 rows=94628 width=17) (actual time=0.094..27.329 rows=227107.00 loops=1)
+                                      Buffers: shared read=3261 written=2
+                                ->  Parallel Seq Scan on navigation_sessions_p202503 navigation_sessions_3  (cost=0.00..4207.27 rows=94628 width=17) (actual time=0.075..29.593 rows=227106.00 loops=1)
+                                      Buffers: shared read=3261
+                                ->  Parallel Seq Scan on navigation_sessions_p202508 navigation_sessions_8  (cost=0.00..4207.27 rows=94628 width=17) (actual time=0.067..25.904 rows=227106.00 loops=1)
+                                      Buffers: shared read=3261
+                                ->  Parallel Seq Scan on navigation_sessions_p202603 navigation_sessions_15  (cost=0.00..4207.27 rows=94628 width=17) (actual time=0.075..31.117 rows=227106.00 loops=1)
+                                      Buffers: shared read=3261
+                                ->  Parallel Seq Scan on navigation_sessions_p202602 navigation_sessions_14  (cost=0.00..4152.64 rows=120664 width=17) (actual time=0.082..23.222 rows=205129.00 loops=1)
+                                      Buffers: shared read=2946
+                                ->  Parallel Seq Scan on navigation_sessions_p202502 navigation_sessions_2  (cost=0.00..4152.64 rows=120664 width=17) (actual time=0.064..8.624 rows=68376.00 loops=3)
+                                      Buffers: shared read=2946
+                                ->  Parallel Seq Scan on navigation_sessions_p202504 navigation_sessions_4  (cost=0.00..4072.75 rows=91575 width=17) (actual time=0.023..22.953 rows=219780.00 loops=1)
+                                      Buffers: shared read=3157
+                                ->  Parallel Seq Scan on navigation_sessions_p202509 navigation_sessions_9  (cost=0.00..4072.75 rows=91575 width=17) (actual time=0.051..23.089 rows=219780.00 loops=1)
+                                      Buffers: shared read=3157
+                                ->  Parallel Seq Scan on navigation_sessions_p202604 navigation_sessions_16  (cost=0.00..4072.75 rows=91575 width=17) (actual time=0.020..24.639 rows=219780.00 loops=1)
+                                      Buffers: shared read=3157
+                                ->  Parallel Seq Scan on navigation_sessions_p202606 navigation_sessions_18  (cost=0.00..4072.75 rows=91575 width=17) (actual time=0.027..25.530 rows=219780.00 loops=1)
+                                      Buffers: shared read=3157
+                                ->  Parallel Seq Scan on navigation_sessions_p202506 navigation_sessions_6  (cost=0.00..4071.75 rows=91575 width=17) (actual time=0.029..34.264 rows=219780.00 loops=1)
+                                      Buffers: shared read=3156
+                                ->  Parallel Seq Scan on navigation_sessions_p202511 navigation_sessions_11  (cost=0.00..4071.75 rows=91575 width=17) (actual time=0.032..26.967 rows=219780.00 loops=1)
+                                      Buffers: shared read=3156
+                                ->  Parallel Seq Scan on navigation_sessions_p_default navigation_sessions_19  (cost=0.00..0.00 rows=1 width=84) (actual time=0.001..0.001 rows=0.00 loops=1)
+Planning:
+  Buffers: shared hit=2410 read=197
+Planning Time: 7.328 ms
+Execution Time: 439.873 ms

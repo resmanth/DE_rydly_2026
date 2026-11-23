@@ -1,0 +1,60 @@
+=== R03 run 1 ===
+Limit  (cost=190.89..217.22 rows=20 width=34) (actual time=6.276..6.278 rows=20.00 loops=1)
+  Buffers: shared hit=10 read=112
+  ->  Incremental Sort  (cost=190.89..7114.14 rows=5259 width=34) (actual time=6.275..6.276 rows=20.00 loops=1)
+        Sort Key: avg_rating DESC NULLS LAST, review_count DESC
+        Presorted Key: avg_rating
+        Full-sort Groups: 1  Sort Method: top-N heapsort  Average Memory: 26kB  Peak Memory: 26kB
+        Pre-sorted Groups: 1  Sort Method: top-N heapsort  Average Memory: 26kB  Peak Memory: 26kB
+        Buffers: shared hit=10 read=112
+        ->  Index Only Scan using idx_places_city_rating on places  (cost=0.42..6907.73 rows=5259 width=34) (actual time=0.329..6.110 rows=554.00 loops=1)
+              Index Cond: (city_id = 1)
+              Filter: ((name)::text ~~* '%biryani%'::text)
+              Rows Removed by Filter: 12895
+              Heap Fetches: 0
+              Index Searches: 1
+              Buffers: shared hit=1 read=112
+Planning:
+  Buffers: shared hit=262
+Planning Time: 1.946 ms
+Execution Time: 6.303 ms
+=== R03 run 2 ===
+Limit  (cost=190.89..217.22 rows=20 width=34) (actual time=5.251..5.253 rows=20.00 loops=1)
+  Buffers: shared hit=122
+  ->  Incremental Sort  (cost=190.89..7114.14 rows=5259 width=34) (actual time=5.250..5.251 rows=20.00 loops=1)
+        Sort Key: avg_rating DESC NULLS LAST, review_count DESC
+        Presorted Key: avg_rating
+        Full-sort Groups: 1  Sort Method: top-N heapsort  Average Memory: 26kB  Peak Memory: 26kB
+        Pre-sorted Groups: 1  Sort Method: top-N heapsort  Average Memory: 26kB  Peak Memory: 26kB
+        Buffers: shared hit=122
+        ->  Index Only Scan using idx_places_city_rating on places  (cost=0.42..6907.73 rows=5259 width=34) (actual time=0.070..5.098 rows=554.00 loops=1)
+              Index Cond: (city_id = 1)
+              Filter: ((name)::text ~~* '%biryani%'::text)
+              Rows Removed by Filter: 12895
+              Heap Fetches: 0
+              Index Searches: 1
+              Buffers: shared hit=113
+Planning:
+  Buffers: shared hit=262
+Planning Time: 1.424 ms
+Execution Time: 5.275 ms
+=== R03 run 3 ===
+Limit  (cost=190.89..217.22 rows=20 width=34) (actual time=5.608..5.610 rows=20.00 loops=1)
+  Buffers: shared hit=122
+  ->  Incremental Sort  (cost=190.89..7114.14 rows=5259 width=34) (actual time=5.607..5.608 rows=20.00 loops=1)
+        Sort Key: avg_rating DESC NULLS LAST, review_count DESC
+        Presorted Key: avg_rating
+        Full-sort Groups: 1  Sort Method: top-N heapsort  Average Memory: 26kB  Peak Memory: 26kB
+        Pre-sorted Groups: 1  Sort Method: top-N heapsort  Average Memory: 26kB  Peak Memory: 26kB
+        Buffers: shared hit=122
+        ->  Index Only Scan using idx_places_city_rating on places  (cost=0.42..6907.73 rows=5259 width=34) (actual time=0.067..5.452 rows=554.00 loops=1)
+              Index Cond: (city_id = 1)
+              Filter: ((name)::text ~~* '%biryani%'::text)
+              Rows Removed by Filter: 12895
+              Heap Fetches: 0
+              Index Searches: 1
+              Buffers: shared hit=113
+Planning:
+  Buffers: shared hit=262
+Planning Time: 1.392 ms
+Execution Time: 5.632 ms

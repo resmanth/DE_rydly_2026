@@ -1,0 +1,57 @@
+=== R20 run 1 ===
+WindowAgg  (cost=29506.10..37196.83 rows=219736 width=44) (actual time=52.955..70.807 rows=30.00 loops=1)
+  Window: w1 AS (ORDER BY ((navigation_sessions.started_at)::date))
+  Storage: Memory  Maximum Storage: 17kB
+  Buffers: shared hit=3 read=3157, temp read=324 written=325
+  ->  GroupAggregate  (cost=29506.07..33900.79 rows=219736 width=12) (actual time=52.306..70.777 rows=30.00 loops=1)
+        Group Key: ((navigation_sessions.started_at)::date)
+        Buffers: shared hit=3 read=3157, temp read=324 written=325
+        ->  Sort  (cost=29506.07..30055.41 rows=219736 width=4) (actual time=51.655..61.094 rows=219780.00 loops=1)
+              Sort Key: ((navigation_sessions.started_at)::date)
+              Sort Method: external merge  Disk: 2592kB
+              Buffers: shared hit=3 read=3157, temp read=324 written=325
+              ->  Seq Scan on navigation_sessions_p202606 navigation_sessions  (cost=0.00..7003.04 rows=219736 width=4) (actual time=0.030..35.626 rows=219780.00 loops=1)
+                    Filter: ((started_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (started_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+                    Buffers: shared read=3157
+Planning:
+  Buffers: shared hit=372 read=73
+Planning Time: 1.469 ms
+Execution Time: 71.427 ms
+=== R20 run 2 ===
+WindowAgg  (cost=29506.10..37196.83 rows=219736 width=44) (actual time=53.177..71.175 rows=30.00 loops=1)
+  Window: w1 AS (ORDER BY ((navigation_sessions.started_at)::date))
+  Storage: Memory  Maximum Storage: 17kB
+  Buffers: shared hit=3160, temp read=324 written=325
+  ->  GroupAggregate  (cost=29506.07..33900.79 rows=219736 width=12) (actual time=52.522..71.134 rows=30.00 loops=1)
+        Group Key: ((navigation_sessions.started_at)::date)
+        Buffers: shared hit=3160, temp read=324 written=325
+        ->  Sort  (cost=29506.07..30055.41 rows=219736 width=4) (actual time=51.868..61.367 rows=219780.00 loops=1)
+              Sort Key: ((navigation_sessions.started_at)::date)
+              Sort Method: external merge  Disk: 2592kB
+              Buffers: shared hit=3160, temp read=324 written=325
+              ->  Seq Scan on navigation_sessions_p202606 navigation_sessions  (cost=0.00..7003.04 rows=219736 width=4) (actual time=0.008..36.527 rows=219780.00 loops=1)
+                    Filter: ((started_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (started_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+                    Buffers: shared hit=3157
+Planning:
+  Buffers: shared hit=445
+Planning Time: 0.922 ms
+Execution Time: 72.376 ms
+=== R20 run 3 ===
+WindowAgg  (cost=29506.10..37196.83 rows=219736 width=44) (actual time=52.992..70.956 rows=30.00 loops=1)
+  Window: w1 AS (ORDER BY ((navigation_sessions.started_at)::date))
+  Storage: Memory  Maximum Storage: 17kB
+  Buffers: shared hit=3160, temp read=324 written=325
+  ->  GroupAggregate  (cost=29506.07..33900.79 rows=219736 width=12) (actual time=52.328..70.920 rows=30.00 loops=1)
+        Group Key: ((navigation_sessions.started_at)::date)
+        Buffers: shared hit=3160, temp read=324 written=325
+        ->  Sort  (cost=29506.07..30055.41 rows=219736 width=4) (actual time=51.669..61.189 rows=219780.00 loops=1)
+              Sort Key: ((navigation_sessions.started_at)::date)
+              Sort Method: external merge  Disk: 2592kB
+              Buffers: shared hit=3160, temp read=324 written=325
+              ->  Seq Scan on navigation_sessions_p202606 navigation_sessions  (cost=0.00..7003.04 rows=219736 width=4) (actual time=0.012..35.524 rows=219780.00 loops=1)
+                    Filter: ((started_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (started_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+                    Buffers: shared hit=3157
+Planning:
+  Buffers: shared hit=445
+Planning Time: 0.946 ms
+Execution Time: 71.655 ms

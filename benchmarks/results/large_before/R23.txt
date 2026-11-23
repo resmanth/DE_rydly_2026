@@ -1,0 +1,27 @@
+=== R23 run 1 ===
+Index Scan using places_plus_code_key on places  (cost=0.42..8.44 rows=1 width=41) (actual time=1.332..1.333 rows=1.00 loops=1)
+  Index Cond: ((plus_code)::text = '22222222+2W'::text)
+  Index Searches: 1
+  Buffers: shared read=4
+Planning:
+  Buffers: shared hit=225
+Planning Time: 0.800 ms
+Execution Time: 1.363 ms
+=== R23 run 2 ===
+Index Scan using places_plus_code_key on places  (cost=0.42..8.44 rows=1 width=41) (actual time=0.022..0.023 rows=1.00 loops=1)
+  Index Cond: ((plus_code)::text = '22222222+2W'::text)
+  Index Searches: 1
+  Buffers: shared hit=4
+Planning:
+  Buffers: shared hit=225
+Planning Time: 0.666 ms
+Execution Time: 0.054 ms
+=== R23 run 3 ===
+Index Scan using places_plus_code_key on places  (cost=0.42..8.44 rows=1 width=41) (actual time=0.021..0.022 rows=1.00 loops=1)
+  Index Cond: ((plus_code)::text = '22222222+2W'::text)
+  Index Searches: 1
+  Buffers: shared hit=4
+Planning:
+  Buffers: shared hit=225
+Planning Time: 0.649 ms
+Execution Time: 0.050 ms
